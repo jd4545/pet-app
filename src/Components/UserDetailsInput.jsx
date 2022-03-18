@@ -10,15 +10,20 @@ import {
 } from "firebase/firestore";
 import fetchLocation from "../api";
 
-export default function UserDetailsInput () {
+export default function UserDetailsInput() {
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState(0);
-  const [location, setLocation] = useState(null)
+  const [postcode, setPostcode] = useState([]);
+  const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
-    await addDoc(usersCollectionRef, { name: newName, age: newAge, location: });
+    await addDoc(usersCollectionRef, {
+      name: newName,
+      age: newAge,
+      location: location,
+    });
   };
 
   // const updateUser = async (id, age) => {
@@ -33,8 +38,8 @@ export default function UserDetailsInput () {
   };
 
   const refreshPage = () => {
-    window.location.reload(false)
-  }
+    window.location.reload(false);
+  };
 
   useEffect(() => {
     const getUsers = async () => {
@@ -45,81 +50,87 @@ export default function UserDetailsInput () {
     getUsers();
   }, []);
 
-
- return (
-  <div className="App">
-    {/* <button
+  return (
+    <div className="App">
+      {/* <button
         onClick={(e) => {
           fetchLocation()
         }}
       >
       console log location
       </button> */}
-    <form>
+      <form>
+        <input
+          placeholder="Location..."
+          onChange={(e) => {
+            setPostcode(e.target.value);
+          }}
+          required="required"
+        />
+        <button
+          onClick={() => {
+            console.log(postcode);
+            fetchLocation(postcode).then((data) => {
+              const latitude = data.result.latitude;
+              const longitude = data.result.longitude;
+              const newLocation = [latitude, longitude];
+              return setLocation(newLocation)
+            });
+          }}
+        >
+          set postcode
+        </button>
 
-    <input
-      placeholder="Location..."
-      onChange={(e) => {
-        setLocation(e.target.value);
-      }}
-      required="required"
-    />
-      <button onClick={() => {
-      console.log(location)
-      fetchLocation(location).then((data)=>{
-        console.log(data.result.latitude, data.result.longitude)
-        const latitude = data.result.latitude
-        const longitude = data.result.longitude
-        return [data.result.latitude, data.result.longitude]
-      })
-    }}>set postcode</button>
-
-    <input
-      placeholder="Name..."
-      onChange={(e) => {
-        setNewName(e.target.value);
-      }}
-      required="required"
-    />
-    <input
-      type="number"
-      placeholder="Age..."
-      onChange={(e) => {
-        setNewAge(e.target.value);
-      }}
-      required="required"
-    />
-    <button onClick={() => {
-        createUser().then(()=>{
-          refreshPage();
-        });
-      }}>Create User</button>
-    {users.map((user) => {
-      return (
-        <div>
-          <h1>Name: {user.name} </h1>
-          <h1>Age: {user.age}</h1>
-          {/* <h1>Location: {user.location}</h1> */}
-          {/* <button
+        <input
+          placeholder="Name..."
+          onChange={(e) => {
+            setNewName(e.target.value);
+          }}
+          required="required"
+        />
+        <input
+          type="number"
+          placeholder="Age..."
+          onChange={(e) => {
+            setNewAge(e.target.value);
+          }}
+          required="required"
+        />
+        <button
+          onClick={() => {
+            createUser().then(() => {
+              refreshPage();
+            });
+          }}
+        >
+          Create User
+        </button>
+        {users.map((user) => {
+          return (
+            <div>
+              <h1>Name: {user.name} </h1>
+              <h1>Age: {user.age}</h1>
+              {/* <h1>Location: {user.location}</h1> */}
+              {/* <button
             onClick={() => {
               updateUser(user.id, user.age);
             }}
           >
             Increase Age
           </button> */}
-          <button
-            onClick={() => {
-              deleteUser(user.id, user.age).then(()=>{
-                refreshPage();
-              });
-            }}
-          >
-            Delete User
-          </button>
-        </div>
-      );
-    })}
-    </form>
-  </div>
-);
+              <button
+                onClick={() => {
+                  deleteUser(user.id, user.age).then(() => {
+                    refreshPage();
+                  });
+                }}
+              >
+                Delete User
+              </button>
+            </div>
+          );
+        })}
+      </form>
+    </div>
+  );
 }
