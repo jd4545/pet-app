@@ -1,24 +1,24 @@
 import { useState } from "react";
 
-export default function Dropdown({ title, items, multiSelect = false }) {
-  const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState([]);
-  const toggle = () => setOpen(!open);
+export default function Dropdown() {
+  const [services, setServices] = useState();
 
-  function handleOnClick(item) {}
+  console.log("services >>>", services);
 
   return (
-    <div className="dd-wrapper">
-      <div
-        tabIndex={0}
-        className="dd-header"
-        role="button"
-        onClick={() => toggle(!open)}
+    <div>
+      <h1>Pet Services</h1>
+      <p>{services}</p>
+      <select
+        className="btn btn-primary"
+        value={services}
+        onChange={(e) => setServices(e.target.value)}
       >
-        <div className="dd-header-title">
-          <p className="dd-header-potato">{title}</p>
-        </div>
-      </div>
+        <option></option>
+        <option>Dog Sitting</option>
+        <option>Cat Sitting</option>
+        <option>Rat Catching</option>
+      </select>
     </div>
   );
 }
