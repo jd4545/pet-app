@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import Select from 'react-select';
+import Select from "react-select";
 import { db } from "../firebase-config";
 import {
   collection,
   getDocs,
   addDoc,
-  // updateDoc,
   doc,
   deleteDoc,
 } from "firebase/firestore";
@@ -14,47 +13,22 @@ import fetchLocation from "../api";
 export default function UserDetailsInput() {
   const [newName, setNewName] = useState("");
   const [newPet, setNewPet] = useState("");
-  const [postcode, setPostcode] = useState([]);
-  const [location, setLocation] = useState([null, null]);
+  // const [postcode, setPostcode] = useState([]);
+  // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, {
       name: newName,
-      location: location,
+      // location: location,
       pet: newPet,
     });
   };
 
-  // const updateUser = async (id, age) => {
-  //   const userDoc = doc(db, "users", id);
-  //   const newFields = { age: Number(age) + 1 };
-  //   await updateDoc(userDoc, newFields);
-  // };
-
-  // const deleteUser = async (id) => {
-  //   const userDoc = doc(db, "users", id);
-  //   await deleteDoc(userDoc);
-  // };
-
   const refreshPage = () => {
     window.location.reload(false);
   };
-
-  const petOptions = [{
-                      value: "dog",
-                      label: "Dog"
-                     },
-                     {
-                      value: "cat",
-                      label: "Cat"
-                     },
-                     {
-                      value: "cat&Dog",
-                      label: "Both"
-                     }
-]
 
   useEffect(() => {
     const getUsers = async () => {
@@ -67,35 +41,7 @@ export default function UserDetailsInput() {
 
   return (
     <div className="App">
-      {/* <button
-        onClick={(e) => {
-          fetchLocation()
-        }}
-      >
-      console log location
-      </button> */}
       <form>
-        {/* <input
-          placeholder="Location..."
-          onChange={(e) => {
-            setPostcode(e.target.value);
-          }}
-          required="required"
-        />
-        <button
-          onClick={() => {
-            console.log(postcode);
-            fetchLocation(postcode).then((data) => {
-              const latitude = data.result.latitude;
-              const longitude = data.result.longitude;
-              const newLocation = [latitude, longitude];
-              return setLocation(newLocation)
-            });
-          }}
-        >
-          set postcode
-        </button> */}
-
         <input
           placeholder="Name..."
           onChange={(e) => {
@@ -106,17 +52,12 @@ export default function UserDetailsInput() {
         <br />
         <br />
         <br />
-
-          {/* // value={newPet}
-          // // defaultValue={"default"}
-          // onSubmit={(e) => {
-          //   setNewPet(e.target.value);
-          // }} */}
-        <Select
-        options = {petOptions}
-        placeholder="Choose pet"
-        />
-
+        <select value={newPet} onChange={(e) => setNewPet(e.target.value)}>
+          <option></option>
+          <option>Dog</option>
+          <option>Cat</option>
+          <option>Both</option>
+        </select>
         <br />
         <br />
         <br />
@@ -134,23 +75,7 @@ export default function UserDetailsInput() {
             <div>
               <h1>Name: {user.name} </h1>
               <h1>Pet: {user.pet}</h1>
-              <h1>Location: {user.location}</h1>
-              {/* <button
-            onClick={() => {
-              updateUser(user.id, user.age);
-            }}
-          >
-            Increase Age
-          </button> */}
-              {/* <button
-                onClick={() => {
-                  deleteUser(user.id).then(() => {
-                    refreshPage();
-                  });
-                }}
-              >
-                Delete User
-              </button> */}
+              {/* <h1>Location: {user.location}</h1> */}
             </div>
           );
         })}
