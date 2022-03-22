@@ -1,39 +1,35 @@
-import React from 'react'
-import { useState, useContext, useEffect } from 'react'
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 
-import { auth } from '../firebase-config'
-import {
-  signOut,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from 'firebase/auth'
-import { Navigate } from 'react-router-dom'
-import Logout from './Logout'
-import { UserContext } from '../contexts/UserContext'
+import { auth } from "../firebase-config";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { Navigate, Link } from "react-router-dom";
+import Register from "./Register";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Login() {
-  const [loginEmail, setLoginEmail] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-  const { user, setUser } = useContext(UserContext)
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   const login = async (e) => {
     try {
       const luser = await signInWithEmailAndPassword(
         auth,
         loginEmail,
-        loginPassword,
-      )
+        loginPassword
+      );
 
-      console.log(luser)
-      console.log(user)
+      console.log(luser);
+      console.log(user);
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  })
+    setUser(currentUser);
+  });
 
   // const handleLogout = async () => {
   //   await signOut(auth)
@@ -45,21 +41,30 @@ export default function Login() {
       {user ? (
         <Navigate to="/" />
       ) : (
-        <div>
+        <div className="text-center my-5">
           <h1>Sign In</h1>
           <input
             placeholder="email"
+            className="my-2"
             onChange={(event) => setLoginEmail(event.target.value)}
           />
           <br />
           <input
             placeholder="password"
+            type="password"
+            className="my-2"
             onChange={(event) => setLoginPassword(event.target.value)}
           />
           <br />
-          <button onClick={login}>Sign In</button>
+          <button className="btn btn-primary my-3" onClick={login}>
+            Sign In
+          </button>
+          <p>
+            Don't already have an account?{" "}
+            <Link to="/register">Create an account</Link>
+          </p>
         </div>
       )}
     </>
-  )
+  );
 }

@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { auth } from "../firebase-config";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [user, setUser] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -37,11 +38,11 @@ export default function Register() {
       {user ? (
         <Navigate to="/" />
       ) : (
-        <div>
+        <div className="text-center my-5">
           <h1>Register</h1>
-          <br />
           <input
             placeholder="email"
+            className="my-2"
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
@@ -49,14 +50,19 @@ export default function Register() {
           <br />
           <input
             type="password"
+            className="my-2"
             placeholder="password"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
             }}
           />
           <br />
-          <button onClick={handleRegister}>Register</button>
-          <p>{user?.email}</p>
+          <button className="btn btn-primary my-3" onClick={handleRegister}>
+            Register
+          </button>
+          <p>
+            Already have an account? <Link to="/signin">Sign in</Link>
+          </p>
         </div>
       )}
     </>
