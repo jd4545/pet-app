@@ -16,9 +16,11 @@ export default function UserDetailsInput() {
   // const [postcode, setPostcode] = useState([]);
   // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
+  const [isSitter, setIsSitter] = useState(false);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
+    console.log(newName, newPet)
     await addDoc(usersCollectionRef, {
       name: newName,
       // location: location,
@@ -31,6 +33,7 @@ export default function UserDetailsInput() {
   };
 
   useEffect(() => {
+    // console.log("useEffect invoked")
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       console.log(data);
@@ -40,11 +43,12 @@ export default function UserDetailsInput() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="user-form">
       <form>
         <input
           placeholder="Name..."
           onChange={(e) => {
+            console.log(e.target.value)
             setNewName(e.target.value);
           }}
           required="required"
@@ -53,6 +57,7 @@ export default function UserDetailsInput() {
         <br />
         <br />
         <select value={newPet} onChange={(e) => setNewPet(e.target.value)}>
+          {console.log(newPet)}
           <option></option>
           <option>Dog</option>
           <option>Cat</option>
@@ -60,6 +65,16 @@ export default function UserDetailsInput() {
         </select>
         <br />
         <br />
+        <br />
+        <button onClick={isSitter===false ? ()=>setIsSitter(true) : ()=>setIsSitter(false)}>Become a sitter</button>
+        <br />
+        {/* {console.log(isSitter, "sitter boolean")} */}
+        {isSitter === true ? <div className="sitter-form">
+          <form>
+            <input placeholder="Enter bio..." id="sitter-form-bio" />
+          </form>
+        </div> : <br />}
+
         <br />
         <button
           onClick={() => {
