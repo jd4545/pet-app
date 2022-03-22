@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 import { db } from "../firebase-config";
 import {
   collection,
@@ -40,6 +41,20 @@ export default function UserDetailsInput() {
   const refreshPage = () => {
     window.location.reload(false);
   };
+
+  const petOptions = [{
+                      value: "dog",
+                      label: "Dog"
+                     },
+                     {
+                      value: "cat",
+                      label: "Cat"
+                     },
+                     {
+                      value: "cat&Dog",
+                      label: "Both"
+                     }
+]
 
   useEffect(() => {
     const getUsers = async () => {
@@ -91,17 +106,17 @@ export default function UserDetailsInput() {
         <br />
         <br />
         <br />
-        <select
-          // value={newPet}
+
+          {/* // value={newPet}
           // // defaultValue={"default"}
-          onSubmit={(e) => {
-            setNewPet(e.target.value);
-          }}
-        >
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-          <option value="Dog & Cat">Both</option>
-        </select>
+          // onSubmit={(e) => {
+          //   setNewPet(e.target.value);
+          // }} */}
+        <Select
+        options = {petOptions}
+        placeholder="Choose pet"
+        />
+
         <br />
         <br />
         <br />
