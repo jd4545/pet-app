@@ -17,6 +17,10 @@ export default function UserDetailsInput() {
   // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
   const [isSitter, setIsSitter] = useState(false);
+  const [bio, setBio] = useState("");
+  const [services, setServices] = useState("");
+  const [petType, setPetType] = useState("");
+  const [price, setPrice] = useState(0);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
@@ -25,6 +29,11 @@ export default function UserDetailsInput() {
       name: newName,
       // location: location,
       pet: newPet,
+      isSitter: isSitter,
+      bio: bio,
+      services: services,
+      petType: petType,
+      price: price
     });
   };
 
@@ -49,7 +58,7 @@ export default function UserDetailsInput() {
           onChange={(e) => {
             setNewName(e.target.value);
           }}
-          required="required"
+          // required="required"
         />
         <br />
         <br />
@@ -65,7 +74,8 @@ export default function UserDetailsInput() {
         <br />
         <button
           onClick={
-            isSitter === false
+            // setIsSitter(!isSitter) 
+            !isSitter
               ? () => setIsSitter(true)
               : () => setIsSitter(false)
           }
@@ -73,18 +83,44 @@ export default function UserDetailsInput() {
           Become a sitter
         </button>
         <br />
-        {/* {console.log(isSitter, "sitter boolean")} */}
-        {isSitter === true ? (
+        {console.log(isSitter, "sitter boolean")}
+        {isSitter ? (
           <div className="sitter-form">
             <form>
-              <input placeholder="Enter bio..." id="sitter-form-bio" />
+            <input placeholder="Enter bio..." id="sitter-form-bio" 
+            onChange={(e) => {
+              setBio(e.target.value);
+            }}/>
+                      <br />          <br />
+            <p>Services offered...</p>
+            <select  value={newPet} onChange={(e) => setServices(e.target.value)}>
+            <option></option>
+            <option>Pet sitting</option>
+            <option>Pet walking</option>
+            <option>Both</option>
+        </select>
+        <br />          <br />
+        <p>Pets catered for...</p>
+        <select  value={newPet} onChange={(e) => setPetType(e.target.value)}>
+            <option></option>
+            <option>Dog</option>
+            <option>Cat</option>
+            <option>Both</option>
+        </select>
+        <br />          <br />
+        <p>Hourly rate charged</p>
+        <input placeholder="£ per hr" type="number" id="sitter-form-bio" 
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}/>
             </form>
+
           </div>
         ) : (
           <br />
         )}
-
         <br />
+        
         <button
           onClick={() => {
             createUser()
