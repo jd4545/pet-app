@@ -1,36 +1,49 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react'
+import { useState, useContext, useEffect } from 'react'
 
-import { auth } from "../firebase-config";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { Navigate } from "react-router-dom";
+import { auth } from '../firebase-config'
+import {
+  signOut,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth'
+import { Navigate } from 'react-router-dom'
+import Logout from './Logout'
+import { UserContext } from '../contexts/UserContext'
 
 export default function Login() {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState({});
+  const [loginEmail, setLoginEmail] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const { user, setUser } = useContext(UserContext)
 
   const login = async (e) => {
     try {
-      const user = await signInWithEmailAndPassword(
+      const luser = await signInWithEmailAndPassword(
         auth,
         loginEmail,
-        loginPassword
-      );
-      console.log(user);
+        loginPassword,
+      )
+
+      console.log(luser)
+      console.log(user)
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
-  };
+  }
 
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+    setUser(currentUser)
+  })
+
+  // const handleLogout = async () => {
+  //   await signOut(auth)
+  //   console.log(user)
+  // }
 
   return (
     <>
       {user ? (
-        <Navigate to="/register" />
+        <Navigate to="/" />
       ) : (
         <div>
           <h1>Sign In</h1>
@@ -48,5 +61,5 @@ export default function Login() {
         </div>
       )}
     </>
-  );
+  )
 }
