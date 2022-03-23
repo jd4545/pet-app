@@ -6,7 +6,6 @@ export default function WelcomePage() {
   const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
   const [location, setLocation] = useState("");
-  // console.log("postcode>>>", postcode);
 
   return (
     <div>
@@ -28,7 +27,7 @@ export default function WelcomePage() {
           <input
             aria-label="aria" // << ??
             type="text"
-            onChange={(e) => setPostcode(e.target.value)} // << FIX
+            onChange={(e) => setPostcode(e.target.value)}
             placeholder="Enter Postcode..."
           />
 
@@ -45,13 +44,11 @@ export default function WelcomePage() {
                 const newLocation = [latitude, longitude];
                 setNeighbourhood(neighbourhood);
                 setLocation(newLocation);
-                // return?
               });
             }}
           >
             set postcode
           </button>
-          {/* <button>Submit</button> */}
         </form>
         <Dropdown />
       </section>
