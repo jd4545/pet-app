@@ -12,3 +12,7 @@
   outline: none !important;
   box-shadow: none !important;
 }
+.dd-wrapper {
+  color: aquamarine;
+  background-color: aquamarine;
+}
