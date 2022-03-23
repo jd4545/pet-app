@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Dropdown() {
   const [services, setServices] = useState();
 
-  console.log("services >>>", services);
+  // console.log("services >>>", services);
 
   return (
     <div>

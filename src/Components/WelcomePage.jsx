@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
+import fetchLocation from "../api";
 
 export default function WelcomePage() {
   const [postcode, setPostcode] = useState("");
-  console.log("postcode>>>", postcode);
+  const [neighbourhood, setNeighbourhood] = useState("");
+  const [location, setLocation] = useState("");
+  // console.log("postcode>>>", postcode);
 
   return (
     <div>
@@ -18,7 +21,9 @@ export default function WelcomePage() {
       {/* //new section below */}
       <section>
         {/* Location input box */}
-        <p>Location: </p>
+        <br></br>
+        <br></br>
+        <p>Location: {neighbourhood}</p>
         <form action="">
           <input
             aria-label="aria" // << ??
@@ -28,7 +33,25 @@ export default function WelcomePage() {
           />
 
           {/* Submit button*/}
-          <button>Submit</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              fetchLocation(postcode).then((data) => {
+                console.log("postcode>>>", postcode);
+                console.log("data>>>", data);
+                const neighbourhood = data.result.admin_ward;
+                const latitude = data.result.latitude;
+                const longitude = data.result.longitude;
+                const newLocation = [latitude, longitude];
+                setNeighbourhood(neighbourhood);
+                setLocation(newLocation);
+                // return?
+              });
+            }}
+          >
+            set postcode
+          </button>
+          {/* <button>Submit</button> */}
         </form>
         <Dropdown />
       </section>
