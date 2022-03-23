@@ -9,7 +9,7 @@ export default function WelcomePage() {
   const [services, setServices] = useState();
 
   return (
-    <div>
+    <div className="text-center mt-5">
       {/* //header below */}
       <header>
         <h1>[WELCOME PAGE]</h1>
