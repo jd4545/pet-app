@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import fetchLocation from "../api";
+import NavBar from "./NavBar";
 
 export default function WelcomePage() {
   const [postcode, setPostcode] = useState("");
