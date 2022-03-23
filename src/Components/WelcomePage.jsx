@@ -1,12 +1,19 @@
-import { useState, useEffect } from "react";
-import Dropdown from "./Dropdown";
-import fetchLocation from "../api";
+import { useState, useEffect, useContext } from 'react'
+import Dropdown from './Dropdown'
+import fetchLocation from '../api'
+import { LocationContext } from '../contexts/LocationContext'
+import { ServicesContext } from '../contexts/ServicesContext'
+import { UserContext } from '../contexts/UserContext'
+import { Link } from 'react-router-dom'
 
 export default function WelcomePage() {
-  const [postcode, setPostcode] = useState("");
-  const [neighbourhood, setNeighbourhood] = useState("");
-  const [location, setLocation] = useState("");
-  const [services, setServices] = useState();
+  const [postcode, setPostcode] = useState('')
+  const [neighbourhood, setNeighbourhood] = useState('')
+  // const [location, setLocation] = useState('')
+  // const [services, setServices] = useState()
+  const { user, setUser } = useContext(UserContext)
+  const { location, setLocation } = useContext(LocationContext)
+  const { services, setServices } = useContext(ServicesContext)
 
   return (
     <div className="text-center mt-5">
@@ -39,37 +46,35 @@ export default function WelcomePage() {
               className="btn btn-primary"
               value={services}
               onChange={(e) => {
-                setServices(e.target.value);
+                setServices(e.target.value)
               }}
             >
               <option></option>
-              <option>Dog Sitting</option>
-              <option>Cat Sitting</option>
-              <option>Rat Catching</option>
+              <option>Pet sitting</option>
+              <option>Pet walking</option>
+              <option>Both</option>
             </select>
           </div>
 
           {/* Submit button*/}
+
           <button
             onClick={(e) => {
-              e.preventDefault();
+              e.preventDefault()
               fetchLocation(postcode).then((data) => {
-                console.log("postcode>>>", postcode);
-                console.log("data>>>", data);
-                const neighbourhood = data.result.admin_ward;
-                const latitude = data.result.latitude;
-                const longitude = data.result.longitude;
-                const newLocation = [latitude, longitude];
-                setNeighbourhood(neighbourhood);
-                setLocation(newLocation);
-                console.log("button/services >>>", services);
-              });
+                const neighbourhood = data.result.admin_ward
+                const latitude = data.result.latitude
+                const longitude = data.result.longitude
+                const newLocation = [latitude, longitude]
+                setNeighbourhood(neighbourhood)
+                setLocation(newLocation)
+              })
             }}
           >
-            Find your sitter
+            <Link to="/">Find your sitter</Link>
           </button>
         </form>
       </section>
     </div>
-  );
+  )
 }
