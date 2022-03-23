@@ -60,8 +60,7 @@ export default function Login() {
             Sign In
           </button>
           <p>
-            Don't already have an account?{" "}
-            <Link to="/register">Create an account</Link>
+            Don't have an account? <Link to="/register">Create an account</Link>
           </p>
         </div>
       )}

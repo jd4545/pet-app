@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase-config";
-import {
-  collection,
-  getDocs,
-  addDoc,
-} from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import fetchLocation from "../api";
 import { Navigate } from "react-router-dom";
 
@@ -32,7 +28,7 @@ export default function UserDetailsInput() {
       bio: bio,
       services: services,
       petType: petType,
-      price: price
+      price: price,
     });
     setNewName("");
     setNewPet("");
@@ -58,7 +54,7 @@ export default function UserDetailsInput() {
   }, []);
 
   return (
-    <div className="user-form">
+    <div className="user-form text-center mt-5">
       <form>
         <input
           placeholder="Name..."
@@ -90,14 +86,16 @@ export default function UserDetailsInput() {
         <br />
         <button
           onClick={
-            // setIsSitter(!isSitter) 
+            // setIsSitter(!isSitter)
             !isSitter
               ? (e) => {
-                e.preventDefault();
-                setIsSitter(true)}
+                  e.preventDefault();
+                  setIsSitter(true);
+                }
               : (e) => {
-                e.preventDefault();
-                setIsSitter(false)}
+                  e.preventDefault();
+                  setIsSitter(false);
+                }
           }
         >
           Become a sitter
@@ -107,61 +105,71 @@ export default function UserDetailsInput() {
         {isSitter ? (
           <div className="sitter-form">
             {/* <form> */}
-            <input placeholder="Enter bio..." id="sitter-form-bio" 
-            onChange={(e) => {
-              setBio(e.target.value);
-            }}/>
-                      <br />          <br />
+            <input
+              placeholder="Enter bio..."
+              id="sitter-form-bio"
+              onChange={(e) => {
+                setBio(e.target.value);
+              }}
+            />
+            <br /> <br />
             <p>Services offered...</p>
-            <select  value={services} onChange={(e) => setServices(e.target.value)}>
-            <option></option>
-            <option>Pet sitting</option>
-            <option>Pet walking</option>
-            <option>Both</option>
-        </select>
-        <br />          <br />
-        <p>Pets catered for...</p>
-        <select  value={petType} onChange={(e) => setPetType(e.target.value)}>
-            <option></option>
-            <option>Dog</option>
-            <option>Cat</option>
-            <option>Both</option>
-        </select>
-        <br />          <br />
-        <p>Hourly rate charged</p>
-        <input placeholder="£ per hr" type="number" id="sitter-form-bio" 
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}/>
+            <select
+              value={services}
+              onChange={(e) => setServices(e.target.value)}
+            >
+              <option></option>
+              <option>Pet sitting</option>
+              <option>Pet walking</option>
+              <option>Both</option>
+            </select>
+            <br /> <br />
+            <p>Pets catered for...</p>
+            <select
+              value={petType}
+              onChange={(e) => setPetType(e.target.value)}
+            >
+              <option></option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Both</option>
+            </select>
+            <br /> <br />
+            <p>Hourly rate charged</p>
+            <input
+              placeholder="£ per hr"
+              type="number"
+              id="sitter-form-bio"
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
             {/* </form> */}
-
           </div>
         ) : (
           <br />
         )}
         <br />
-        
         <button
           onClick={
             createUser
-              // .then(() => {
-              // refreshPage();
+            // .then(() => {
+            // refreshPage();
             // });
           }
         >
           Submit
         </button>
-        </form>
-        {users.map((user) => {
-          return (
-            <div>
-              <h1>Name: {user.name} </h1>
-              <h1>Pet: {user.pet}</h1>
-              {/* <h1>Location: {user.location}</h1> */}
-            </div>
-          );
-        })}
-
+      </form>
+      {users.map((user) => {
+        return (
+          <div>
+            <h1>Name: {user.name} </h1>
+            <h1>Pet: {user.pet}</h1>
+            {/* <h1>Location: {user.location}</h1> */}
+          </div>
+        );
+      })}
     </div>
   );
 }
