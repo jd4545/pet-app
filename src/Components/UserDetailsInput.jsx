@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import Select from "react-select";
 import { db } from "../firebase-config";
 import {
   collection,
   getDocs,
   addDoc,
-  doc,
-  deleteDoc,
 } from "firebase/firestore";
 import fetchLocation from "../api";
+import { Navigate } from "react-router-dom";
 
 export default function UserDetailsInput() {
   const [newName, setNewName] = useState("");
   const [newPet, setNewPet] = useState("");
-  // const [postcode, setPostcode] = useState([]);
+  const [postcode, setPostcode] = useState([]);
   // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
   const [isSitter, setIsSitter] = useState(false);
@@ -23,11 +21,12 @@ export default function UserDetailsInput() {
   const [price, setPrice] = useState(0);
   const usersCollectionRef = collection(db, "users");
 
-  const createUser = async () => {
+  const createUser = async (e) => {
+    e.preventDefault();
     console.log(newName, newPet);
     await addDoc(usersCollectionRef, {
       name: newName,
-      // location: location,
+      postcode: postcode,
       pet: newPet,
       isSitter: isSitter,
       bio: bio,
@@ -35,6 +34,14 @@ export default function UserDetailsInput() {
       petType: petType,
       price: price
     });
+    setNewName("");
+    setNewPet("");
+    setIsSitter(false);
+    setBio("");
+    setServices("");
+    setPetType("");
+    setPrice(0);
+    // <Navigate to="/page" />
   };
 
   const refreshPage = () => {
@@ -58,11 +65,20 @@ export default function UserDetailsInput() {
           onChange={(e) => {
             setNewName(e.target.value);
           }}
-          // required="required"
+          required="required"
         />
         <br />
         <br />
+        <input
+          placeholder="Postcode..."
+          onChange={(e) => {
+            setPostcode(e.target.value);
+          }}
+          required="required"
+        />
         <br />
+        <br />
+        <p>Pets you own...</p>
         <select value={newPet} onChange={(e) => setNewPet(e.target.value)}>
           <option></option>
           <option>Dog</option>
@@ -76,24 +92,28 @@ export default function UserDetailsInput() {
           onClick={
             // setIsSitter(!isSitter) 
             !isSitter
-              ? () => setIsSitter(true)
-              : () => setIsSitter(false)
+              ? (e) => {
+                e.preventDefault();
+                setIsSitter(true)}
+              : (e) => {
+                e.preventDefault();
+                setIsSitter(false)}
           }
         >
           Become a sitter
         </button>
-        <br />
-        {console.log(isSitter, "sitter boolean")}
+        <br /> <br />
+        {/* {console.log(isSitter, "sitter boolean")} */}
         {isSitter ? (
           <div className="sitter-form">
-            <form>
+            {/* <form> */}
             <input placeholder="Enter bio..." id="sitter-form-bio" 
             onChange={(e) => {
               setBio(e.target.value);
             }}/>
                       <br />          <br />
             <p>Services offered...</p>
-            <select  value={newPet} onChange={(e) => setServices(e.target.value)}>
+            <select  value={services} onChange={(e) => setServices(e.target.value)}>
             <option></option>
             <option>Pet sitting</option>
             <option>Pet walking</option>
@@ -101,7 +121,7 @@ export default function UserDetailsInput() {
         </select>
         <br />          <br />
         <p>Pets catered for...</p>
-        <select  value={newPet} onChange={(e) => setPetType(e.target.value)}>
+        <select  value={petType} onChange={(e) => setPetType(e.target.value)}>
             <option></option>
             <option>Dog</option>
             <option>Cat</option>
@@ -113,7 +133,7 @@ export default function UserDetailsInput() {
             onChange={(e) => {
               setPrice(e.target.value);
             }}/>
-            </form>
+            {/* </form> */}
 
           </div>
         ) : (
@@ -122,15 +142,16 @@ export default function UserDetailsInput() {
         <br />
         
         <button
-          onClick={() => {
-            createUser()
+          onClick={
+            createUser
               // .then(() => {
               // refreshPage();
             // });
-          }}
+          }
         >
           Submit
         </button>
+        </form>
         {users.map((user) => {
           return (
             <div>
@@ -140,7 +161,7 @@ export default function UserDetailsInput() {
             </div>
           );
         })}
-      </form>
+
     </div>
   );
 }
