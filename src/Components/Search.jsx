@@ -16,43 +16,45 @@ export default function Search() {
         <br />
         <br />
 
-        <Container className="text-center align-items-center">
+        <Container className="align-items-center">
           <Card
             className="justify-content-center mx-2 shadow-sm"
             border="light"
             style={{ width: "40rem" }}
-            style={{ color: "rgba(59, 130, 246, 0.5)" }}
+            style={{ color: "gray" }}
           >
-            <Card.Header as="h6">Location: {neighbourhood}</Card.Header>
             <Card.Body>
+              <Card.Text as="h5">Location: {location}</Card.Text>
               <Form action="">
                 <Row className="justify-content-center">
-                  <Col s="auto" md="auto" className="my-1">
+                  <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Control
+                      className="border-0"
                       aria-label="aria" // << ??
                       type="text"
                       onChange={(e) => setPostcode(e.target.value)}
                       placeholder="Enter Postcode..."
                     />
                   </Col>
-                  <Col s="auto" md="auto" className="my-1">
+                  <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Select
-                      className=""
+                      className="border-0"
                       value={services}
                       onChange={(e) => {
                         setServices(e.target.value);
                       }}
                     >
-                      <option disabled>select a service</option>
+                      <option readonly>select a service</option>
                       <option value="Dog Sitting">Dog Sitting</option>
                       <option value="Cat Sitting">Cat Sitting</option>
                       <option value="Rat Catching">Rat Catching</option>
                     </Form.Select>
                   </Col>
-                  <Col xs="auto" lg="auto" className="my-1">
+                  <Col xs="auto" lg="3" className="my-1">
                     <Button
-                      style={{ color: "rgba(59, 130, 246, 0.5)" }}
+                      style={{ color: "white" }}
                       variant="light"
+                      className="p-2 px-4 btn-search"
                       onClick={(e) => {
                         e.preventDefault();
                         fetchLocation(postcode).then((data) => {

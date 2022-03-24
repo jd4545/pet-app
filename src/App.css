@@ -11,6 +11,14 @@
   font-weight: 500;
 }
 
+.btn-search {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 500;
+  background-color: #9333ea !important;
+}
+
 .btn:focus {
   outline: none !important;
   box-shadow: none !important;
