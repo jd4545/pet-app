@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Card, Container } from "react-bootstrap";
 import fetchLocation from "../api";
-import Image from "react-bootstrap/Image";
 
 export default function Search() {
   const [postcode, setPostcode] = useState("");
