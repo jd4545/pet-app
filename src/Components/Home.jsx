@@ -41,6 +41,8 @@ export default function Home({ services, setServices }) {
     }
   });
 
+  console.log(user.email);
+
   return (
     <>
       {user ? (
@@ -53,7 +55,7 @@ export default function Home({ services, setServices }) {
           </div>
           <br />
           <div className="my-5">
-            <h2>list</h2>
+            <h2>listings</h2>
 
             {sittersFilteredByServices.map((sitter, index) => {
               console.log("sitter >>", sitter);

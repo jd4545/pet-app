@@ -13,7 +13,6 @@ import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
 import Logout from "./Components/Logout";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Search from "./Components/Search";
 
 function App() {
   const [user, setUser] = useState(UserContext);
@@ -62,7 +61,6 @@ function App() {
                   }
                 />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/search" element={<Search />} />
               </Routes>
             </BrowserRouter>
           </UserContext.Provider>

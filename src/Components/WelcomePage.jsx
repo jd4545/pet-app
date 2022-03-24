@@ -2,7 +2,6 @@ import NavBar from "./NavBar";
 import { useState, useEffect, useContext } from "react";
 import fetchLocation from "../api";
 import { LocationContext } from "../contexts/LocationContext";
-import { ServicesContext } from "../contexts/ServicesContext";
 import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import {
@@ -26,6 +25,8 @@ export default function WelcomePage({ services, setServices }) {
   const { user, setUser } = useContext(UserContext);
   const { location, setLocation } = useContext(LocationContext);
 
+  console.log(user.email, "<<<<");
+
   return (
     <>
       <header className="text-center">
@@ -45,7 +46,6 @@ export default function WelcomePage({ services, setServices }) {
                 <Col s="auto" md="auto" lg={4} className="my-1">
                   <Form.Control
                     className="border-0"
-                    aria-label="aria" // << ??
                     type="text"
                     onChange={(e) => setPostcode(e.target.value)}
                     placeholder="Enter Postcode..."
@@ -99,21 +99,21 @@ export default function WelcomePage({ services, setServices }) {
       </Container>
       <div className="text-center my-5 p-4">
         <Row className="justify-content-center g-5">
-          <Col xs="4" s="2" md="2" lg="2">
+          <Col xs="3" s="2" md="2" lg="2">
             <Image
               roundedCircle
               src={dogSitting}
               className="img-fluid shadow"
             />
           </Col>
-          <Col xs="4" s="2" md="2" lg="2">
+          <Col xs="3" s="2" md="2" lg="2">
             <Image
               roundedCircle
               src={catSitting}
               className="img-fluid shadow"
             />
           </Col>
-          <Col xs="4" s="2" md="2" lg="2">
+          <Col xs="3" s="2" md="2" lg="2">
             <Image
               roundedCircle
               src={dogWalking}
