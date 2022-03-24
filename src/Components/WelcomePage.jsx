@@ -15,8 +15,6 @@ export default function WelcomePage() {
       <header>
         <h1>[WELCOME PAGE]</h1>
         <h2>PetsApp</h2>
-        <button>Paw Return button</button>
-        <button>Login/Register</button>
       </header>
 
       {/* //new section below */}

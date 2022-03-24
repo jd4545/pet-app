@@ -9,6 +9,7 @@ import UserDetailsInput from "./Components/UserDetailsInput";
 import { UserContext } from "./contexts/UserContext";
 import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
+import Logout from "./Components/Logout";
 
 function App() {
   const [user, setUser] = useState(UserContext);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/form" element={<UserDetailsInput />} />
             <Route path="/home" element={<DummyHome />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

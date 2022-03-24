@@ -1,6 +1,5 @@
 import paw from "../assets/paw.png";
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -32,7 +31,8 @@ export default function NavBar() {
               <Nav.Link href="/home">Home</Nav.Link>
               <Nav.Link href="/register">Register</Nav.Link>
               <Nav.Link href="/signin">Login</Nav.Link>
-              <Nav.Link href="#action2">Profile</Nav.Link>
+              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="/logout">Logout</Nav.Link>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
