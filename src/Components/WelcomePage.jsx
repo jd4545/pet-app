@@ -14,7 +14,8 @@ export default function WelcomePage() {
   const { user, setUser } = useContext(UserContext)
   const { location, setLocation } = useContext(LocationContext)
   const { services, setServices } = useContext(ServicesContext)
-
+  const [filterByDogSitter, setFilterByDogSitter] = useState(false)
+  const [filterByCatSitter, setFilterByCatSitter] = useState(false)
   return (
     <div className="text-center mt-5">
       {/* //header below */}
@@ -50,9 +51,8 @@ export default function WelcomePage() {
               }}
             >
               <option></option>
-              <option>Pet sitting</option>
-              <option>Pet walking</option>
-              <option>Both</option>
+              <option>Dog Sitting</option>
+              <option>Cat Sitting</option>
             </select>
           </div>
 

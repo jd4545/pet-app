@@ -55,7 +55,8 @@ export default function Home() {
                     </li>
                     <li>Pet: {sitter.pet}</li>
                     <li>{sitter.bio}</li>
-                    <li>Services: {sitter.services}</li>
+                    <li>Dogsitter: {sitter.isDogSitter}</li>
+                    <li>Catsitter: {sitter.isCatSitter}</li>
                     <li>Pet Type: {sitter.petType}</li>
                     <li>Price: {sitter.price}</li>
                   </ul>
