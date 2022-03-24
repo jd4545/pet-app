@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import fetchLocation from "../api";
+import NavBar from "./NavBar";
 
 export default function WelcomePage() {
   const [postcode, setPostcode] = useState("");
@@ -14,8 +15,6 @@ export default function WelcomePage() {
       <header>
         <h1>[WELCOME PAGE]</h1>
         <h2>PetsApp</h2>
-        <button>Paw Return button</button>
-        <button>Login/Register</button>
       </header>
 
       {/* //new section below */}
