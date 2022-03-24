@@ -1,11 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 .App {
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .btn {
   padding: 3px 9px;
   border: 0 none !important;
   font-weight: 500;
+}
+
+.btn-search {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 500;
+  background-color: #9333ea !important;
 }
 
 .btn:focus {
@@ -15,4 +26,10 @@
 .dd-wrapper {
   color: aquamarine;
   background-color: aquamarine;
+}
+
+.background {
+  background-image: url("https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg");
+  height: 500px;
+  background-size: 100%;
 }

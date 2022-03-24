@@ -10,6 +10,9 @@ import { UserContext } from "./contexts/UserContext";
 import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
 import Logout from "./Components/Logout";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
+import Search from "./Components/Search";
+
 
 function App() {
   const [user, setUser] = useState(UserContext);
@@ -19,6 +22,13 @@ function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <NavBar />
         <BrowserRouter>
+
+          <ThemeProvider
+            breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+          >
+            <div className="App"></div>
+          </ThemeProvider>
+
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/signin" element={<Login />} />
@@ -26,6 +36,8 @@ function App() {
             <Route path="/form" element={<UserDetailsInput />} />
             <Route path="/home" element={<DummyHome />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/search" element={<Search />} />
+
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
