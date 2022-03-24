@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
-import Dropdown from "./Dropdown";
-import fetchLocation from "../api";
 import NavBar from "./NavBar";
+import { useState, useEffect, useContext } from "react";
+import fetchLocation from "../api";
+import { LocationContext } from "../contexts/LocationContext";
+import { ServicesContext } from "../contexts/ServicesContext";
+import { UserContext } from "../contexts/UserContext";
+import { Link } from "react-router-dom";
 
 export default function WelcomePage() {
   const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
-  const [location, setLocation] = useState("");
-  const [services, setServices] = useState();
+  // const [location, setLocation] = useState('')
+  // const [services, setServices] = useState()
+  const { user, setUser } = useContext(UserContext);
+  const { location, setLocation } = useContext(LocationContext);
+  const { services, setServices } = useContext(ServicesContext);
 
   return (
     <div className="text-center mt-5">
@@ -44,28 +50,26 @@ export default function WelcomePage() {
               <option></option>
               <option>Dog Sitting</option>
               <option>Cat Sitting</option>
-              <option>Rat Catching</option>
+              <option>Both</option>
             </select>
           </div>
 
           {/* Submit button*/}
+
           <button
             onClick={(e) => {
               e.preventDefault();
               fetchLocation(postcode).then((data) => {
-                console.log("postcode>>>", postcode);
-                console.log("data>>>", data);
                 const neighbourhood = data.result.admin_ward;
                 const latitude = data.result.latitude;
                 const longitude = data.result.longitude;
                 const newLocation = [latitude, longitude];
                 setNeighbourhood(neighbourhood);
                 setLocation(newLocation);
-                console.log("button/services >>>", services);
               });
             }}
           >
-            Find your sitter
+            <Link to="/home">Find your sitter</Link>
           </button>
         </form>
       </section>

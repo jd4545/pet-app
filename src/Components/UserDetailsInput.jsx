@@ -1,57 +1,58 @@
-import { useState, useEffect } from "react";
-import { db } from "../firebase-config";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import fetchLocation from "../api";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { db } from '../firebase-config'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
+import fetchLocation from '../api'
+import { Navigate } from 'react-router-dom'
+import { Form } from 'react-bootstrap'
 
 export default function UserDetailsInput() {
-  const [newName, setNewName] = useState("");
-  const [newPet, setNewPet] = useState("");
-  const [postcode, setPostcode] = useState([]);
+  const [newName, setNewName] = useState('')
+  const [newPet, setNewPet] = useState('')
+  const [postcode, setPostcode] = useState([])
   // const [location, setLocation] = useState([null, null]);
-  const [users, setUsers] = useState([]);
-  const [isSitter, setIsSitter] = useState(false);
-  const [bio, setBio] = useState("");
-  const [services, setServices] = useState("");
-  const [petType, setPetType] = useState("");
-  const [price, setPrice] = useState(0);
-  const usersCollectionRef = collection(db, "users");
+  const [users, setUsers] = useState([])
+  const [isSitter, setIsSitter] = useState(false)
+  const [bio, setBio] = useState('')
+  // const [services, setServices] = useState({dogsitting:false, catsitting:false })
+  const [isDogSitter, setIsDogSitter] = useState(false)
+  const [isCatSitter, setIsCatSitter] = useState(false)
+  const [price, setPrice] = useState(0)
+  const usersCollectionRef = collection(db, 'users')
 
   const createUser = async (e) => {
-    e.preventDefault();
-    console.log(newName, newPet);
+    e.preventDefault()
+    console.log(newName, newPet)
     await addDoc(usersCollectionRef, {
       name: newName,
       postcode: postcode,
       pet: newPet,
       isSitter: isSitter,
       bio: bio,
-      services: services,
-      petType: petType,
+      isDogSitter: isDogSitter,
+      isCatSitter: isCatSitter,
       price: price,
-    });
-    setNewName("");
-    setNewPet("");
-    setIsSitter(false);
-    setBio("");
-    setServices("");
-    setPetType("");
-    setPrice(0);
+    })
+    setNewName('')
+    setNewPet('')
+    setIsSitter(false)
+    setBio('')
+    // setServices('')
+    setPrice(0)
     // <Navigate to="/page" />
-  };
+  }
 
   const refreshPage = () => {
-    window.location.reload(false);
-  };
+    window.location.reload(false)
+  }
 
   useEffect(() => {
     // console.log("useEffect invoked")
     const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getUsers();
-  }, []);
+      const data = await getDocs(usersCollectionRef)
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    }
+    getUsers()
+  }, [])
 
   return (
     <div className="user-form text-center mt-5">
@@ -59,7 +60,7 @@ export default function UserDetailsInput() {
         <input
           placeholder="Name..."
           onChange={(e) => {
-            setNewName(e.target.value);
+            setNewName(e.target.value)
           }}
           required="required"
         />
@@ -68,7 +69,7 @@ export default function UserDetailsInput() {
         <input
           placeholder="Postcode..."
           onChange={(e) => {
-            setPostcode(e.target.value);
+            setPostcode(e.target.value)
           }}
           required="required"
         />
@@ -89,12 +90,12 @@ export default function UserDetailsInput() {
             // setIsSitter(!isSitter)
             !isSitter
               ? (e) => {
-                  e.preventDefault();
-                  setIsSitter(true);
+                  e.preventDefault()
+                  setIsSitter(true)
                 }
               : (e) => {
-                  e.preventDefault();
-                  setIsSitter(false);
+                  e.preventDefault()
+                  setIsSitter(false)
                 }
           }
         >
@@ -109,39 +110,41 @@ export default function UserDetailsInput() {
               placeholder="Enter bio..."
               id="sitter-form-bio"
               onChange={(e) => {
-                setBio(e.target.value);
+                setBio(e.target.value)
               }}
             />
             <br /> <br />
             <p>Services offered...</p>
-            <select
-              value={services}
-              onChange={(e) => setServices(e.target.value)}
-            >
-              <option></option>
-              <option>Pet sitting</option>
-              <option>Pet walking</option>
-              <option>Both</option>
-            </select>
+            <Form>
+              <div key={'dog sitting'} className="mb-3">
+                <Form.Check
+                  type="checkbox"
+                  id={`dog sitting`}
+                  label={`Dog Sitting`}
+                  onChange={(e) => {
+                    setIsDogSitter(!isDogSitter)
+                  }}
+                />
+              </div>
+              <div key={'cat sitting'} className="mb-3">
+                <Form.Check
+                  type="checkbox"
+                  id={`cat sitting`}
+                  label={`Cat Sitting`}
+                  onChange={(e) => {
+                    setIsCatSitter(!isCatSitter)
+                  }}
+                />
+              </div>
+            </Form>
             <br /> <br />
-            <p>Pets catered for...</p>
-            <select
-              value={petType}
-              onChange={(e) => setPetType(e.target.value)}
-            >
-              <option></option>
-              <option>Dog</option>
-              <option>Cat</option>
-              <option>Both</option>
-            </select>
-            <br /> <br />
-            <p>Hourly rate charged</p>
+            <p>Daily rate charged</p>
             <input
-              placeholder="£ per hr"
+              placeholder="£ per day"
               type="number"
               id="sitter-form-bio"
               onChange={(e) => {
-                setPrice(e.target.value);
+                setPrice(e.target.value)
               }}
             />
             {/* </form> */}
@@ -168,8 +171,8 @@ export default function UserDetailsInput() {
             <h1>Pet: {user.pet}</h1>
             {/* <h1>Location: {user.location}</h1> */}
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
