@@ -15,7 +15,15 @@
   padding: 3px 9px;
   border: 0 none !important;
   border-radius: 20px !important;
-  font-weight: 500;
+  font-weight: 600 !important;
+  background-color: #9333ea !important;
+}
+
+.btn-sign {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
   background-color: #9333ea !important;
 }
 
@@ -23,6 +31,14 @@
   outline: none !important;
   box-shadow: none !important;
 }
+
+#offcanvasNavbar,
+#offcanvasNavbar:focus,
+#offcanvasNavbar:active {
+  border: 0 none !important;
+  box-shadow: none;
+}
+
 .dd-wrapper {
   color: aquamarine;
   background-color: aquamarine;
