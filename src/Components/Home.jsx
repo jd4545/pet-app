@@ -5,15 +5,13 @@ import { UserContext } from "../contexts/UserContext";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import WelcomePage from "./WelcomePage";
-import { ServicesContext } from "../contexts/ServicesContext";
 import dog from "../assets/dogIcon.png";
 import cat from "../assets/catIcon.png";
 
-export default function Home() {
+export default function Home({ services, setServices }) {
   const { user, setUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
-  const { services, setServices } = useContext(ServicesContext);
 
   useEffect(() => {
     // console.log("useEffect invoked")

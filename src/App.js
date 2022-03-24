@@ -17,7 +17,7 @@ import Search from "./Components/Search";
 
 function App() {
   const [user, setUser] = useState(UserContext);
-  const [services, setServices] = useState(ServicesContext);
+  const [services, setServices] = useState(null);
   const [location, setLocation] = useState(LocationContext);
 
   return (
@@ -43,11 +43,24 @@ function App() {
               </ThemeProvider>
 
               <Routes>
-                <Route path="/" element={<WelcomePage />} />
+                <Route
+                  path="/"
+                  element={
+                    <WelcomePage
+                      services={services}
+                      setServices={setServices}
+                    />
+                  }
+                />
                 <Route path="/signin" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/form" element={<UserDetailsInput />} />
-                <Route path="/home" element={<Home />} />
+                <Route
+                  path="/home"
+                  element={
+                    <Home services={services} setServices={setServices} />
+                  }
+                />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/search" element={<Search />} />
               </Routes>
