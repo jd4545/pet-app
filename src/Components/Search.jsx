@@ -24,7 +24,7 @@ export default function Search() {
             style={{ color: "gray" }}
           >
             <Card.Body>
-              <Card.Text as="h5">Location: {location}</Card.Text>
+              <Card.Text as="h5">Location: {neighbourhood}</Card.Text>
               <Form action="">
                 <Row className="justify-content-center">
                   <Col s="auto" md="auto" lg={4} className="my-1">
@@ -44,7 +44,7 @@ export default function Search() {
                         setServices(e.target.value);
                       }}
                     >
-                      <option readonly>select a service</option>
+                      <option readOnly>select a service</option>
                       <option value="Dog Sitting">Dog Sitting</option>
                       <option value="Cat Sitting">Cat Sitting</option>
                       <option value="Rat Catching">Rat Catching</option>
@@ -58,7 +58,6 @@ export default function Search() {
                       onClick={(e) => {
                         e.preventDefault();
                         fetchLocation(postcode).then((data) => {
-                          console.log("postcode>>>", postcode);
                           console.log("data>>>", data);
                           const neighbourhood = data.result.admin_ward;
                           const latitude = data.result.latitude;
