@@ -11,19 +11,18 @@ export default function GeoHash() {
 
   // add hash to lat/lng to document
   //use the hash for queries and lat/lng for distance comparisons
+
+  const usersRef = collection(db, "test-users");
+
   useEffect(() => {
-    const usersRef = collection(db, "test-users");
     console.log(usersRef);
-    usersRef.map
-      .update({
-        geohash: hash,
-        lat: lat,
-        lng: lng,
-      })
-      .then(() => {
-        //   /
+    const getUsers = async () => {
+      const data = await getDocs(usersRef);
+      data.docs.map((doc) => {
+        doc.update({});
       });
-  }, []);
+    };
+  });
 
   return (
     <div>
