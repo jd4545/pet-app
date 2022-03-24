@@ -11,6 +11,8 @@ import WelcomePage from "./Components/WelcomePage";
 // test search page
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import Search from "./Components/Search";
+// Geohash
+import GeoHash from "./Components/GeoHash";
 
 function App() {
   const [user, setUser] = useState(UserContext);
@@ -30,6 +32,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/form" element={<UserDetailsInput />} />
             <Route path="/home" element={<DummyHome />} />
+            <Route path="/geo" element={<GeoHash />} />
 
             <Route path="/search" element={<Search />} />
           </Routes>
