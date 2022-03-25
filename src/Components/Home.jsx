@@ -77,9 +77,9 @@ export default function Home({ services, setServices, location, setLocation }) {
         {sittersSortedByProximity.map((sitter, index) => {
           const sitterLocation = sitter.location;
           console.log(sitterLocation, "<<< sitter location const");
-          // console.log("sitter >>", sitter);
+          console.log("sitter >>", sitter);
           return (
-            <Link to="/profile" className="destyle">
+            <Link to={`/profile/${sitter.id}`} className="destyle">
               <Card
                 className="sittercard p-1 m-2 shadow-sm border-0"
                 key={index}
