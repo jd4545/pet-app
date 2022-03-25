@@ -9,7 +9,7 @@ export default function UserDetailsInput() {
   const [newName, setNewName] = useState('')
   const [newPet, setNewPet] = useState('')
   const [postcode, setPostcode] = useState([])
-  // const [location, setLocation] = useState([null, null]);
+  const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([])
   const [isSitter, setIsSitter] = useState(false)
   const [bio, setBio] = useState('')
@@ -20,8 +20,11 @@ export default function UserDetailsInput() {
   const usersCollectionRef = collection(db, 'users')
 
   const createUser = async (e) => {
-    e.preventDefault()
-    console.log(newName, newPet)
+    e.preventDefault();
+    const locationInfo = await fetchLocation(postcode);
+    // console.log(locationInfo.result.latitude, locationInfo.result.longitude)
+    setLocation([locationInfo.result.latitude, locationInfo.result.longitude])
+    // console.log(location)
     await addDoc(usersCollectionRef, {
       name: newName,
       postcode: postcode,
@@ -31,6 +34,7 @@ export default function UserDetailsInput() {
       isDogSitter: isDogSitter,
       isCatSitter: isCatSitter,
       price: price,
+      location: location
     })
     setNewName('')
     setNewPet('')
