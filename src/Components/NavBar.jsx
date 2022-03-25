@@ -1,9 +1,12 @@
 import paw from "../assets/paw.png";
-import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
+import { Navbar, Container, Nav, Offcanvas, Button } from "react-bootstrap";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function NavBar() {
+  const { user, setUser } = useContext(UserContext);
   return (
-    <Navbar bg="light" expand={false}>
+    <Navbar expand={false}>
       <Container fluid>
         <Navbar.Brand href="#">
           <Nav.Link href="/">
@@ -17,22 +20,40 @@ export default function NavBar() {
             />
           </Nav.Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="offcanvasNavbar" />
+        <Button href="/signin" className="ms-auto mx-3 btn-sign">
+          Add a listing
+        </Button>
+        <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
         <Navbar.Offcanvas
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
           placement="end"
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel">Menu</Offcanvas.Title>
+            <Offcanvas.Title id="offcanvasNavbarLabel">
+              {user?.email}
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/register">Register</Nav.Link>
-              <Nav.Link href="/signin">Login</Nav.Link>
-              <Nav.Link href="/profile">Profile</Nav.Link>
-              <Nav.Link href="/logout">Logout</Nav.Link>
+              <Nav.Link className="p-3" href="/home">
+                Home
+              </Nav.Link>
+              <Nav.Link className="p-3" href="/register">
+                Register
+              </Nav.Link>
+              <Nav.Link className="p-3" href="/signin">
+                Login
+              </Nav.Link>
+              <Nav.Link className="p-3" href="/profile">
+                Profile
+              </Nav.Link>
+              <Nav.Link className="p-3" href="/logout">
+                Logout
+              </Nav.Link>
+              <Button href="/signin" className="btn-sign m-3">
+                Sign in/Sign up
+              </Button>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
