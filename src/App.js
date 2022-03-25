@@ -13,11 +13,10 @@ import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
 import Logout from "./Components/Logout";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Search from "./Components/Search";
 
 function App() {
   const [user, setUser] = useState(UserContext);
-  const [services, setServices] = useState(ServicesContext);
+  const [services, setServices] = useState(null);
   const [location, setLocation] = useState(LocationContext);
 
   return (
@@ -43,13 +42,25 @@ function App() {
               </ThemeProvider>
 
               <Routes>
-                <Route path="/" element={<WelcomePage />} />
+                <Route
+                  path="/"
+                  element={
+                    <WelcomePage
+                      services={services}
+                      setServices={setServices}
+                    />
+                  }
+                />
                 <Route path="/signin" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/form" element={<UserDetailsInput />} />
-                <Route path="/home" element={<Home />} />
+                <Route
+                  path="/home"
+                  element={
+                    <Home services={services} setServices={setServices} />
+                  }
+                />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/search" element={<Search />} />
               </Routes>
             </BrowserRouter>
           </UserContext.Provider>
