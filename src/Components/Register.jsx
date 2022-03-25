@@ -16,22 +16,19 @@ export default function Register() {
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
-      const user = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
       setRegisterEmail("");
       setRegisterPassword("");
-      console.log(user);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  console.log(user);
 
   return (
     <>
@@ -43,6 +40,7 @@ export default function Register() {
           <input
             placeholder="email"
             className="my-2"
+            value={registerEmail}
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
@@ -51,6 +49,7 @@ export default function Register() {
           <input
             type="password"
             className="my-2"
+            value={registerPassword}
             placeholder="password"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
