@@ -21,7 +21,7 @@ export default function NavBar() {
           </Nav.Link>
         </Navbar.Brand>
         <Button href="/signin" className="ms-auto mx-3 btn-sign">
-          Sign in
+          Add a listing
         </Button>
         <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
         <Navbar.Offcanvas
