@@ -2,6 +2,7 @@ import paw from "../assets/paw.png";
 import { Navbar, Container, Nav, Offcanvas, Button } from "react-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import Logout from "./Logout";
 
 export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
@@ -51,9 +52,13 @@ export default function NavBar() {
               <Nav.Link className="p-3" href="/logout">
                 Logout
               </Nav.Link>
-              <Button href="/signin" className="btn-sign m-3">
-                Sign in/Sign up
-              </Button>
+              {!user ? (
+                <Button href="/signin" className="btn-sign m-3">
+                  Sign in/Sign up
+                </Button>
+              ) : (
+                <Logout />
+              )}
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
