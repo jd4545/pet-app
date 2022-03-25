@@ -26,7 +26,7 @@ export default function WelcomePage({ services, setServices }) {
   const { user, setUser } = useContext(UserContext);
   const { location, setLocation } = useContext(LocationContext);
 
-  console.log(user.uid, "<<<<<");
+  console.log(user?.uid, "<<<<<");
 
   return (
     <>
