@@ -17,7 +17,7 @@ import ThemeProvider from "react-bootstrap/ThemeProvider";
 function App() {
   const [user, setUser] = useState(UserContext);
   const [services, setServices] = useState(null);
-  const [location, setLocation] = useState(LocationContext);
+  const [location, setLocation] = useState(null);
 
   return (
     <>
@@ -57,7 +57,12 @@ function App() {
                 <Route
                   path="/home"
                   element={
-                    <Home services={services} setServices={setServices} />
+                    <Home
+                      services={services}
+                      setServices={setServices}
+                      location={location}
+                      setLocation={setLocation}
+                    />
                   }
                 />
                 <Route path="/logout" element={<Logout />} />

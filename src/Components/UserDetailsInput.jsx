@@ -9,7 +9,7 @@ export default function UserDetailsInput() {
   const [newName, setNewName] = useState('')
   const [newPet, setNewPet] = useState('')
   const [postcode, setPostcode] = useState([])
-  const [location, setLocation] = useState([null, null]);
+  // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([])
   const [isSitter, setIsSitter] = useState(false)
   const [bio, setBio] = useState('')
@@ -19,11 +19,12 @@ export default function UserDetailsInput() {
   const [price, setPrice] = useState(0)
   const usersCollectionRef = collection(db, 'users')
 
+
   const createUser = async (e) => {
     e.preventDefault();
     const locationInfo = await fetchLocation(postcode);
     // console.log(locationInfo.result.latitude, locationInfo.result.longitude)
-    setLocation([locationInfo.result.latitude, locationInfo.result.longitude])
+    // setLocation([locationInfo.result.latitude, locationInfo.result.longitude])
     // console.log(location)
     await addDoc(usersCollectionRef, {
       name: newName,
@@ -34,20 +35,20 @@ export default function UserDetailsInput() {
       isDogSitter: isDogSitter,
       isCatSitter: isCatSitter,
       price: price,
-      location: location
+      location: [locationInfo.result.latitude, locationInfo.result.longitude]
     })
     setNewName('')
     setNewPet('')
     setIsSitter(false)
     setBio('')
     // setServices('')
+    setIsDogSitter(false);
+    setIsCatSitter(false);
     setPrice(0)
+    // setLocation([null, null])
     // <Navigate to="/page" />
   }
 
-  const refreshPage = () => {
-    window.location.reload(false)
-  }
 
   useEffect(() => {
     // console.log("useEffect invoked")
@@ -157,12 +158,10 @@ export default function UserDetailsInput() {
           <br />
         )}
         <br />
-        <button
+        {/* move this to form and have onSubmit */}
+        <button 
           onClick={
             createUser
-            // .then(() => {
-            // refreshPage();
-            // });
           }
         >
           Submit
