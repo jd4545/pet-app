@@ -65,7 +65,7 @@ export default function Home({ services, setServices, location, setLocation }) {
 
   return (
     <>
-      {user ? (
+      (
         <div className="justify-content-center text-center mt-5">
           <div className="">
             <h2 className=" my-3">Home</h2>
@@ -111,16 +111,13 @@ export default function Home({ services, setServices, location, setLocation }) {
                     <li>
                       {sitter.proximity} miles away</li>
                   </ul>
-
                   {/* <h1>Location: {user.location}</h1> */}
                 </div>
               );
             })}
           </div>
         </div>
-      ) : (
-        <WelcomePage />
-      )}
+      ) 
     </>
   );
 }

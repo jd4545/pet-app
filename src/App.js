@@ -19,6 +19,8 @@ function App() {
   const [services, setServices] = useState(null);
   const [location, setLocation] = useState(null);
 
+  console.log(setLocation);
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser, "currentuser");
@@ -30,33 +32,45 @@ function App() {
 
   return (
     <>
-        <UserContext.Provider value={{ user }}>
-          <NavBar />
-          <BrowserRouter>
-            <ThemeProvider
-              breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-            >
-              <div className="App"></div>
-            </ThemeProvider>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <WelcomePage services={services} setServices={setServices} />
-                }
-              />
-              <Route path="/signin" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/form" element={<UserDetailsInput />} />
-              <Route
-                path="/home"
-                element={<Home services={services} setServices={setServices} location={location}
-                      setLocation={setLocation} />}
-              />
-              <Route path="/logout" element={<Logout />} />
-            </Routes>
-          </BrowserRouter>
-        </UserContext.Provider>
+      <UserContext.Provider value={{ user }}>
+        <NavBar />
+        <BrowserRouter>
+          <ThemeProvider
+            breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+          >
+            <div className="App"></div>
+          </ThemeProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <WelcomePage
+                  services={services}
+                  setServices={setServices}
+                  location={location}
+                  setLocation={setLocation}
+                  test="test"
+                />
+              }
+            />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/form" element={<UserDetailsInput />} />
+            <Route
+              path="/home"
+              element={
+                <Home
+                  services={services}
+                  setServices={setServices}
+                  location={location}
+                  setLocation={setLocation}
+                />
+              }
+            />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </>
   );
 }

@@ -1,8 +1,6 @@
-import NavBar from "./NavBar";
-import { auth } from "../firebase-config";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import fetchLocation from "../api";
-import { LocationContext } from "../contexts/LocationContext";
+// import { LocationContext } from "../contexts/LocationContext";
 import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import {
@@ -19,14 +17,16 @@ import dogWalking from "../assets/walking-the-dog.png";
 import dogSitting from "../assets/dog-sitting.png";
 import catSitting from "../assets/cat-sitting.png";
 
-export default function WelcomePage({ services, setServices }) {
+export default function WelcomePage({ services, setServices, location, setLocation, test }) {
   const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
-  // const [location, setLocation] = useState('')
   const { user, setUser } = useContext(UserContext);
-  const { location, setLocation } = useContext(LocationContext);
 
+  console.log(setLocation, "<<< setLocation")
+  console.log(test, "<< test")
+  console.log(setServices, "<<< setServices")
   console.log(user?.uid, "<<<<<");
+  console.log(location)
 
   return (
     <>
@@ -83,6 +83,7 @@ export default function WelcomePage({ services, setServices }) {
                         const longitude = data.result.longitude;
                         const newLocation = [latitude, longitude];
                         setNeighbourhood(neighbourhood);
+
                         setLocation(newLocation);
                         console.log("button/services >>>", services);
                       });
