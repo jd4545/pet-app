@@ -1,30 +1,34 @@
-import { useState, useEffect } from 'react'
-import { db } from '../firebase-config'
-import { collection, getDocs, addDoc } from 'firebase/firestore'
-import fetchLocation from '../api'
-import { Navigate } from 'react-router-dom'
-import { Form } from 'react-bootstrap'
+import { useState, useEffect, useContext } from "react";
+import { db } from "../firebase-config";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import fetchLocation from "../api";
+import { Navigate } from "react-router-dom";
+import { Form } from "react-bootstrap";
+import { auth } from "../firebase-config";
+import { UserContext } from "../contexts/UserContext";
 
 export default function UserDetailsInput() {
-  const [newName, setNewName] = useState('')
-  const [newPet, setNewPet] = useState('')
-  const [postcode, setPostcode] = useState([])
+  const { user, setUser } = useContext(UserContext);
+  const [newName, setNewName] = useState("");
+  const [newPet, setNewPet] = useState("");
+  const [postcode, setPostcode] = useState([]);
   const [location, setLocation] = useState([null, null]);
-  const [users, setUsers] = useState([])
-  const [isSitter, setIsSitter] = useState(false)
-  const [bio, setBio] = useState('')
+  const [users, setUsers] = useState([]);
+  const [isSitter, setIsSitter] = useState(false);
+  const [bio, setBio] = useState("");
   // const [services, setServices] = useState({dogsitting:false, catsitting:false })
-  const [isDogSitter, setIsDogSitter] = useState(false)
-  const [isCatSitter, setIsCatSitter] = useState(false)
-  const [price, setPrice] = useState(0)
-  const usersCollectionRef = collection(db, 'users')
+  const [isDogSitter, setIsDogSitter] = useState(false);
+  const [isCatSitter, setIsCatSitter] = useState(false);
+  const [price, setPrice] = useState(0);
+  const usersCollectionRef = collection(db, "users");
 
   const createUser = async (e) => {
     e.preventDefault();
     const locationInfo = await fetchLocation(postcode);
     // console.log(locationInfo.result.latitude, locationInfo.result.longitude)
-    setLocation([locationInfo.result.latitude, locationInfo.result.longitude])
+    setLocation([locationInfo.result.latitude, locationInfo.result.longitude]);
     // console.log(location)
+
     await addDoc(usersCollectionRef, {
       name: newName,
       postcode: postcode,
@@ -34,29 +38,27 @@ export default function UserDetailsInput() {
       isDogSitter: isDogSitter,
       isCatSitter: isCatSitter,
       price: price,
-      location: location
-    })
-    setNewName('')
-    setNewPet('')
-    setIsSitter(false)
-    setBio('')
+      location: location,
+      id: user?.uid,
+    });
+    setNewName("");
+    setNewPet("");
+    setIsSitter(false);
+    setBio("");
     // setServices('')
-    setPrice(0)
+    setPrice(0);
     // <Navigate to="/page" />
-  }
+  };
 
-  const refreshPage = () => {
-    window.location.reload(false)
-  }
-
+  console.log(user, "state");
   useEffect(() => {
     // console.log("useEffect invoked")
     const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef)
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    }
-    getUsers()
-  }, [])
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+  }, []);
 
   return (
     <div className="user-form text-center mt-5">
@@ -64,7 +66,7 @@ export default function UserDetailsInput() {
         <input
           placeholder="Name..."
           onChange={(e) => {
-            setNewName(e.target.value)
+            setNewName(e.target.value);
           }}
           required="required"
         />
@@ -73,7 +75,7 @@ export default function UserDetailsInput() {
         <input
           placeholder="Postcode..."
           onChange={(e) => {
-            setPostcode(e.target.value)
+            setPostcode(e.target.value);
           }}
           required="required"
         />
@@ -94,12 +96,12 @@ export default function UserDetailsInput() {
             // setIsSitter(!isSitter)
             !isSitter
               ? (e) => {
-                  e.preventDefault()
-                  setIsSitter(true)
+                  e.preventDefault();
+                  setIsSitter(true);
                 }
               : (e) => {
-                  e.preventDefault()
-                  setIsSitter(false)
+                  e.preventDefault();
+                  setIsSitter(false);
                 }
           }
         >
@@ -114,29 +116,29 @@ export default function UserDetailsInput() {
               placeholder="Enter bio..."
               id="sitter-form-bio"
               onChange={(e) => {
-                setBio(e.target.value)
+                setBio(e.target.value);
               }}
             />
             <br /> <br />
             <p>Services offered...</p>
             <Form>
-              <div key={'dog sitting'} className="mb-3">
+              <div key={"dog sitting"} className="mb-3">
                 <Form.Check
                   type="checkbox"
                   id={`dog sitting`}
                   label={`Dog Sitting`}
                   onChange={(e) => {
-                    setIsDogSitter(!isDogSitter)
+                    setIsDogSitter(!isDogSitter);
                   }}
                 />
               </div>
-              <div key={'cat sitting'} className="mb-3">
+              <div key={"cat sitting"} className="mb-3">
                 <Form.Check
                   type="checkbox"
                   id={`cat sitting`}
                   label={`Cat Sitting`}
                   onChange={(e) => {
-                    setIsCatSitter(!isCatSitter)
+                    setIsCatSitter(!isCatSitter);
                   }}
                 />
               </div>
@@ -148,7 +150,7 @@ export default function UserDetailsInput() {
               type="number"
               id="sitter-form-bio"
               onChange={(e) => {
-                setPrice(e.target.value)
+                setPrice(e.target.value);
               }}
             />
             {/* </form> */}
@@ -175,8 +177,8 @@ export default function UserDetailsInput() {
             <h1>Pet: {user.pet}</h1>
             {/* <h1>Location: {user.location}</h1> */}
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
