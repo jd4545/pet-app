@@ -1,4 +1,5 @@
 import NavBar from "./NavBar";
+import { auth } from "../firebase-config";
 import { useState, useEffect, useContext } from "react";
 import fetchLocation from "../api";
 import { LocationContext } from "../contexts/LocationContext";
@@ -25,7 +26,7 @@ export default function WelcomePage({ services, setServices }) {
   const { user, setUser } = useContext(UserContext);
   const { location, setLocation } = useContext(LocationContext);
 
-  console.log(user.email, "<<<<");
+  console.log(user?.uid, "<<<<<");
 
   return (
     <>

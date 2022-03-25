@@ -1,41 +1,27 @@
-import React from 'react'
-import { useState, useContext, useEffect } from 'react'
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 
-import { auth } from '../firebase-config'
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
-import { Navigate, Link } from 'react-router-dom'
-import Register from './Register'
-import { UserContext } from '../contexts/UserContext'
+import { auth } from "../firebase-config";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Login() {
-  const [loginEmail, setLoginEmail] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-  const { user, setUser } = useContext(UserContext)
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   const login = async (e) => {
     try {
-      const luser = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword,
-      )
-      window.location.href = '/'
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      window.location.href = "/";
       //add functionality to redirect user to "/" when logged in
-
-      console.log(user)
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  })
-
-  // const handleLogout = async () => {
-  //   await signOut(auth)
-  //   console.log(user)
-  // }
+  console.log(user);
 
   return (
     <>
@@ -61,7 +47,6 @@ export default function Login() {
           Don't have an account? <Link to="/register">Create an account</Link>
         </p>
       </div>
-      )
     </>
-  )
+  );
 }
