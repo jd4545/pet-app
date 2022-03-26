@@ -31,26 +31,36 @@ export default function NavBar() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id="offcanvasNavbarLabel">
-              {user?.email}
+              {user?.name}
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link className="p-3" href="/home">
-                Home
-              </Nav.Link>
-              <Nav.Link className="p-3" href="/register">
-                Register
-              </Nav.Link>
-              <Nav.Link className="p-3" href="/signin">
-                Login
-              </Nav.Link>
-              <Nav.Link className="p-3" href="/profile">
-                Profile
-              </Nav.Link>
-              <Nav.Link className="p-3" href="/logout">
-                Logout
-              </Nav.Link>
+              {user ? (
+                <>
+                  <Nav.Link className="p-3 link" href="/home">
+                    home
+                  </Nav.Link>
+                  <Nav.Link className="p-3 link" href="/me">
+                    my profile
+                  </Nav.Link>
+                  <Nav.Link className="p-3 link" href="/messages">
+                    messages
+                  </Nav.Link>
+                  <Nav.Link className="p-3 link" href="/profile">
+                    profile
+                  </Nav.Link>
+                  <Nav.Link className="p-3 link" href="/favourites">
+                    favourites
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <h5 className="text-center">
+                    you are not currently signed in
+                  </h5>
+                </>
+              )}
               {!user ? (
                 <Button href="/signin" className="btn-sign m-3">
                   Sign in/Sign up

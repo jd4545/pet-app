@@ -5,6 +5,12 @@
   font-family: "Roboto", sans-serif;
 }
 
+.link {
+  color: #9333ea !important;
+  font-weight: 600;
+  text-align: center;
+}
+
 .search-link,
 .search-link:hover {
   text-decoration: none;
@@ -68,5 +74,3 @@
   font-weight: 600 !important;
   background-color: #9333ea !important;
 }
-
-
