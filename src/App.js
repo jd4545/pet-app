@@ -10,6 +10,7 @@ import { UserContext } from "./contexts/UserContext";
 import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
 import Logout from "./Components/Logout";
+import Profile from "./Components/Profile";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
@@ -67,6 +68,7 @@ function App() {
                 />
               }
             />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
         </BrowserRouter>
