@@ -8,12 +8,16 @@ import CalculateDistance from "./CalculateDistance";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Container, Image } from "react-bootstrap";
 
-export default function Home({ services, setServices, location, setLocation }) {
+export default function Home({
+  services,
+  setServices,
+  location,
+  setLocation,
+  users,
+  setUsers,
+}) {
   const { user, setUser } = useContext(UserContext);
-  const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
-
-  console.log(user, "<<<logged in user");
 
   const ownerLocation = location;
 
@@ -25,14 +29,14 @@ export default function Home({ services, setServices, location, setLocation }) {
     getUsers();
   }, []);
 
+  console.log(users, "<users state");
+
   const usersCopy = [...users];
   const sitters = usersCopy.filter((profile) => {
     return profile.isSitter === true;
   });
 
   const sittersFilteredByServices = sitters.filter((sitter) => {
-    // console.log("services: ", services);
-    // console.log("sitterservices >>>", sitter.services === "Dog Sitting");
     if (services === "Dog Sitting") {
       return sitter.isDogSitter === true;
     }
@@ -52,13 +56,9 @@ export default function Home({ services, setServices, location, setLocation }) {
     return sitter;
   });
 
-  console.log(sittersWithProximity);
-
   const sittersSortedByProximity = sittersWithProximity.sort((a, b) => {
     return a.proximity - b.proximity;
   });
-
-  console.log(sittersSortedByProximity);
 
   return (
     <>
@@ -69,11 +69,8 @@ export default function Home({ services, setServices, location, setLocation }) {
           console.log(sitterLocation, "<<< sitter location const");
           console.log("sitter >>", sitter);
           return (
-            <Link to={`/profile/${sitter.id}`} className="destyle">
-              <Card
-                className="sittercard p-1 m-2 shadow-sm border-0"
-                key={index}
-              >
+            <Link key={index} to={`/profile/${sitter.id}`} className="destyle">
+              <Card className="sittercard p-1 m-2 shadow-sm border-0">
                 <Card.Body>
                   <Row>
                     <Col xs="8" sm="9" md="9" className="px-5">

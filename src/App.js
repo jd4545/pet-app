@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
@@ -19,12 +19,10 @@ function App() {
   const [user, setUser] = useState(null);
   const [services, setServices] = useState(null);
   const [location, setLocation] = useState(null);
-
-  console.log(setLocation);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser, "currentuser");
       setUser(currentUser);
     });
   });
@@ -65,10 +63,15 @@ function App() {
                   setServices={setServices}
                   location={location}
                   setLocation={setLocation}
+                  users={users}
+                  setUsers={setUsers}
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile/:sitter_id"
+              element={<Profile users={users} setUsers={setUsers} />}
+            />
             <Route path="/logout" element={<Logout />} />
           </Routes>
         </BrowserRouter>

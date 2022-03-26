@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import fetchLocation from "../api";
 // import { LocationContext } from "../contexts/LocationContext";
 import { UserContext } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Form,
   Button,
@@ -28,11 +28,28 @@ export default function WelcomePage({
   const [neighbourhood, setNeighbourhood] = useState("");
   const { user, setUser } = useContext(UserContext);
 
-  console.log(setLocation, "<<< setLocation");
-  console.log(test, "<< test");
-  console.log(setServices, "<<< setServices");
-  console.log(user?.uid, "<<<<<");
-  console.log(location);
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+    console.log("services>>>", services);
+    fetchLocation(postcode)
+      .then((data) => {
+        console.log("data>>>", data);
+        const neighbourhood = data.result.admin_ward;
+        const latitude = data.result.latitude;
+        const longitude = data.result.longitude;
+        const newLocation = [latitude, longitude];
+        setNeighbourhood(neighbourhood);
+
+        setLocation(newLocation);
+        console.log("button/services >>>", services);
+      })
+      .then(() => {
+        navigate("/home");
+      });
+  };
 
   return (
     <>
@@ -48,7 +65,7 @@ export default function WelcomePage({
         >
           <Card.Body>
             <Card.Text as="h5">{neighbourhood}</Card.Text>
-            <Form action="">
+            <Form onSubmit={handleSubmit}>
               <Row className="justify-content-center">
                 <Col s="auto" md="auto" lg={4} className="my-1">
                   <Form.Control
@@ -76,29 +93,14 @@ export default function WelcomePage({
                 </Col>
                 <Col xs="auto" lg="3" className="my-1 text-center">
                   <Button
-                    href="/home"
+                    type="submit"
                     style={{ color: "white" }}
                     variant="light"
                     className="p-2 px-4 btn-search"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      console.log("services>>>", services);
-                      fetchLocation(postcode).then((data) => {
-                        console.log("data>>>", data);
-                        const neighbourhood = data.result.admin_ward;
-                        const latitude = data.result.latitude;
-                        const longitude = data.result.longitude;
-                        const newLocation = [latitude, longitude];
-                        setNeighbourhood(neighbourhood);
-
-                        setLocation(newLocation);
-                        console.log("button/services >>>", services);
-                      });
-                    }}
                   >
-                    <Link className="search-link" to="/home">
-                      Search
-                    </Link>
+                    {/* <Link className="search-link" to="/home"> */}
+                    Search
+                    {/* </Link> */}
                   </Button>
                 </Col>
               </Row>
