@@ -19,6 +19,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [services, setServices] = useState(null);
   const [location, setLocation] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -62,10 +63,15 @@ function App() {
                   setServices={setServices}
                   location={location}
                   setLocation={setLocation}
+                  users={users}
+                  setUsers={setUsers}
                 />
               }
             />
-            <Route path="/profile/:sitter_id" element={<Profile />} />
+            <Route
+              path="/profile/:sitter_id"
+              element={<Profile users={users} setUsers={setUsers} />}
+            />
             <Route path="/logout" element={<Logout />} />
           </Routes>
         </BrowserRouter>

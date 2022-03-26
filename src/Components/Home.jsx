@@ -8,9 +8,15 @@ import CalculateDistance from "./CalculateDistance";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Container, Image } from "react-bootstrap";
 
-export default function Home({ services, setServices, location, setLocation }) {
+export default function Home({
+  services,
+  setServices,
+  location,
+  setLocation,
+  users,
+  setUsers,
+}) {
   const { user, setUser } = useContext(UserContext);
-  const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
   const ownerLocation = location;
@@ -23,14 +29,14 @@ export default function Home({ services, setServices, location, setLocation }) {
     getUsers();
   }, []);
 
+  console.log(users, "<users state");
+
   const usersCopy = [...users];
   const sitters = usersCopy.filter((profile) => {
     return profile.isSitter === true;
   });
 
   const sittersFilteredByServices = sitters.filter((sitter) => {
-    // console.log("services: ", services);
-    // console.log("sitterservices >>>", sitter.services === "Dog Sitting");
     if (services === "Dog Sitting") {
       return sitter.isDogSitter === true;
     }

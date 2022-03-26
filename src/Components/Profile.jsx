@@ -6,27 +6,30 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 
-export default function Profile() {
+export default function Profile({ users, setUsers }) {
   const { sitter_id } = useParams();
-  const [profile, setProfile] = useState();
 
-  const userRef = doc(db, "users", sitter_id);
+  // useEffect(() => {
+  //   const getSitter = async () => {
+  //     const sitter = await getDoc(userRef);
+  //     const sitterFields = sitter._document.data.value.mapValue.fields;
+  //     setProfile(sitterFields);
+  //   };
+  //   getSitter();
+  // }, []);
 
-  useEffect(() => {
-    const getSitter = async () => {
-      const sitter = await getDoc(userRef);
-      const sitterFields = sitter._document.data.value.mapValue.fields;
-      setProfile(sitterFields);
-    };
-    getSitter();
-  }, []);
-
+  // const usersCopy = [...users];
+  // const sitter = usersCopy.filter((user) => {
+  //   console.log(profile);
+  //   return user.id === sitter_id;
+  // });
+  // setProfile(sitter);
   console.log(sitter_id, "< sitter_id");
-  console.log(profile);
+
   return (
     <>
       <Container>
-        <ProfileCard profile={profile} />
+        <ProfileCard />
         <h2 className="p-2">Reviews</h2>
         <ReviewCard />
       </Container>
