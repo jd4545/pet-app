@@ -5,6 +5,7 @@ import { db } from "../firebase-config";
 import fetchLocation from "../api";
 import dog from "../assets/dogIcon.png";
 import cat from "../assets/catIcon.png";
+import sidebar from "../assets/side.jpg";
 import CalculateDistance from "./CalculateDistance";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -212,7 +213,10 @@ export default function Home({
             })}
           </Col>
           <Col md="3" lg="4">
-            <Card height="200"> something here, map???</Card>
+            <Card>
+              <h4>Map here?? </h4>
+              <Image src={sidebar} height="500" width="auto" />
+            </Card>
           </Col>
         </Row>
       </Container>

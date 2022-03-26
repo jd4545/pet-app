@@ -71,8 +71,9 @@
 }
 
 .background {
-  background-image: url("https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg");
-  height: 500px;
+  background-image: url("./assets/golden.jpg");
+  background-repeat: no-repeat, repeat;
+  height: 350px;
   background-size: 100%;
 }
 
