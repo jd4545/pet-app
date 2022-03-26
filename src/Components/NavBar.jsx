@@ -9,7 +9,7 @@ export default function NavBar() {
   return (
     <Navbar expand={false}>
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand>
           <Nav.Link href="/">
             <img
               src={paw}
@@ -17,7 +17,6 @@ export default function NavBar() {
               width="50"
               height="50"
               className="d-inline-block align-top"
-              to="/"
             />
           </Nav.Link>
         </Navbar.Brand>
