@@ -11,6 +11,7 @@ import {
   Card,
   Container,
   Image,
+  Alert,
 } from "react-bootstrap";
 // images
 import dogWalking from "../assets/walking-the-dog.png";
@@ -28,6 +29,7 @@ export default function WelcomePage({
   const [neighbourhood, setNeighbourhood] = useState("");
   const { user, setUser } = useContext(UserContext);
   const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -55,6 +57,10 @@ export default function WelcomePage({
       })
       .then(() => {
         navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error, "<message");
+        setError(error);
       });
   };
 
@@ -72,6 +78,14 @@ export default function WelcomePage({
         >
           <Card.Body>
             <Card.Text as="h5">{neighbourhood}</Card.Text>
+            {error ? (
+              <Alert variant="warning" className="text-center">
+                Please check your postcode and try again
+              </Alert>
+            ) : (
+              ""
+            )}
+
             <Form validated={validated} onSubmit={handleSubmit}>
               <Row className="justify-content-center">
                 <Col s="auto" md="auto" lg={4} className="my-1">

@@ -4,12 +4,13 @@ import { auth } from "../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Alert } from "react-bootstrap";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -20,6 +21,7 @@ export default function Login() {
       //add functionality to redirect user to "/" when logged in
     } catch (error) {
       console.log(error.message);
+      setError(error);
     }
   };
 
@@ -33,29 +35,35 @@ export default function Login() {
           <Form onSubmit={handleLogin}>
             <Form.Control
               placeholder="email"
-              className="my-4"
+              className="my-1 mt-4"
               value={loginEmail}
               onChange={(event) => setLoginEmail(event.target.value)}
             />
             <br />
             <Form.Control
               type="password"
-              className="my-2"
+              className="my-1"
               value={loginPassword}
               placeholder="password"
               onChange={(event) => setLoginPassword(event.target.value)}
             />
-            <br />
+            {error ? (
+              <p className="text-center p-1">
+                Please check your email/password and try again
+              </p>
+            ) : (
+              ""
+            )}
             <Button
               style={{ color: "white" }}
               variant="light"
-              className="p-2 px-4 m-3 btn-search align-items-center"
+              className="p-2 px-4 mt-3 btn-search align-items-center"
               type="submit"
             >
               Sign In
             </Button>
           </Form>
-          <p>
+          <p className="py-3">
             Don't have an account?{" "}
             <Link to="/register" className="link">
               Create an account
