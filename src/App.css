@@ -37,6 +37,14 @@
   background-color: #9333ea !important;
 }
 
+.btn-home {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  background-color: #1e40af !important;
+}
+
 .btn-sign {
   padding: 3px 9px;
   border: 0 none !important;
@@ -68,10 +76,9 @@
   background-size: 100%;
 }
 
-.home-search {
+.homebar {
   padding: 9px 9px;
   border: 0 none !important;
-  border-radius: 20px !important;
   font-weight: 600 !important;
-  background-color: #9333ea !important;
+  background-color: #34d399 !important;
 }
