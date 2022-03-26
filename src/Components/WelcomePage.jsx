@@ -17,16 +17,22 @@ import dogWalking from "../assets/walking-the-dog.png";
 import dogSitting from "../assets/dog-sitting.png";
 import catSitting from "../assets/cat-sitting.png";
 
-export default function WelcomePage({ services, setServices, location, setLocation, test }) {
+export default function WelcomePage({
+  services,
+  setServices,
+  location,
+  setLocation,
+  test,
+}) {
   const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
   const { user, setUser } = useContext(UserContext);
 
-  console.log(setLocation, "<<< setLocation")
-  console.log(test, "<< test")
-  console.log(setServices, "<<< setServices")
+  console.log(setLocation, "<<< setLocation");
+  console.log(test, "<< test");
+  console.log(setServices, "<<< setServices");
   console.log(user?.uid, "<<<<<");
-  console.log(location)
+  console.log(location);
 
   return (
     <>
@@ -48,6 +54,7 @@ export default function WelcomePage({ services, setServices, location, setLocati
                   <Form.Control
                     className="border-0"
                     type="text"
+                    value={postcode}
                     onChange={(e) => setPostcode(e.target.value)}
                     placeholder="Enter Postcode..."
                   />

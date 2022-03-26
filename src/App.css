@@ -11,6 +11,11 @@
   color: white;
 }
 
+.destyle {
+  text-decoration: none;
+  color: black;
+}
+
 .btn {
   padding: 3px 9px;
   border: 0 none !important;
@@ -54,4 +59,12 @@
   background-image: url("https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg");
   height: 500px;
   background-size: 100%;
+}
+
+.home-search {
+  padding: 9px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  background-color: #9333ea !important;
 }
