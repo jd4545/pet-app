@@ -6,15 +6,7 @@ import dog from "../assets/dogIcon.png";
 import cat from "../assets/catIcon.png";
 import CalculateDistance from "./CalculateDistance";
 import { Link } from "react-router-dom";
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-  Card,
-  Container,
-  Image,
-} from "react-bootstrap";
+import { Row, Col, Card, Container, Image } from "react-bootstrap";
 
 export default function Home({ services, setServices, location, setLocation }) {
   const { user, setUser } = useContext(UserContext);
@@ -27,7 +19,6 @@ export default function Home({ services, setServices, location, setLocation }) {
   console.log(ownerLocation, "<<< owner location const");
 
   useEffect(() => {
-    // console.log("useEffect invoked")
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
