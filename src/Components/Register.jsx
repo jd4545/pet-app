@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState, useContext } from "react";
 import { auth } from "../firebase-config";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Navigate, Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { Form, Button, Container } from "react-bootstrap";
@@ -37,37 +34,42 @@ export default function Register() {
         {user ? (
           <Navigate to="/" />
         ) : (
-          <div className="text-center my-5">
+          <div className="text-center m-5 p-5">
             <h1>Register</h1>
-            <Form.Control
-              placeholder="email"
-              className="my-2"
-              value={registerEmail}
-              onChange={(event) => {
-                setRegisterEmail(event.target.value);
-              }}
-            />
-            <br />
-            <Form.Control
-              type="password"
-              className="my-2"
-              value={registerPassword}
-              placeholder="password"
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
-            />
-            <br />
-            <Button
-              style={{ color: "white" }}
-              variant="light"
-              className="p-2 px-4 btn-search align-items-center"
-              onClick={handleRegister}
-            >
-              Register
-            </Button>
+            <Form onSubmit={handleRegister}>
+              <Form.Control
+                placeholder="email"
+                className="my-4"
+                value={registerEmail}
+                onChange={(event) => {
+                  setRegisterEmail(event.target.value);
+                }}
+              />
+              <br />
+              <Form.Control
+                type="password"
+                className="my-2"
+                value={registerPassword}
+                placeholder="password"
+                onChange={(event) => {
+                  setRegisterPassword(event.target.value);
+                }}
+              />
+              <br />
+              <Button
+                style={{ color: "white" }}
+                variant="light"
+                className="p-2 px-4 m-3 btn-search align-items-center"
+                type="submit"
+              >
+                Register
+              </Button>
+            </Form>
             <p>
-              Have an account? <Link to="/signin">Sign in</Link>
+              Have an account?{" "}
+              <Link to="/signin" className="link">
+                Sign in
+              </Link>
             </p>
           </div>
         )}
