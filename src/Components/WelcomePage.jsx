@@ -27,11 +27,18 @@ export default function WelcomePage({
   const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [validated, setValidated] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
     event.preventDefault();
     console.log("services>>>", services);
     fetchLocation(postcode)
@@ -65,7 +72,7 @@ export default function WelcomePage({
         >
           <Card.Body>
             <Card.Text as="h5">{neighbourhood}</Card.Text>
-            <Form onSubmit={handleSubmit}>
+            <Form validated={validated} onSubmit={handleSubmit}>
               <Row className="justify-content-center">
                 <Col s="auto" md="auto" lg={4} className="my-1">
                   <Form.Control
