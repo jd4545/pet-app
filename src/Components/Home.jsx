@@ -16,7 +16,6 @@ export default function Home({ services, setServices, location, setLocation }) {
   console.log(user, "<<<logged in user");
 
   const ownerLocation = location;
-  console.log(ownerLocation, "<<< owner location const");
 
   useEffect(() => {
     const getUsers = async () => {
