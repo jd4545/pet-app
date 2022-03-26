@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { Navigate, Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { Form, Button, Container } from "react-bootstrap";
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -32,38 +33,45 @@ export default function Register() {
 
   return (
     <>
-      {user ? (
-        <Navigate to="/" />
-      ) : (
-        <div className="text-center my-5">
-          <h1>Register</h1>
-          <input
-            placeholder="email"
-            className="my-2"
-            value={registerEmail}
-            onChange={(event) => {
-              setRegisterEmail(event.target.value);
-            }}
-          />
-          <br />
-          <input
-            type="password"
-            className="my-2"
-            value={registerPassword}
-            placeholder="password"
-            onChange={(event) => {
-              setRegisterPassword(event.target.value);
-            }}
-          />
-          <br />
-          <button className="btn btn-primary my-3" onClick={handleRegister}>
-            Register
-          </button>
-          <p>
-            Have an account? <Link to="/signin">Sign in</Link>
-          </p>
-        </div>
-      )}
+      <Container className="align-items-center">
+        {user ? (
+          <Navigate to="/" />
+        ) : (
+          <div className="text-center my-5">
+            <h1>Register</h1>
+            <Form.Control
+              placeholder="email"
+              className="my-2"
+              value={registerEmail}
+              onChange={(event) => {
+                setRegisterEmail(event.target.value);
+              }}
+            />
+            <br />
+            <Form.Control
+              type="password"
+              className="my-2"
+              value={registerPassword}
+              placeholder="password"
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
+            />
+            <br />
+            <Button
+              style={{ color: "white" }}
+              variant="light"
+              className="p-2 px-4 btn-search align-items-center"
+              onClick={handleRegister}
+            >
+              Register
+            </Button>
+            <p>
+              Have an account? <Link to="/signin">Sign in</Link>
+            </p>
+          </div>
+        )}
+      </Container>
     </>
   );
 }
