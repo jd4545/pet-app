@@ -3,27 +3,25 @@ import { db } from "../firebase-config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import fetchLocation from "../api";
 import { Navigate } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
 import { auth } from "../firebase-config";
 import { UserContext } from "../contexts/UserContext";
 
 export default function UserDetailsInput() {
-
   const { user, setUser } = useContext(UserContext);
-  const [newName, setNewName] = useState('')
-  const [newPet, setNewPet] = useState('')
-  const [postcode, setPostcode] = useState([])
+  const [newName, setNewName] = useState("");
+  const [newPet, setNewPet] = useState("");
+  const [postcode, setPostcode] = useState([]);
   // const [location, setLocation] = useState([null, null]);
-  const [users, setUsers] = useState([])
-  const [isSitter, setIsSitter] = useState(false)
-  const [bio, setBio] = useState('')
+  const [users, setUsers] = useState([]);
+  const [isSitter, setIsSitter] = useState(false);
+  const [bio, setBio] = useState("");
 
   // const [services, setServices] = useState({dogsitting:false, catsitting:false })
   const [isDogSitter, setIsDogSitter] = useState(false);
   const [isCatSitter, setIsCatSitter] = useState(false);
   const [price, setPrice] = useState(0);
   const usersCollectionRef = collection(db, "users");
-
 
   const createUser = async (e) => {
     e.preventDefault();
@@ -40,21 +38,21 @@ export default function UserDetailsInput() {
       price: price,
       location: [locationInfo.result.latitude, locationInfo.result.longitude],
       id: user?.uid,
-    })
-    setNewName('')
-    setNewPet('')
-    setIsSitter(false)
-    setBio('')
+    });
+    setNewName("");
+    setNewPet("");
+    setIsSitter(false);
+    setBio("");
     // setServices('')
     setIsDogSitter(false);
     setIsCatSitter(false);
-    setPrice(0)
+    setPrice(0);
     // setLocation([null, null])
     // <Navigate to="/page" />
-  }
+  };
 
   console.log(user, "state");
-  
+
   useEffect(() => {
     // console.log("useEffect invoked")
     const getUsers = async () => {
@@ -65,9 +63,14 @@ export default function UserDetailsInput() {
   }, []);
 
   return (
-    <div className="user-form text-center mt-5">
-      <form>
-        <input
+    <Container className="justify-content-center text-center mx-5 px-5">
+      <br />
+      <br />
+      <h1>Profile Details</h1>
+      <Form>
+        <br />
+        <br />
+        <Form.Control
           placeholder="Name..."
           onChange={(e) => {
             setNewName(e.target.value);
@@ -76,7 +79,7 @@ export default function UserDetailsInput() {
         />
         <br />
         <br />
-        <input
+        <Form.Control
           placeholder="Postcode..."
           onChange={(e) => {
             setPostcode(e.target.value);
@@ -85,17 +88,21 @@ export default function UserDetailsInput() {
         />
         <br />
         <br />
-        <p>Pets you own...</p>
-        <select value={newPet} onChange={(e) => setNewPet(e.target.value)}>
+        <h4>Pets you own</h4>
+        <br />
+        <Form.Select value={newPet} onChange={(e) => setNewPet(e.target.value)}>
           <option></option>
           <option>Dog</option>
           <option>Cat</option>
           <option>Both</option>
-        </select>
+        </Form.Select>
         <br />
         <br />
         <br />
-        <button
+        <Button
+          style={{ color: "white" }}
+          variant="light"
+          className="p-2 px-4 btn-search align-items-center"
           onClick={
             // setIsSitter(!isSitter)
             !isSitter
@@ -110,13 +117,13 @@ export default function UserDetailsInput() {
           }
         >
           Become a sitter
-        </button>
+        </Button>
         <br /> <br />
         {/* {console.log(isSitter, "sitter boolean")} */}
         {isSitter ? (
           <div className="sitter-form">
             {/* <form> */}
-            <input
+            <Form.Control
               placeholder="Enter bio..."
               id="sitter-form-bio"
               onChange={(e) => {
@@ -124,32 +131,37 @@ export default function UserDetailsInput() {
               }}
             />
             <br /> <br />
-            <p>Services offered...</p>
-            <Form>
-              <div key={"dog sitting"} className="mb-3">
-                <Form.Check
-                  type="checkbox"
-                  id={`dog sitting`}
-                  label={`Dog Sitting`}
-                  onChange={(e) => {
-                    setIsDogSitter(!isDogSitter);
-                  }}
-                />
-              </div>
-              <div key={"cat sitting"} className="mb-3">
-                <Form.Check
-                  type="checkbox"
-                  id={`cat sitting`}
-                  label={`Cat Sitting`}
-                  onChange={(e) => {
-                    setIsCatSitter(!isCatSitter);
-                  }}
-                />
-              </div>
-            </Form>
+            <h3>Services offered</h3>
+            <br />
+            <Form.Group>
+              <Row>
+                <Col xs="4" md="4" lg="4">
+                  <div key={"dog sitting"} className="mb-3">
+                    <Form.Check
+                      type="checkbox"
+                      id={`dog sitting`}
+                      label={`Dog Sitting`}
+                      onChange={(e) => {
+                        setIsDogSitter(!isDogSitter);
+                      }}
+                    />
+                  </div>
+                  <div key={"cat sitting"} className="mb-3">
+                    <Form.Check
+                      type="checkbox"
+                      id={`cat sitting`}
+                      label={`Cat Sitting`}
+                      onChange={(e) => {
+                        setIsCatSitter(!isCatSitter);
+                      }}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            </Form.Group>
             <br /> <br />
             <p>Daily rate charged</p>
-            <input
+            <Form.Control
               placeholder="£ per day"
               type="number"
               id="sitter-form-bio"
@@ -164,23 +176,15 @@ export default function UserDetailsInput() {
         )}
         <br />
         {/* move this to form and have onSubmit */}
-        <button 
-          onClick={
-            createUser
-          }
+        <Button
+          style={{ color: "white" }}
+          variant="light"
+          className="p-2 px-4 btn-search align-items-center"
+          onClick={createUser}
         >
           Submit
-        </button>
-      </form>
-      {users.map((user) => {
-        return (
-          <div>
-            <h1>Name: {user.name} </h1>
-            <h1>Pet: {user.pet}</h1>
-            {/* <h1>Location: {user.location}</h1> */}
-          </div>
-        );
-      })}
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 }
