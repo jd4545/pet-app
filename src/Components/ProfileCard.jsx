@@ -36,7 +36,7 @@ export default function ProfileCard({ img, sitterName, sitterBio }) {
             <Card.Body>
               <Row>
                 <Col>
-                  <Image src={img ? img : avatar} width="200" height="200" />
+                  <Image src={img ? img : avatar} width="160" height="160" />
                 </Col>
                 <Col md="9" lg="9">
                   <Card.Title className="p-1">

@@ -84,7 +84,7 @@ export default function Home({
       event.preventDefault();
       event.stopPropagation();
     }
-
+    setError(false);
     setValidated(true);
     event.preventDefault();
     console.log("services>>>", services);
@@ -110,14 +110,14 @@ export default function Home({
     <>
       <>
         <div className="homebar">
+          {error ? (
+            <p className="text-center">
+              Please check your postcode and try again
+            </p>
+          ) : (
+            ""
+          )}
           <Nav className=" justify-content-center" style={{ color: "gray" }}>
-            {error ? (
-              <Alert variant="warning" className="text-center">
-                Please check your postcode and try again
-              </Alert>
-            ) : (
-              ""
-            )}
             <Nav.Item>
               <Form validated={validated} onSubmit={handleSubmit}>
                 <Row className="justify-content-center">
@@ -163,10 +163,10 @@ export default function Home({
           </Nav>
         </div>
       </>
-      <Container className="justify-content-center p-2">
-        <h2 className="text-center">listings</h2>
+      <Container className="justify-content-center">
+        <h2 className="text-center p-2">listings</h2>
         <Row>
-          <Col md="9" lg="8">
+          <Col md="7" lg="7">
             {sittersSortedByProximity.map((sitter, index) => {
               const sitterLocation = sitter.location;
               console.log(sitterLocation, "<<< sitter location const");
@@ -212,10 +212,10 @@ export default function Home({
               );
             })}
           </Col>
-          <Col md="3" lg="4">
+          <Col md="5" lg="5">
             <Card>
               <h4>Map here?? </h4>
-              <Image src={sidebar} height="500" width="auto" />
+              <Image src={sidebar} height="auto" width="auto" />
             </Card>
           </Col>
         </Row>
