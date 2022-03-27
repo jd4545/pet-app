@@ -18,7 +18,9 @@ import {
   Form,
   Button,
   Nav,
+  Badge,
 } from "react-bootstrap";
+import avatar from "../assets/blank-profile.png";
 
 export default function Home({
   services,
@@ -166,9 +168,11 @@ export default function Home({
         </div>
       </>
       <Container className="justify-content-center">
-        <h2 className="text-center p-2">listings</h2>
+        <h4 className="text-center p-2">
+          Pet care near {neighbourhood ? neighbourhood : "you"}
+        </h4>
         <Row>
-          <Col md="7" lg="7">
+          <Col lg="7">
             {sittersSortedByProximity.map((sitter, index) => {
               const sitterLocation = sitter.location;
               console.log(sitterLocation, "<<< sitter location const");
@@ -182,7 +186,10 @@ export default function Home({
                   <Card className="sittercard  my-3 shadow-sm border-0">
                     <Card.Body>
                       <Row>
-                        <Col xs="8" sm="9" md="9" className="px-5">
+                        <Col xs="3" sm="3" md="3">
+                          <Image src={avatar} width="90" height="90" />
+                        </Col>
+                        <Col xs="6" sm="6" md="6" className="px-5">
                           <Card.Text>
                             <h4>{sitter.name}</h4>
                             {sitter.proximity} miles away
@@ -190,21 +197,21 @@ export default function Home({
                           <Card.Text>Rating here</Card.Text>
                         </Col>
                         {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}
-                        <Col xs="4" sm="3" md="3" className="py-3">
+                        <Col xs="3" sm="3" md="3" className="py-3">
                           {sitter.isDogSitter ? (
-                            <Image src={dog} alt="dog" width="40" />
+                            <Image src={dog} alt="dog" width="35" />
                           ) : (
                             <p></p>
                           )}
                           {/* <li>Catsitter: {sitter.isCatSitter.toString()}</li> */}
                           {sitter.isCatSitter ? (
-                            <Image src={cat} alt="cat" width="40" />
+                            <Image src={cat} alt="cat" width="35" />
                           ) : (
                             <p></p>
                           )}
-                          <Card.Text className="py-1">
+                          <Badge pill bg="light" text="dark">
                             £{sitter.price} per day
-                          </Card.Text>
+                          </Badge>
                         </Col>
                       </Row>
                     </Card.Body>
@@ -214,7 +221,7 @@ export default function Home({
               );
             })}
           </Col>
-          <Col md="5" lg="5">
+          <Col lg="5">
             <Card>
               <h4>Map here?? </h4>
               <Image src={sidebar} height="auto" width="auto" />
