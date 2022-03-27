@@ -40,13 +40,11 @@ export default function ProfileCard({ img, sitterName, sitterBio }) {
                 </Col>
                 <Col md="9" lg="9">
                   <Card.Title className="p-1">
-                    {sitterName ? sitterName : "Name Here"}
+                    {prof ? prof.name : "Name Here"}
                   </Card.Title>
                   <Image src={dogIcon} width="30" className="p-1" />
                   <Card.Text className="p-2">
-                    {sitterBio
-                      ? sitterBio
-                      : "This is the users bio within profile"}
+                    {prof ? prof.bio : "This is the users bio within profile"}
                   </Card.Text>
                 </Col>
                 <Col lg="2" className="p-3">

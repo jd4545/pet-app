@@ -21,6 +21,7 @@ function App() {
   const [location, setLocation] = useState(null);
   const [users, setUsers] = useState([]);
   const [postcode, setPostcode] = useState(null);
+  const [neighbourhood, setNeighbourhood] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -51,6 +52,8 @@ function App() {
                   setLocation={setLocation}
                   postcode={postcode}
                   setPostcode={setPostcode}
+                  neighbourhood={neighbourhood}
+                  setNeighbourhood={setNeighbourhood}
                 />
               }
             />
@@ -69,6 +72,8 @@ function App() {
                   setUsers={setUsers}
                   postcode={postcode}
                   setPostcode={setPostcode}
+                  neighbourhood={neighbourhood}
+                  setNeighbourhood={setNeighbourhood}
                 />
               }
             />
