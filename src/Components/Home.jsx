@@ -27,13 +27,15 @@ export default function Home({
   setLocation,
   users,
   setUsers,
+  postcode,
+  setPostcode,
 }) {
   const { user, setUser } = useContext(UserContext);
   const usersCollectionRef = collection(db, "users");
   //header search bar
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState(null);
-  const [postcode, setPostcode] = useState("");
+
   const [neighbourhood, setNeighbourhood] = useState("");
   const navigate = useNavigate();
   const ownerLocation = location;

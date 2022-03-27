@@ -24,8 +24,9 @@ export default function WelcomePage({
   location,
   setLocation,
   test,
+  postcode,
+  setPostcode,
 }) {
-  const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState("");
   const { user, setUser } = useContext(UserContext);
   const [validated, setValidated] = useState(false);
