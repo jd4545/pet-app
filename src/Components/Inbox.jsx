@@ -169,7 +169,7 @@ export default function Inbox() {
           />
         </>
       ) : (
-        <h3 className="no_conv">Select a user to start convo</h3>
+        <h3 className="no_conv">select a user to start chatting</h3>
       )}
     </Container>
   );

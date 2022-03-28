@@ -57,7 +57,7 @@ function App() {
               }
             />
 
-            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/messages" element={<Inbox />} />
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/form" element={<UserDetailsInput />} />
