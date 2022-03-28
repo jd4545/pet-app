@@ -1,4 +1,12 @@
-import { Container, Card, Row, Col, Button, Image } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Button,
+  Image,
+  Form,
+} from "react-bootstrap";
 import {
   doc,
   getDocs,
@@ -18,6 +26,10 @@ import catIcon from "../assets/catIcon.png";
 export default function EditProfile({ img, users, setUsers }) {
   const { user, setUser } = useContext(UserContext);
   const [prof, setProf] = useState(null);
+  const [newName, setNewName] = useState("");
+  const [newBio, setNewBio] = useState("");
+  const [newPrice, setNewPrice] = useState("");
+  const [edit, setEdit] = useState(false);
   const usersCollectionRef = collection(db, "users");
 
   useEffect(() => {
@@ -46,27 +58,17 @@ export default function EditProfile({ img, users, setUsers }) {
 
   // console.log(updateRef, "<<< updateRef");
 
-  const handleNameUpdate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const updateRef = doc(db, "users", sitterId);
     // set state
     const updated = await updateDoc(updateRef, {
-      name: "Michaela",
+      name: newName,
+      bio: newBio,
+      price: newPrice,
     });
+    setEdit(false);
   };
-
-  // const profRef = collection(db, "users")
-  // console.log(usersCollectionRef)
-
-  // const q = query(usersCollectionRef, where("name", "==", "Michael"))
-
-  // useEffect(()=>{
-  //     const getUser = async () => {
-  //         const me = await getDoc(db, "users", where("id", "===", user?.uid));
-  //         console.log(me)
-  //     }
-  //     getUser()
-  // })
 
   return (
     <Container>
@@ -77,7 +79,7 @@ export default function EditProfile({ img, users, setUsers }) {
               <Image src={img ? img : profilePic} width="160" height="160" />
             </Col>
             <Col md="9" lg="9">
-              <Card.Title className="p-1">
+              <Card.Title className="p-1 mt-3">
                 {sitter ? sitter.name : "Name Here"}
               </Card.Title>
               <Card.Text className="p-2">
@@ -101,9 +103,8 @@ export default function EditProfile({ img, users, setUsers }) {
               {/* Sitter section */}
               {sitter && sitter.isSitter ? (
                 <>
-                  <Card.Title className="p-1">Sitter section:</Card.Title>
                   <Card.Text className="p-2">
-                    {sitter ? sitter.price : null}
+                    £{sitter ? sitter.price : null} per day
                   </Card.Text>
                   <Card.Text className="p-2">
                     {" "}
@@ -123,9 +124,42 @@ export default function EditProfile({ img, users, setUsers }) {
               ) : null}
             </Col>
             <Col lg="2" className="p-3">
-              <Button onClick={handleNameUpdate} className="ms-auto btn-sign">
-                save
+              <Button
+                onClick={() => setEdit(!edit)}
+                className="ms-auto btn-sign"
+              >
+                edit details
               </Button>
+              {edit ? (
+                <Form onSubmit={handleUpdate} className="p-3">
+                  <Form.Control
+                    placeholder="Name"
+                    className="m-2"
+                    onChange={(e) => setNewName(e.target.value)}
+                    value={newName}
+                  />
+
+                  <Form.Control
+                    placeholder="Bio"
+                    className="m-2"
+                    onChange={(e) => setNewBio(e.target.value)}
+                    value={newBio}
+                  />
+
+                  <Form.Control
+                    placeholder="Price"
+                    className="m-2"
+                    onChange={(e) => setNewPrice(e.target.value)}
+                    value={newPrice}
+                  />
+                  <p>save and return to home</p>
+                  <Button type="submit" className="ms-auto btn-sign my-3">
+                    save
+                  </Button>
+                </Form>
+              ) : (
+                ""
+              )}
             </Col>
           </Row>
         </Card.Body>
