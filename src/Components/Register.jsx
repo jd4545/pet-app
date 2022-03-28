@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { auth } from "../firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { Form, Button, Container } from "react-bootstrap";
 
@@ -11,6 +11,7 @@ export default function Register() {
   const [registerPassword, setRegisterPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ export default function Register() {
       );
       setRegisterEmail("");
       setRegisterPassword("");
+      navigate("/form")
     } catch (error) {
       console.log(error.message);
       setError(error);
@@ -34,7 +36,7 @@ export default function Register() {
     <>
       <Container className="align-items-center">
         {user ? (
-          <Navigate to="/" />
+          navigate("/")
         ) : (
           <div className="text-center m-5 p-5">
             <h1>Register</h1>
