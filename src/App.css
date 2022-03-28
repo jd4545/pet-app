@@ -83,3 +83,7 @@
   font-weight: 600 !important;
   background-color: #34d399 !important;
 }
+
+.form-control {
+  max-width: 85% !important;
+}

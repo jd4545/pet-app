@@ -85,7 +85,6 @@ export default function EditProfile({ img, users, setUsers }) {
               <Card.Text className="p-2">
                 {sitter ? sitter.bio : "User has not completed bio yet"}
               </Card.Text>
-
               {sitter && sitter.pet === "Both" ? (
                 <>
                   {" "}
@@ -123,45 +122,40 @@ export default function EditProfile({ img, users, setUsers }) {
                 </>
               ) : null}
             </Col>
-            <Col lg="2" className="p-3">
-              <Button
-                onClick={() => setEdit(!edit)}
-                className="ms-auto btn-sign"
-              >
-                edit details
-              </Button>
-              {edit ? (
-                <Form onSubmit={handleUpdate} className="p-3">
-                  <Form.Control
-                    placeholder="Name"
-                    className="m-2"
-                    onChange={(e) => setNewName(e.target.value)}
-                    value={newName}
-                  />
-
-                  <Form.Control
-                    placeholder="Bio"
-                    className="m-2"
-                    onChange={(e) => setNewBio(e.target.value)}
-                    value={newBio}
-                  />
-
-                  <Form.Control
-                    placeholder="Price"
-                    className="m-2"
-                    onChange={(e) => setNewPrice(e.target.value)}
-                    value={newPrice}
-                  />
-                  <p>save and return to home</p>
-                  <Button type="submit" className="ms-auto btn-sign my-3">
-                    save
-                  </Button>
-                </Form>
-              ) : (
-                ""
-              )}
-            </Col>
           </Row>
+          <Button onClick={() => setEdit(!edit)} className="ms-auto btn-sign">
+            edit details
+          </Button>
+          {edit ? (
+            <Form onSubmit={handleUpdate} className="p-3 form-group" width="40">
+              <Form.Control
+                placeholder="Name"
+                className="m-2"
+                onChange={(e) => setNewName(e.target.value)}
+                value={newName}
+              />
+
+              <Form.Control
+                placeholder="Bio"
+                className="m-2"
+                onChange={(e) => setNewBio(e.target.value)}
+                value={newBio}
+              />
+
+              <Form.Control
+                placeholder="Price"
+                className="m-2"
+                onChange={(e) => setNewPrice(e.target.value)}
+                value={newPrice}
+              />
+              <p>save and return to home</p>
+              <Button type="submit" className="ms-auto btn-sign my-3">
+                save
+              </Button>
+            </Form>
+          ) : (
+            ""
+          )}
         </Card.Body>
       </Card>
     </Container>
