@@ -23,7 +23,7 @@ export default function Register() {
       );
       setRegisterEmail("");
       setRegisterPassword("");
-      navigate("/form")
+      navigate("/form");
     } catch (error) {
       console.log(error.message);
       setError(error);
@@ -40,7 +40,7 @@ export default function Register() {
         ) : (
           <div className="text-center m-5 p-5">
             <h1>Register</h1>
-            <Form onSubmit={handleRegister}>
+            <Form onSubmit={handleRegister} className="sign-group">
               <Form.Control
                 placeholder="email"
                 className="my-1 mt-4"

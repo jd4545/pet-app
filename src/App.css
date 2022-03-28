@@ -85,11 +85,19 @@
 }
 
 .form-control {
-  max-width: 85% !important;
+  width: 80%;
+  max-width: 100% !important;
+}
+
+.sign-form {
+  max-width: 100% !important;
+}
+
+.sign-group {
+  /* width: 300px; */
 }
 
 .leaflet-container {
   width: 40vw;
   height: 70vh;
-
 }

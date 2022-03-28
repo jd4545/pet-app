@@ -35,14 +35,14 @@ export default function Login() {
           <Form onSubmit={handleLogin}>
             <Form.Control
               placeholder="email"
-              className="my-1 mt-4"
+              className="my-1 mt-4 sign-form"
               value={loginEmail}
               onChange={(event) => setLoginEmail(event.target.value)}
             />
             <br />
             <Form.Control
               type="password"
-              className="my-1"
+              className="my-1 sign-form"
               value={loginPassword}
               placeholder="password"
               onChange={(event) => setLoginPassword(event.target.value)}
