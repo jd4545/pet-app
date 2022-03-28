@@ -12,6 +12,7 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
+import { Row, Col, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 //onSnapshot is a realtime listener - checking user online or not.
 //whereas getDocs works only once.
 import { useEffect, useState, useContext } from "react";
@@ -108,41 +109,68 @@ export default function Inbox() {
   };
 
   return (
-    <div className="home_container">
-      <div className="users_container">
-        {chatters.map((user) => (
-          <User
-            key={user.uid}
-            user={user}
-            selectUser={selectUser}
-            user1={user1}
-            chat={chat}
-          />
-        ))}
-      </div>
-      <div className="messages_container">
-        {chat ? (
-          <>
-            <div className="messages_user">
-              <h3>{chat.name}</h3>
-            </div>
-            <div className="messages">
-              {messages.length
-                ? messages.map((msg, i) => (
-                    <Message key={i} msg={msg} user1={user1} />
-                  ))
-                : null}
-            </div>
-            <MessageForm
-              handleSubmit={handleSubmit}
-              text={text}
-              setText={setText}
+    <Container className="border-top">
+      <Navbar expand={false}>
+        <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
+        <Navbar.Offcanvas
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+          placement="start"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id="offcanvasNavbarLabel">
+              messages
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+              {chatters.map((user) => (
+                <User
+                  key={user.uid}
+                  user={user}
+                  selectUser={selectUser}
+                  user1={user1}
+                  chat={chat}
+                />
+              ))}
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Navbar>
+
+      {/* <Col xs="6" sm="4" md="3" lg="3" className="users_container">
+          {chatters.map((user) => (
+            <User
+              key={user.uid}
+              user={user}
+              selectUser={selectUser}
+              user1={user1}
+              chat={chat}
             />
-          </>
-        ) : (
-          <h3 className="no_conv">Select a user to start convo</h3>
-        )}
-      </div>
-    </div>
+          ))}
+        </Col> */}
+
+      {chat ? (
+        <>
+          <div className="messages_user">
+            <h3>{chat.name}</h3>
+          </div>
+          <Container className="">
+            {messages.length
+              ? messages.map((msg, i) => (
+                  <Message key={i} msg={msg} user1={user1} />
+                ))
+              : null}
+          </Container>
+          <MessageForm
+            handleSubmit={handleSubmit}
+            text={text}
+            setText={setText}
+          />
+        </>
+      ) : (
+        <h3 className="no_conv">Select a user to start convo</h3>
+      )}
+    </Container>
   );
 }

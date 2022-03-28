@@ -2,6 +2,7 @@ import { onSnapshot, doc } from "firebase/firestore";
 import { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import { UserContext } from "../contexts/UserContext";
+import { Container } from "react-bootstrap";
 
 export default function User({ user, selectUser, user1, chat }) {
   const user2 = user?.uid;
@@ -22,15 +23,15 @@ export default function User({ user, selectUser, user1, chat }) {
   return (
     //The chat 3 lines down is the "selected_user". This is the chat highlight functionality.
     <>
-      <div
+      <Container
         className={`user_wrapper ${chat.name === user.name && "selected_user"}`}
         onClick={() => {
           selectUser(user);
         }}
       >
-        <div className="user_info">
-          <div className="user_detail">
-            <h4>{user.name}</h4>
+        <div className="user_info p-2">
+          <div className="">
+            <h6>{user.name}</h6>
             {data?.from !== user1 && data?.unread && (
               <small className="unread">New</small>
             )}
@@ -41,12 +42,12 @@ export default function User({ user, selectUser, user1, chat }) {
         </div>
         {/* Line below shows most recent sent message truncated under the selected user. */}
         {data && (
-          <p className="truncate">
-            <strong>{data.from === user1 ? "Me" : null}</strong>
+          <p className="truncate px-4">
+            <strong>{data.from === user1 ? "me:" : null}</strong>
             {data.text}
           </p>
         )}
-      </div>
+      </Container>
     </>
   );
 }
