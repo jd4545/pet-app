@@ -84,7 +84,12 @@
   background-color: #34d399 !important;
 }
 
+.form-control {
+  max-width: 85% !important;
+}
+
 .leaflet-container {
   width: 40vw;
   height: 70vh;
+
 }
