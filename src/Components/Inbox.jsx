@@ -12,7 +12,6 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 //onSnapshot is a realtime listener - checking user online or not.
 //whereas getDocs works only once.
 import { useEffect, useState, useContext } from "react";
@@ -26,35 +25,35 @@ export default function Inbox() {
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   console.log("USER UID==>", user?.uid);
-  const user1 = user
+  const user1 = user?.uid;
   // console.log(user1);
 
-  useEffect(async() => {
-    try {
-      if (user.uid) {}
-    const usersRef = await collection(db, "users");
-    //create query object----line below queries users db EXCEPT for current logged in user
-    const q = await query(usersRef, where("uid", "not-in", [auth.currentUser.uid]));
-    //execute query
-    console.log("Q===>", q)
-    const unsub = await onSnapshot(q, (querySnapshot) => {
-      let users = [];
-      console.log("QUERY SNAPSHOT===>", querySnapshot)
-      querySnapshot.forEach((doc) => {
-        users.push(doc.data());
+  useEffect(() => {
+    async function fetchData() {
+      const usersRef = await collection(db, "users");
+      //create query object----line below queries users db EXCEPT for current logged in user
+      const q = await query(usersRef, where("uid", "not-in", [user?.uid]));
+      //execute query
+      console.log("Q===>", q);
+      const unsub = await onSnapshot(q, (querySnapshot) => {
+        let users = [];
+        console.log("QUERY SNAPSHOT===>", querySnapshot);
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        setChatters(users);
       });
-      setChatters(users);
-    });
-    return () => {
-      unsub();
-    };
-    } catch(err){
-      console.log(err)
+      return () => {
+        unsub();
+      };
     }
-  }, []);
+    fetchData();
+  }, [user1]);
+
+  console.log("CHATTERS==>>>", chatters);
 
   //selecting user from sidebar - when select a user it provides that user to chat State.
   const selectUser = async (user) => {
@@ -62,7 +61,7 @@ export default function Inbox() {
     console.log("USER==>>", user);
 
     const user2 = user.uid;
-    console.log(user2)
+    console.log(user2);
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
     const messagesRef = collection(db, "messages", id, "chat");
@@ -108,7 +107,6 @@ export default function Inbox() {
     setText("");
   };
 
-  console.log("CHATTERS==>>>", chatters)
   return (
     <div className="home_container">
       <div className="users_container">
