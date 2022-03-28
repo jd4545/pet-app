@@ -15,6 +15,7 @@ import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import EditProfile from "./Components/EditProfile";
+import Reviews from "./Components/Reviews";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -85,6 +86,10 @@ function App() {
             <Route
               path="/profile/:sitter_id"
               element={<Profile users={users} setUsers={setUsers} />}
+            />
+            <Route
+              path="/profile/:sitter_id/reviews"
+              element={<Reviews users={users} setUsers={setUsers} />}
             />
             <Route path="/logout" element={<Logout />} />
           </Routes>
