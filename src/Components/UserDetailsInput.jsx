@@ -37,7 +37,7 @@ export default function UserDetailsInput() {
       isCatSitter: isCatSitter,
       price: price,
       location: [locationInfo.result.latitude, locationInfo.result.longitude],
-      id: user?.uid,
+      uid: user?.uid,
     });
     setNewName("");
     setNewPet("");
