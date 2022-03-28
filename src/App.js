@@ -30,8 +30,6 @@ function App() {
     });
   });
 
-  console.log("user >>>", user);
-
   return (
     <>
       <UserContext.Provider value={{ user }}>
