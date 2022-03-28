@@ -53,6 +53,9 @@ export default function NavBar() {
                   <Nav.Link className="p-3 link" href="/favourites">
                     favourites
                   </Nav.Link>
+                  <Nav.Link className="p-3 link" href="/inbox">
+                    inbox
+                  </Nav.Link>
                 </>
               ) : (
                 <>

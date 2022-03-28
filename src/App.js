@@ -14,6 +14,7 @@ import Profile from "./Components/Profile";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import Inbox from "./Components/Inbox";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,8 +29,6 @@ function App() {
       setUser(currentUser);
     });
   });
-
-  console.log(user);
 
   return (
     <>
@@ -57,6 +56,8 @@ function App() {
                 />
               }
             />
+
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/form" element={<UserDetailsInput />} />
