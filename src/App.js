@@ -14,6 +14,7 @@ import Profile from "./Components/Profile";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import Map from "./Components/Map";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,7 +30,7 @@ function App() {
     });
   });
 
-  console.log(user);
+  console.log("user >>>", user);
 
   return (
     <>
