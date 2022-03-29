@@ -313,11 +313,11 @@ section .form {
   padding: 10px;
 }
 .me {
-  background: paleturquoise;
+  background: #38bdf8;
   color: white;
 }
 .friend {
-  background: var(--color-6);
+  background: #e4e4e7;
 }
 
 .selected_user {
