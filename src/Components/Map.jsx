@@ -32,11 +32,44 @@ export default function Map({
       {users.map((user) => {
         const position = user.location;
         console.log("user.location>>>", user.location);
-        return (
+        console.log("services>>", services);
+
+        if (services === "Dog Sitting")
+          return user.isDogSitter ? (
+            <Marker key={user.id} position={position} icon={iconVar}>
+              <Popup>
+                {user.name}
+                <br />
+                {`Dog Sitter ${user.isDogSitter}`}
+                <br />
+                {`Cat Sitter ${user.isCatSitter}`}
+              </Popup>
+            </Marker>
+          ) : null;
+        else if (services === "Cat Sitting")
+          return user.isCatSitter ? (
+            <Marker key={user.id} position={position} icon={iconVar}>
+              <Popup>
+                {user.name}
+                <br />
+                {`Dog Sitter ${user.isDogSitter}`}
+                <br />
+                {`Cat Sitter ${user.isCatSitter}`}
+              </Popup>
+            </Marker>
+          ) : null;
+        else services === "Dog Sitting" && "Cat Sitting";
+        return user.isDogSitter ? (
           <Marker key={user.id} position={position} icon={iconVar}>
-            <Popup>{position}</Popup>
+            <Popup>
+              {user.name}
+              <br />
+              {`Dog Sitter ${user.isDogSitter}`}
+              <br />
+              {`Cat Sitter ${user.isCatSitter}`}
+            </Popup>
           </Marker>
-        );
+        ) : null;
       })}
     </MapContainer>
   );
