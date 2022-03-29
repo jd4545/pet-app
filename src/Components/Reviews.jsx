@@ -27,6 +27,7 @@ export default function Reviews({ users, setUsers }) {
   const reviewsRef = collection(db, 'users', sitter_id, 'reviews')
   const [comment, setComment] = useState('')
   const [reviews, setReviews] = useState('')
+  const [addReview, setAddReview] = useState(false)
 
   useEffect(() => {
     const getUsers = async () => {
@@ -171,34 +172,32 @@ export default function Reviews({ users, setUsers }) {
         <Card>
           <Card.Body>
             <h4>Rate this user:</h4>
-            <Card.Text>
+            <Button
+          style={{ color: "white" }}
+          variant="light"
+          className="p-2 px-4 btn-search align-items-center"
+          onClick={
+            // setIsSitter(!isSitter)
+            !addReview
+              ? (e) => {
+                  e.preventDefault();
+                  setAddReview(true);
+                }
+              : (e) => {
+                  e.preventDefault();
+                  setAddReview(false);
+                }
+          }
+            >Add a Review </ Button>
+            <br/>  <br/>
+            
+            { addReview ? <>
               <Button onClick={handleOnePaw}>Award 1</Button>{' '}
               <Button onClick={handleTwoPaws}>Award 2</Button>{' '}
               <Button onClick={handleThreePaws}>Award 3</Button>{' '}
               <Button onClick={handleFourPaws}>Award 4</Button>{' '}
               <Button onClick={handleFivePaws}>Award 5</Button>
-            </Card.Text>
-            <Card.Text>🐾 Average: {meanPaw}</Card.Text>
-            <Card.Text>
-              🐾 : {sitter?.pawRating[0]} (
-              {Math.round((sitter?.pawRating[0] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾 : {sitter?.pawRating[1]} (
-              {Math.round((sitter?.pawRating[1] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾🐾 : {sitter?.pawRating[2]} (
-              {Math.round((sitter?.pawRating[2] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾🐾🐾 : {sitter?.pawRating[3]} (
-              {Math.round((sitter?.pawRating[3] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾🐾🐾🐾 : {sitter?.pawRating[4]} (
-              {Math.round((sitter?.pawRating[4] / countOfPaws) * 100)} %)
-            </Card.Text>
+                <br /><br />
             <Form>
               {' '}
               <Form.Control
@@ -209,18 +208,59 @@ export default function Reviews({ users, setUsers }) {
                 required="required"
               />
             </Form>
-            <button onClick={createReview}>Add a review</button>
-          </Card.Body>
+            <br />
+            <button style={{ color: "white" }}
+          variant="light"
+          className="p-2 px-4 btn-search align-items-center"
+           onClick={createReview}>Submit review</button>
+            </> : null}
+            </Card.Body>
         </Card>
       </Container>
+
+      <Container>
+        <Card>
+          <Card.Body>
+          <h4>Rating:</h4>
+            <br /> 
+            <h5>🐾 Average rating: {meanPaw} out of 5</h5>
+            <Card.Text>
+              🐾 : {sitter?.pawRating[0]} votes (
+              {Math.round((sitter?.pawRating[0] / countOfPaws) * 100)} %)
+            </Card.Text>
+            <Card.Text>
+              🐾🐾 : {sitter?.pawRating[1]} votes (
+              {Math.round((sitter?.pawRating[1] / countOfPaws) * 100)} %)
+            </Card.Text>
+            <Card.Text>
+              🐾🐾🐾 : {sitter?.pawRating[2]} votes (
+              {Math.round((sitter?.pawRating[2] / countOfPaws) * 100)} %)
+            </Card.Text>
+            <Card.Text>
+              🐾🐾🐾🐾 : {sitter?.pawRating[3]} votes (
+              {Math.round((sitter?.pawRating[3] / countOfPaws) * 100)} %)
+            </Card.Text>
+            <Card.Text>
+              🐾🐾🐾🐾🐾 : {sitter?.pawRating[4]} votes (
+              {Math.round((sitter?.pawRating[4] / countOfPaws) * 100)} %)
+            </Card.Text>
+            </Card.Body>
+        </Card>
+      </Container>  
+
+
 
       <h2 className="p-2">Reviews</h2>
       {reviews
         ? reviews.map((review) => {
             return (
               <>
-                <p>{review.username}</p>
-                <p>{review.body}</p>
+              <Container>
+                  <Card>
+                <Card.Text>{review.username}</Card.Text>
+                <Card.Text>{review.body}</Card.Text>
+                </Card>
+                </Container>
               </>
             )
           })
