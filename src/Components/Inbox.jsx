@@ -29,9 +29,8 @@ import MessageForm from "../Components/MessageForm";
 import Message from "../Components/Message";
 import { UserContext } from "../contexts/UserContext";
 
-export default function Inbox() {
+export default function Inbox({ chat, setChat }) {
   const [chatters, setChatters] = useState([]);
-  const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const { user, setUser } = useContext(UserContext);
@@ -63,7 +62,7 @@ export default function Inbox() {
   }, [user1]);
 
   console.log("CHATTERS==>>>", chatters);
-
+  console.log(">>>>>> chat state", chat);
   //selecting user from sidebar - when select a user it provides that user to chat State.
   const selectUser = async (user) => {
     setChat(user);
