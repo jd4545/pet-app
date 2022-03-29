@@ -1,5 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import * as L from "leaflet";
+import paw from "../assets/paw.png";
 
 export default function Map({
   services,
@@ -32,11 +33,104 @@ export default function Map({
       {users.map((user) => {
         const position = user.location;
         console.log("user.location>>>", user.location);
-        return (
-          <Marker key={user.id} position={position} icon={iconVar}>
-            <Popup>{position}</Popup>
-          </Marker>
-        );
+        console.log("services>>", services);
+
+        if (services === "Dog Sitting")
+          return user.isDogSitter ? (
+            <Marker key={user.id} position={position} icon={iconVar}>
+              <Tooltip>
+                {user.name}
+                <br />
+                {`${user.proximity} miles away`}
+                <br />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+              </Tooltip>
+            </Marker>
+          ) : null;
+        else if (services === "Cat Sitting")
+          return user.isCatSitter ? (
+            <Marker key={user.id} position={position} icon={iconVar}>
+              <Tooltip>
+                {user.name}
+                <br />
+                {`${user.proximity} miles away`}
+                <br />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+              </Tooltip>
+            </Marker>
+          ) : null;
+        else if (services === "Dog Sitting" && "Cat Sitting")
+          return user.isDogSitter ? (
+            <Marker key={user.id} position={position} icon={iconVar}>
+              <Tooltip>
+                {user.name}
+                <br />
+                {`${user.proximity} miles away`}
+                <br />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+                <img
+                  src={paw}
+                  alt="paw image"
+                  width="15"
+                  height="15"
+                  className="d-inline-block align-top"
+                />
+              </Tooltip>
+            </Marker>
+          ) : null;
       })}
     </MapContainer>
   );
