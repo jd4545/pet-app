@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import Reviews from "./Reviews";
 
 export default function Profile({ users, setUsers }) {
   const { sitter_id } = useParams();
@@ -31,7 +32,7 @@ export default function Profile({ users, setUsers }) {
       <Container>
         <ProfileCard />
         <h2 className="p-2">Reviews</h2>
-        <ReviewCard />
+        <Reviews users={users} setUsers={setUsers} />
       </Container>
     </>
   );

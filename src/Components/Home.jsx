@@ -82,6 +82,11 @@ export default function Home({
     return a.proximity - b.proximity;
   });
 
+  console.log(sittersSortedByProximity, "< MAPPED OVER")
+
+
+
+
   //
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -195,7 +200,19 @@ export default function Home({
                             <h4>{sitter.name}</h4>
                             {sitter.proximity} miles away
                           </Card.Text>
-                          <Card.Text>Rating here</Card.Text>
+                          <Card.Text>🐾 Average rating : 
+                          { sitter?.pawRating ? (Math.round((sitter?.pawRating[0]*1 +
+                            sitter?.pawRating[1]*2 +
+                            sitter?.pawRating[2]*3 +
+                            sitter?.pawRating[3]*4 +
+                            sitter?.pawRating[4]*5
+                            )/(sitter?.pawRating.reduce((part,a)=>part + a, 0))*10)/10)
+                            : " no reviews yet"
+                          }
+                        
+                          
+
+                          </Card.Text>
                         </Col>
                         {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}
                         <Col xs="3" sm="3" md="3" className="py-3">
