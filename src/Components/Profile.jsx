@@ -7,8 +7,10 @@ import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase-config'
 import Reviews from './Reviews'
 
-export default function Profile({ users, setUsers }) {
-  const { sitter_id } = useParams()
+
+export default function Profile({ users, setUsers, chat, setChat }) {
+  const { sitter_id } = useParams();
+
 
   // useEffect(() => {
   //   const getSitter = async () => {
@@ -31,8 +33,8 @@ export default function Profile({ users, setUsers }) {
     <>
       <Container>
         <ProfileCard />
-
         <Reviews users={users} setUsers={setUsers} />
+        <ProfileCard chat={chat} setChat={setChat} />
       </Container>
     </>
   )

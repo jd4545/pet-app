@@ -6,11 +6,20 @@ import catIcon from "../assets/catIcon.png";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
 
-export default function ProfileCard({ img, sitterName, sitterBio }) {
+export default function ProfileCard({
+  img,
+  sitterName,
+  sitterBio,
+  chat,
+  setChat,
+}) {
   const { sitter_id } = useParams();
   const userRef = doc(db, "users", sitter_id);
   const [prof, setProf] = useState();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSitter = async () => {
@@ -23,7 +32,10 @@ export default function ProfileCard({ img, sitterName, sitterBio }) {
   // testing doc by id
   console.log(prof, "profile");
   // const { name, bio } = prof;
-
+  const handleMessage = () => {
+    setChat(prof);
+    navigate("/messages");
+  };
   //
   return (
     <>
@@ -48,7 +60,9 @@ export default function ProfileCard({ img, sitterName, sitterBio }) {
                   </Card.Text>
                 </Col>
                 <Col lg="2" className="p-3">
-                  <Button className="ms-auto btn-sign">message</Button>
+                  <Button className="ms-auto btn-sign" onClick={handleMessage}>
+                    message
+                  </Button>
                 </Col>
               </Row>
             </Card.Body>
