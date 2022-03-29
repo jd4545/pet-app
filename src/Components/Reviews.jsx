@@ -23,6 +23,7 @@ import {
   import { useParams } from "react-router-dom";
   import dogIcon from "../assets/dogIcon.png";
   import catIcon from "../assets/catIcon.png";
+  import React from "react";
 
   export default function Reviews ({users, setUsers }) {
     const { user, setUser } = useContext(UserContext);
@@ -39,6 +40,8 @@ import {
       getUsers();
     }, []);
   
+console.log(users)
+
     const usersCopy = [...users];
   
     const sitters = usersCopy.filter((profile) => {
@@ -56,6 +59,14 @@ import {
         sitter?.pawRating[3]*4 +
         sitter?.pawRating[4]*5
         )/(sitter?.pawRating.reduce((part,a)=>part + a, 0))*10)/10
+
+    const countOfPaws = sitter?.pawRating[0] +
+    sitter?.pawRating[1] +
+    sitter?.pawRating[2] +
+    sitter?.pawRating[3] +
+    sitter?.pawRating[4]
+
+    console.log(countOfPaws)
 
     const handleOnePaw = async (e) => {
         e.preventDefault();
@@ -125,42 +136,44 @@ import {
             pawRating: 
             [ sitter?.pawRating[0], 
             sitter?.pawRating[1],
+            sitter?.pawRating[2],
             sitter?.pawRating[3],
-            sitter?.pawRating[4],
             updatedFivePaws
             ]
         });
     }
   
     return (
+        <>
         <Container>
-            <Card.Title>
-                Reviews
-            </Card.Title>
+            <Card>
+                <Card.Body>
+            <h4>Rate this user:</h4>
             <Card.Text>
-                username: {sitter?.name}
+            <Button onClick={handleOnePaw}>Award 1</Button> <Button onClick={handleTwoPaws}>Award 2</Button> <Button onClick={handleThreePaws}>Award 3</Button> <Button onClick={handleFourPaws}>Award 4</Button> <Button onClick={handleFivePaws}>Award 5</Button>
             </Card.Text>
             <Card.Text>
             🐾 Average: {meanPaw}
             </Card.Text>
             <Card.Text>
-            <Button onClick={handleOnePaw}>Award 1</Button> 🐾 : {sitter?.pawRating[0]} 
+            🐾 : {sitter?.pawRating[0]} ({Math.round((sitter?.pawRating[0]/countOfPaws)*100)} %)
             </Card.Text>
             <Card.Text>
-            <Button onClick={handleTwoPaws}>Award 2</Button> 🐾🐾 : {sitter?.pawRating[1]}
+            🐾🐾 : {sitter?.pawRating[1]} ({Math.round((sitter?.pawRating[1]/countOfPaws)*100)} %)
             </Card.Text>
             <Card.Text>
-            <Button onClick={handleThreePaws}>Award 3</Button> 🐾🐾🐾 : {sitter?.pawRating[2]}
+            🐾🐾🐾 : {sitter?.pawRating[2]} ({Math.round((sitter?.pawRating[2]/countOfPaws)*100)} %)
             </Card.Text>
             <Card.Text>
-            <Button onClick={handleFourPaws}>Award 4</Button> 🐾🐾🐾🐾 : {sitter?.pawRating[3]}
+             🐾🐾🐾🐾 : {sitter?.pawRating[3]} ({Math.round((sitter?.pawRating[3]/countOfPaws)*100)} %)
             </Card.Text>
             <Card.Text>
-            <Button onClick={handleFivePaws}>Award 5</Button> 🐾🐾🐾🐾🐾 : {sitter?.pawRating[4]}
+             🐾🐾🐾🐾🐾 : {sitter?.pawRating[4]} ({Math.round((sitter?.pawRating[4]/countOfPaws)*100)} %)
             </Card.Text>
-            
+            </Card.Body>
+            </Card>
         </Container>
-
+        </>
     )
 
   }

@@ -38,6 +38,7 @@ export default function UserDetailsInput() {
       price: price,
       location: [locationInfo.result.latitude, locationInfo.result.longitude],
       uid: user?.uid,
+      pawRating: [0,0,0,0,0]
     });
     setNewName("");
     setNewPet("");
