@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
+import { doc, updateDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
@@ -16,7 +17,18 @@ export default function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      const result = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+
+      //isOnline code
+
+       // once user is signed in we update their doc
+       await updateDoc(doc(db, "users", result.user.uid), {
+        //updating doc property isOnline as true
+        isOnline: true,
+      });
+      console.log("You are logged in");
+
+
       navigate("/");
       //add functionality to redirect user to "/" when logged in
     } catch (error) {
