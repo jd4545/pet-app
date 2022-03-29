@@ -2,11 +2,7 @@ import { Container, Form, Button, Row, Col } from "react-bootstrap";
 
 export default function MessageForm({ handleSubmit, text, setText }) {
   return (
-    <Form
-      className=""
-      onSubmit={handleSubmit}
-      className="justify-content-center"
-    >
+    <Form onSubmit={handleSubmit} className="justify-content-center">
       <Container className="align-items-center g-1">
         <Row className="justify-content-center ms-auto p-2 fixed-bottom">
           <Col sm="auto" md="10" lg="10">

@@ -29,10 +29,9 @@ import MessageForm from "../Components/MessageForm";
 import Message from "../Components/Message";
 import { UserContext } from "../contexts/UserContext";
 
-export default function Inbox({ chat, setChat }) {
+export default function Inbox({ chat, setChat, messages, setMessages }) {
   const [chatters, setChatters] = useState([]);
   const [text, setText] = useState("");
-  const [messages, setMessages] = useState([]);
   const { user, setUser } = useContext(UserContext);
 
   console.log("USER UID==>", user?.uid);
