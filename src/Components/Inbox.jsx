@@ -15,6 +15,7 @@ import {
 import {
   Row,
   Col,
+  Card,
   Container,
   Nav,
   Navbar,
@@ -118,9 +119,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
     <Container className="border-top">
       <Navbar expand={false} className="fixed">
         <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
-        <Navbar.Text className="text-center me-auto px-5 mx-5">
-          {chat?.name}
-        </Navbar.Text>
+        <h4 className="text-center me-auto ml-5 ">{chat?.name}</h4>
         <Navbar.Offcanvas
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -134,13 +133,18 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
               {chatters.map((user) => (
-                <User
-                  key={user.uid}
-                  user={user}
-                  selectUser={selectUser}
-                  user1={user1}
-                  chat={chat}
-                />
+                <Card
+                  style={{ height: "80px" }}
+                  className="m-1 border-0 border-bottom border-info shadow-sm"
+                >
+                  <User
+                    key={user.uid}
+                    user={user}
+                    selectUser={selectUser}
+                    user1={user1}
+                    chat={chat}
+                  />
+                </Card>
               ))}
             </Nav>
           </Offcanvas.Body>

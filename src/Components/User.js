@@ -36,9 +36,9 @@ export default function User({ user, selectUser, user1, chat }) {
               <small className="unread">New</small>
             )}
           </div>
-          <div
+          {/* <div
             className={`user_status ${user.isOnline ? "online" : "offline"}`}
-          ></div>
+          ></div> */}
         </div>
         {/* Line below shows most recent sent message truncated under the selected user. */}
         {data && (
