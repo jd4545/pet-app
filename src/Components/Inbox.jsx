@@ -1,4 +1,4 @@
-import { db, auth } from "../firebase-config";
+import { db } from "../firebase-config";
 import {
   collection,
   query,
@@ -13,8 +13,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import {
-  Row,
-  Col,
+  Image,
   Card,
   Container,
   Nav,
@@ -25,10 +24,11 @@ import {
 //onSnapshot is a realtime listener - checking user online or not.
 //whereas getDocs works only once.
 import { useEffect, useState, useContext } from "react";
-import User from "../Components/User";
+import User from "./User";
 import MessageForm from "../Components/MessageForm";
 import Message from "../Components/Message";
 import { UserContext } from "../contexts/UserContext";
+import chatIcon from "../assets/chatIcon.png";
 
 export default function Inbox({ chat, setChat, messages, setMessages }) {
   const [chatters, setChatters] = useState([]);
@@ -43,7 +43,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
     async function fetchData() {
       const usersRef = await collection(db, "users");
       //create query object----line below queries users db EXCEPT for current logged in user
-      const q = await query(usersRef, where("uid", "not-in", [user?.uid]));
+      const q = await query(usersRef, where("uid", "not-in", [user1]));
       //execute query
       console.log("Q===>", q);
       const unsub = await onSnapshot(q, (querySnapshot) => {
@@ -116,42 +116,56 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
   };
 
   return (
-    <Container className="border-top">
-      <Navbar expand={false} className="fixed">
-        <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
-        <h4 className="text-center me-auto ml-5 ">{chat?.name}</h4>
-        <Navbar.Offcanvas
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          placement="start"
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel">
-              messages
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              {chatters.map((user) => (
-                <Card
-                  style={{ height: "80px" }}
-                  className="m-1 border-0 border-bottom border-info shadow-sm"
-                >
-                  <User
-                    key={user.uid}
-                    user={user}
-                    selectUser={selectUser}
-                    user1={user1}
-                    chat={chat}
-                  />
-                </Card>
-              ))}
-            </Nav>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Navbar>
+    <>
+      {!user ? (
+        <Container className="text-center">
+          <h4 className="text-center">
+            You must be signed in to send a message
+          </h4>
+          <Button href="/signin" className="btn-sign m-3">
+            Sign in/Sign up
+          </Button>
+        </Container>
+      ) : (
+        <Container className="border-top">
+          <Navbar expand={false} className="fixed">
+            <Navbar.Toggle
+              aria-controls="offcanvasNavbar"
+              id="offcanvasNavbar"
+            />
+            <h4 className="text-center me-auto ml-5 ">{chat?.name}</h4>
+            <Navbar.Offcanvas
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              placement="start"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbarLabel">
+                  messages
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  {chatters.map((user) => (
+                    <Card
+                      style={{ height: "80px" }}
+                      className="m-1 border-0 border-bottom border-info shadow-sm"
+                    >
+                      <User
+                        key={user.uid}
+                        user={user}
+                        selectUser={selectUser}
+                        user1={user1}
+                        chat={chat}
+                      />
+                    </Card>
+                  ))}
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Navbar>
 
-      {/* <Col xs="6" sm="4" md="3" lg="3" className="users_container">
+          {/* <Col xs="6" sm="4" md="3" lg="3" className="users_container">
           {chatters.map((user) => (
             <User
               key={user.uid}
@@ -163,27 +177,34 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
           ))}
         </Col> */}
 
-      {chat ? (
-        <>
-          {/* <div className="messages_user">
+          {chat ? (
+            <>
+              {/* <div className="messages_user">
             <h3>{chat.name}</h3>
           </div> */}
-          <Container className="messages">
-            {messages.length
-              ? messages.map((msg, i) => (
-                  <Message key={i} msg={msg} user1={user1} />
-                ))
-              : null}
-          </Container>
-          <MessageForm
-            handleSubmit={handleSubmit}
-            text={text}
-            setText={setText}
-          />
-        </>
-      ) : (
-        <h3 className="no_conv">select a user to start chatting</h3>
+              <Container className="messages">
+                {messages.length
+                  ? messages.map((msg, i) => (
+                      <Message key={i} msg={msg} user1={user1} />
+                    ))
+                  : null}
+              </Container>
+              <MessageForm
+                handleSubmit={handleSubmit}
+                text={text}
+                setText={setText}
+              />
+            </>
+          ) : (
+            <>
+              <div className="text-center">
+                <Image src={chatIcon} alt="chat" width="150" className="my-5" />
+                <h5 className="">select a user to start chatting</h5>
+              </div>
+            </>
+          )}
+        </Container>
       )}
-    </Container>
+    </>
   );
 }
