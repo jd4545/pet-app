@@ -8,7 +8,7 @@ export default function MessageForm({ handleSubmit, text, setText }) {
       className="justify-content-center"
     >
       <Container className="align-items-center g-1">
-        <Row className="justify-content-center ms-auto g-3">
+        <Row className="justify-content-center ms-auto p-2 fixed-bottom">
           <Col sm="auto" md="10" lg="10">
             <Form.Control
               type="text"
@@ -18,7 +18,7 @@ export default function MessageForm({ handleSubmit, text, setText }) {
             />
           </Col>
           <Col sm="auto" md="2" lg="2" className="text-center">
-            <Button className="btn-sign align-items-center">Send</Button>
+            <Button className="btn-sign align-items-center m-1">Send</Button>
           </Col>
         </Row>
       </Container>

@@ -12,7 +12,15 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-import { Row, Col, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Container,
+  Nav,
+  Navbar,
+  Offcanvas,
+  Button,
+} from "react-bootstrap";
 //onSnapshot is a realtime listener - checking user online or not.
 //whereas getDocs works only once.
 import { useEffect, useState, useContext } from "react";
@@ -110,8 +118,11 @@ export default function Inbox() {
 
   return (
     <Container className="border-top">
-      <Navbar expand={false}>
+      <Navbar expand={false} className="fixed">
         <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
+        <Navbar.Text className="text-center me-auto px-5 mx-5">
+          {chat?.name}
+        </Navbar.Text>
         <Navbar.Offcanvas
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -152,10 +163,10 @@ export default function Inbox() {
 
       {chat ? (
         <>
-          <div className="messages_user">
+          {/* <div className="messages_user">
             <h3>{chat.name}</h3>
-          </div>
-          <Container className="">
+          </div> */}
+          <Container className="messages">
             {messages.length
               ? messages.map((msg, i) => (
                   <Message key={i} msg={msg} user1={user1} />

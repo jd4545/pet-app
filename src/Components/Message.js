@@ -1,5 +1,6 @@
 import Moment from "react-moment";
 import { useRef, useEffect } from "react";
+import { Container } from "react-bootstrap";
 
 export default function Message({ msg, user1 }) {
   const scrollRef = useRef();
@@ -11,7 +12,7 @@ export default function Message({ msg, user1 }) {
 
   return (
     //rendering text boxes conditionally
-    <div
+    <Container
       className={`message_wrapper ${msg.from === user1 ? "own" : ""}`}
       ref={scrollRef}
     >
@@ -23,6 +24,6 @@ export default function Message({ msg, user1 }) {
           <Moment fromNow>{msg.created_at.toDate()}</Moment>
         </small>
       </p>
-    </div>
+    </Container>
   );
 }
