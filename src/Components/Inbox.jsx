@@ -20,6 +20,8 @@ import {
   Navbar,
   Offcanvas,
   Button,
+  Row,
+  Col,
 } from "react-bootstrap";
 //onSnapshot is a realtime listener - checking user online or not.
 //whereas getDocs works only once.
@@ -129,40 +131,58 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
       ) : (
         <Container className="border-top">
           <Navbar expand={false} className="fixed">
-            <Navbar.Toggle
-              aria-controls="offcanvasNavbar"
-              id="offcanvasNavbar"
-            />
-            <h4 className="text-center me-auto ml-5 ">{chat?.name}</h4>
-            <Navbar.Offcanvas
-              id="offcanvasNavbar"
-              aria-labelledby="offcanvasNavbarLabel"
-              placement="start"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id="offcanvasNavbarLabel">
-                  messages
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {chatters.map((user) => (
-                    <Card
-                      style={{ height: "80px" }}
-                      className="m-1 border-0 border-bottom border-info shadow-sm"
-                    >
-                      <User
-                        key={user.uid}
-                        user={user}
-                        selectUser={selectUser}
-                        user1={user1}
-                        chat={chat}
-                      />
-                    </Card>
-                  ))}
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
+            <Row>
+              <Col xs="auto" sm="auto" md="auto" lg="auto">
+                <Navbar.Toggle
+                  aria-controls="offcanvasNavbar"
+                  id="offcanvasNavbar"
+                >
+                  {" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    fill="#9333ea"
+                    class="bi bi-chat-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
+                  </svg>
+                </Navbar.Toggle>
+              </Col>
+              <Col xs="auto" sm="auto" md="auto" lg="auto">
+                <h4 className="text-center me-auto ml-5 ">{chat?.name}</h4>
+              </Col>
+              <Navbar.Offcanvas
+                id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel"
+                placement="start"
+              >
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title id="offcanvasNavbarLabel">
+                    messages
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                    {chatters.map((user) => (
+                      <Card
+                        style={{ height: "80px" }}
+                        className="m-1 border-0 border-bottom border-info shadow-sm"
+                      >
+                        <User
+                          key={user.uid}
+                          user={user}
+                          selectUser={selectUser}
+                          user1={user1}
+                          chat={chat}
+                        />
+                      </Card>
+                    ))}
+                  </Nav>
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </Row>
           </Navbar>
 
           {/* <Col xs="6" sm="4" md="3" lg="3" className="users_container">
