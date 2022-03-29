@@ -21,6 +21,7 @@ import {
   Badge,
 } from "react-bootstrap";
 import avatar from "../assets/blank-profile.png";
+import Map from "./Map";
 
 export default function Home({
   services,
@@ -223,8 +224,19 @@ export default function Home({
           </Col>
           <Col lg="5">
             <Card>
-              <h4>Map here?? </h4>
-              <Image src={sidebar} height="auto" width="auto" />
+              <Map
+                services={services}
+                setServices={setServices}
+                location={location}
+                setLocation={setLocation}
+                users={users}
+                setUsers={setUsers}
+                postcode={postcode}
+                setPostcode={setPostcode}
+                neighbourhood={neighbourhood}
+                setNeighbourhood={setNeighbourhood}
+              />
+              {/* <Image src={sidebar} height="auto" width="auto" /> */}
             </Card>
           </Col>
         </Row>

@@ -14,7 +14,11 @@ import Profile from "./Components/Profile";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+<<<<<<< HEAD
 import Inbox from "./Components/Inbox";
+=======
+import EditProfile from "./Components/EditProfile";
+>>>>>>> main
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,6 +69,10 @@ function App() {
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/form" element={<UserDetailsInput />} />
+            <Route
+              path="/me"
+              element={<EditProfile users={users} setUsers={setUsers} />}
+            />
             <Route
               path="/home"
               element={

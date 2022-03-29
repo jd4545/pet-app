@@ -83,6 +83,7 @@
   font-weight: 600 !important;
   background-color: #34d399 !important;
 }
+<<<<<<< HEAD
 /* 
 STOP HERE */
 
@@ -376,3 +377,23 @@ section .form {
     max-width: 100%;
   }
 } */
+=======
+
+.form-control {
+  width: 80%;
+  max-width: 100% !important;
+}
+
+.sign-form {
+  max-width: 100% !important;
+}
+
+.sign-group {
+  /* width: 300px; */
+}
+
+.leaflet-container {
+  width: 40vw;
+  height: 70vh;
+}
+>>>>>>> main
