@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 
-export default function Profile({ users, setUsers }) {
+export default function Profile({ users, setUsers, chat, setChat }) {
   const { sitter_id } = useParams();
 
   // useEffect(() => {
@@ -29,7 +29,7 @@ export default function Profile({ users, setUsers }) {
   return (
     <>
       <Container>
-        <ProfileCard />
+        <ProfileCard chat={chat} setChat={setChat} />
         <h2 className="p-2">Reviews</h2>
         <ReviewCard />
       </Container>

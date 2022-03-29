@@ -31,24 +31,21 @@ export default function NavBar() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id="offcanvasNavbarLabel">
-              {user?.name}
+              hi, {user?.email}
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
               {user ? (
                 <>
-                  <Nav.Link className="p-3 link" href="/home">
-                    home
+                  <Nav.Link className="p-3 link" href="/">
+                    search
                   </Nav.Link>
                   <Nav.Link className="p-3 link" href="/me">
                     my profile
                   </Nav.Link>
                   <Nav.Link className="p-3 link" href="/messages">
                     messages
-                  </Nav.Link>
-                  <Nav.Link className="p-3 link" href="/profile">
-                    profile
                   </Nav.Link>
                   <Nav.Link className="p-3 link" href="/favourites">
                     favourites
