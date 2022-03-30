@@ -45,7 +45,7 @@ export default function EditProfile({ img, users, setUsers }) {
   console.log(usersCopy, "users copy");
 
   const sitters = usersCopy.filter((profile) => {
-    console.log(profile.uid);
+    // console.log(profile.uid);
     return profile.uid === user?.uid;
   });
 
@@ -56,7 +56,7 @@ export default function EditProfile({ img, users, setUsers }) {
   const sitterId = sitter?.id;
   console.log(sitterId, "sitterId variable");
 
-  // console.log(updateRef, "<<< updateRef");
+  console.log(sitter, "<<< sitter");
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -108,7 +108,7 @@ export default function EditProfile({ img, users, setUsers }) {
                   <Card.Text className="p-2">
                     {" "}
                     Dog sitter:
-                    {sitter.isDogsitter ? " yes" : "no"}
+                    {sitter.isDogSitter  ? " yes" : "no"}
                   </Card.Text>
                   <Card.Text className="p-2">
                     {" "}
@@ -134,7 +134,7 @@ export default function EditProfile({ img, users, setUsers }) {
                 onChange={(e) => setNewName(e.target.value)}
                 value={newName}
               />
-
+              
               <Form.Control
                 placeholder="Bio"
                 className="m-2"
@@ -148,6 +148,7 @@ export default function EditProfile({ img, users, setUsers }) {
                 onChange={(e) => setNewPrice(e.target.value)}
                 value={newPrice}
               />
+               
               <p>save and return to home</p>
               <Button type="submit" className="ms-auto btn-sign my-3">
                 save
