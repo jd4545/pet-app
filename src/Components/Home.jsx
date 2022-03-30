@@ -194,12 +194,16 @@ export default function Home({
                       <Row>
                         <Col xs="3" sm="3" md="3">
                           <Image src={avatar} width="90" height="90" />
+                          <Badge pill bg="light" text="dark" className=" my-2">
+                            £{sitter.price} per day
+                          </Badge>
                         </Col>
                         <Col xs="6" sm="6" md="6" className="px-5">
                           <Card.Text>
                             <h4>{sitter.name}</h4>
                             {sitter.proximity} miles away
                           </Card.Text>
+
                           <Card.Text>🐾 Average rating : 
                           { sitter?.pawRating ? (Math.round((sitter?.pawRating[0]*1 +
                             sitter?.pawRating[1]*2 +
@@ -213,23 +217,22 @@ export default function Home({
                           
 
                           </Card.Text>
+
                         </Col>
                         {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}
                         <Col xs="3" sm="3" md="3" className="py-3">
                           {sitter.isDogSitter ? (
-                            <Image src={dog} alt="dog" width="35" />
+                            <Image src={dog} alt="dog" width="25" />
                           ) : (
                             <p></p>
                           )}
                           {/* <li>Catsitter: {sitter.isCatSitter.toString()}</li> */}
                           {sitter.isCatSitter ? (
-                            <Image src={cat} alt="cat" width="35" />
+                            <Image src={cat} alt="cat" width="25" />
                           ) : (
                             <p></p>
                           )}
-                          <Badge pill bg="light" text="dark">
-                            £{sitter.price} per day
-                          </Badge>
+                          <Card.Text>Rating here</Card.Text>
                         </Col>
                       </Row>
                     </Card.Body>

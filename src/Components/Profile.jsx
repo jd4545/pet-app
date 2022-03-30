@@ -8,7 +8,7 @@ import { db } from '../firebase-config'
 import Reviews from './Reviews'
 
 
-export default function Profile({ users, setUsers, chat, setChat }) {
+export default function Profile({ users, setUsers, chat, setChat, messages, setMessages }) {
   const { sitter_id } = useParams();
 
 
@@ -32,7 +32,10 @@ export default function Profile({ users, setUsers, chat, setChat }) {
   return (
     <>
       <Container>
-      <ProfileCard chat={chat} setChat={setChat} />
+        <ProfileCard chat={chat} setChat={setChat} messages={messages} setMessages={setMessages} />
+        <h2 className="p-2">Reviews</h2>
+        
+     
         <Reviews users={users} setUsers={setUsers} />
       </Container>
     </>
