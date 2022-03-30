@@ -95,15 +95,17 @@ export default function WelcomePage({
                 <Row className="justify-content-center">
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Control
+                      defaultValue={"N4 1DN"}
+                      placeholder="Enter Postcode..."
                       className="border-0"
                       type="text"
                       value={postcode}
                       onChange={(e) => setPostcode(e.target.value)}
-                      placeholder="Enter Postcode..."
                     />
                   </Col>
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Select
+                      defaultValue={"Dog Sitting"}
                       className="border-0"
                       value={services}
                       onChange={(e) => {

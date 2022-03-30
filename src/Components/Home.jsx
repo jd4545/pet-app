@@ -142,6 +142,7 @@ export default function Home({
                 <Row className="justify-content-center">
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Control
+                      defaultValue={"N4 1DN"}
                       className="border-0"
                       type="text"
                       value={postcode}
@@ -151,6 +152,7 @@ export default function Home({
                   </Col>
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Select
+                      defaultValue={"Dog Sitting"}
                       className="border-0"
                       value={services}
                       onChange={(e) => {
