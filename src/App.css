@@ -298,7 +298,7 @@ section .form {
 .message_wrapper p {
   padding: 10px;
   display: inline-block;
-  max-width: 50%;
+  max-width: 80%;
   text-align: left;
   border-radius: 5px;
 }
@@ -311,7 +311,7 @@ section .form {
 
 .message_wrapper.own {
   text-align: right;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .me {
   background: #38bdf8;

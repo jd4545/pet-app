@@ -196,7 +196,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
             />
           ))}
         </Col> */}
-
+        <div className="messages_container">
           {chat ? (
             <>
               {/* <div className="messages_user">
@@ -223,6 +223,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
               </div>
             </>
           )}
+          </div>
         </Container>
       )}
     </>
