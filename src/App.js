@@ -73,7 +73,15 @@ function App() {
             />
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/form" element={<UserDetailsInput />} />
+            <Route
+              path="/form"
+              element={
+                <UserDetailsInput
+                  postcode={postcode}
+                  setPostcode={setPostcode}
+                />
+              }
+            />
             <Route
               path="/me"
               element={<EditProfile users={users} setUsers={setUsers} />}
