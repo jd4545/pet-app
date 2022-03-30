@@ -246,7 +246,6 @@ export default function Home({
                           ) : (
                             <p></p>
                           )}
-                          <Card.Text>Rating here</Card.Text>
                         </Col>
                       </Row>
                     </Card.Body>
