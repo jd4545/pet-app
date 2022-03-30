@@ -5,6 +5,7 @@ import { db } from "../firebase-config";
 import fetchLocation from "../api";
 import dog from "../assets/dogIcon.png";
 import cat from "../assets/catIcon.png";
+import paw from "../assets/paw.png";
 import sidebar from "../assets/side.jpg";
 import CalculateDistance from "./CalculateDistance";
 import { Link, useNavigate } from "react-router-dom";
@@ -82,10 +83,7 @@ export default function Home({
     return a.proximity - b.proximity;
   });
 
-  console.log(sittersSortedByProximity, "< MAPPED OVER")
-
-
-
+  console.log(sittersSortedByProximity, "< MAPPED OVER");
 
   //
   const handleSubmit = (event) => {
@@ -115,6 +113,16 @@ export default function Home({
         setError(error);
       });
   };
+
+  const voteImage = (
+    <img
+      src={paw}
+      alt="paw image"
+      width="15"
+      height="15"
+      className="d-inline-block align-top"
+    />
+  );
 
   return (
     <>
@@ -200,18 +208,22 @@ export default function Home({
                             <h4>{sitter.name}</h4>
                             {sitter.proximity} miles away
                           </Card.Text>
-                          <Card.Text>🐾 Average rating : 
-                          { sitter?.pawRating ? (Math.round((sitter?.pawRating[0]*1 +
-                            sitter?.pawRating[1]*2 +
-                            sitter?.pawRating[2]*3 +
-                            sitter?.pawRating[3]*4 +
-                            sitter?.pawRating[4]*5
-                            )/(sitter?.pawRating.reduce((part,a)=>part + a, 0))*10)/10)
-                            : " no reviews yet"
-                          }
-                        
-                          
-
+                          <Card.Text>
+                            {voteImage} {"Average rating: "}
+                            {sitter?.pawRating
+                              ? Math.round(
+                                  ((sitter?.pawRating[0] * 1 +
+                                    sitter?.pawRating[1] * 2 +
+                                    sitter?.pawRating[2] * 3 +
+                                    sitter?.pawRating[3] * 4 +
+                                    sitter?.pawRating[4] * 5) /
+                                    sitter?.pawRating.reduce(
+                                      (part, a) => part + a,
+                                      0
+                                    )) *
+                                    10
+                                ) / 10
+                              : " no reviews yet"}
                           </Card.Text>
                         </Col>
                         {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}

@@ -14,9 +14,15 @@ export default function Map({
   neighbourhood,
   setNeighbourhood,
 }) {
-  console.log("postcode>>", postcode);
-  console.log("location>>", location);
-  console.log("users>>", users);
+  const voteImage = (
+    <img
+      src={paw}
+      alt="paw image"
+      width="15"
+      height="15"
+      className="d-inline-block align-top"
+    />
+  );
 
   const lIcon = L.Icon.extend({
     options: { iconSize: [25, 25] },
@@ -31,9 +37,17 @@ export default function Map({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {users.map((user) => {
+        const meanPaw =
+          Math.round(
+            ((user?.pawRating[0] * 1 +
+              user?.pawRating[1] * 2 +
+              user?.pawRating[2] * 3 +
+              user?.pawRating[3] * 4 +
+              user?.pawRating[4] * 5) /
+              user?.pawRating.reduce((part, a) => part + a, 0)) *
+              10
+          ) / 10;
         const position = user.location;
-        console.log("user.location>>>", user.location);
-        console.log("services>>", services);
 
         if (services === "Dog Sitting")
           return user.isDogSitter ? (
@@ -43,27 +57,11 @@ export default function Map({
                 <br />
                 {`${user.proximity} miles away`}
                 <br />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
+                {meanPaw >= 1 ? voteImage : null}
+                {meanPaw >= 1.5 ? voteImage : null}
+                {meanPaw >= 2.5 ? voteImage : null}
+                {meanPaw >= 3.5 ? voteImage : null}
+                {meanPaw >= 4.5 ? voteImage : null}
               </Tooltip>
             </Marker>
           ) : null;
@@ -75,27 +73,11 @@ export default function Map({
                 <br />
                 {`${user.proximity} miles away`}
                 <br />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
+                {meanPaw >= 1 ? voteImage : null}
+                {meanPaw >= 1.5 ? voteImage : null}
+                {meanPaw >= 2.5 ? voteImage : null}
+                {meanPaw >= 3.5 ? voteImage : null}
+                {meanPaw >= 4.5 ? voteImage : null}
               </Tooltip>
             </Marker>
           ) : null;
@@ -107,27 +89,11 @@ export default function Map({
                 <br />
                 {`${user.proximity} miles away`}
                 <br />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
-                <img
-                  src={paw}
-                  alt="paw image"
-                  width="15"
-                  height="15"
-                  className="d-inline-block align-top"
-                />
+                {meanPaw >= 1 ? voteImage : null}
+                {meanPaw >= 1.5 ? voteImage : null}
+                {meanPaw >= 2.5 ? voteImage : null}
+                {meanPaw >= 3.5 ? voteImage : null}
+                {meanPaw >= 4.5 ? voteImage : null}
               </Tooltip>
             </Marker>
           ) : null;
