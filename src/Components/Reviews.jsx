@@ -192,7 +192,7 @@ export default function Reviews({ users, setUsers }) {
   return (
     <>
       <Container>
-        <Card>
+        <Card className="justify-content-center mx-2 shadow-sm" border="light mb-3 p-3">
           <Card.Body>
             <h4>Rate this user:</h4>
             <Button
@@ -219,39 +219,34 @@ export default function Reviews({ users, setUsers }) {
             {addReview ? (
               <>
                 <br />
-                <Button onClick={handleOnePaw}  style={
-                  beenRatedOne
-                    ? { color: "gold" }
-                    : null
-                }> 
-                   Rate 1 <i class="fa-solid fa-paw"></i>
+                <Button
+                  onClick={handleOnePaw}
+                  style={beenRatedOne ? { color: "gold" } : null}
+                >
+                  Rate 1 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleTwoPaws} style={
-                  beenRatedTwo
-                    ? { color: "gold" }
-                    : null
-                }>
+                <Button
+                  onClick={handleTwoPaws}
+                  style={beenRatedTwo ? { color: "gold" } : null}
+                >
                   Rate 2 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleThreePaws} style={
-                  beenRatedThree
-                    ? { color: "gold" }
-                    : null
-                }>
+                <Button
+                  onClick={handleThreePaws}
+                  style={beenRatedThree ? { color: "gold" } : null}
+                >
                   Rate 3 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleFourPaws} style={
-                  beenRatedFour
-                    ? { color: "gold" }
-                    : null
-                }>
+                <Button
+                  onClick={handleFourPaws}
+                  style={beenRatedFour ? { color: "gold" } : null}
+                >
                   Rate 4 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleFivePaws} style={
-                  beenRatedFive
-                    ? { color: "gold" }
-                    : null
-                }>
+                <Button
+                  onClick={handleFivePaws}
+                  style={beenRatedFive ? { color: "gold" } : null}
+                >
                   Rate 5 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <br />
@@ -281,7 +276,8 @@ export default function Reviews({ users, setUsers }) {
       </Container>
 
       <Container>
-        <Card>
+        <Card className="justify-content-center mx-2 shadow-sm mb-3 p-3"
+            border="light">
           <Card.Body>
             <h4>Rating:</h4>
             <label>
@@ -418,14 +414,15 @@ export default function Reviews({ users, setUsers }) {
           </Card.Body>
         </Card>
       </Container>
-      
+
       <h2 className="p-2">Reviews</h2>
       {reviews
         ? reviews.map((review) => {
             return (
               <>
                 <Container>
-                  <Card>
+                  <Card className="justify-content-center mx-2 shadow-sm mb-3 p-3"
+            border="light">
                     <h6>{review.username}</h6>
                     <Card.Text>{review.body}</Card.Text>
                   </Card>
