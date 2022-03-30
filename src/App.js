@@ -11,6 +11,7 @@ import WelcomePage from "./Components/WelcomePage";
 import NavBar from "./Components/NavBar";
 import Logout from "./Components/Logout";
 import Profile from "./Components/Profile";
+import ErrorPage from "./Components/ErrorPage";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
@@ -121,6 +122,7 @@ function App() {
               element={<Reviews users={users} setUsers={setUsers} />}
             />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
