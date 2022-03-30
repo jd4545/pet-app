@@ -27,7 +27,6 @@ import { useParams } from "react-router-dom";
 import dogIcon from "../assets/dogIcon.png";
 import catIcon from "../assets/catIcon.png";
 import React from "react";
-// import {FaStar} from react-icons/fa;
 
 export default function Reviews({ users, setUsers }) {
   const { user, setUser } = useContext(UserContext);
@@ -39,7 +38,11 @@ export default function Reviews({ users, setUsers }) {
   const [reviews, setReviews] = useState("");
   const [addReview, setAddReview] = useState(false);
   const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+  const [beenRatedOne, setBeenRatedOne] = useState(false);
+  const [beenRatedTwo, setBeenRatedTwo] = useState(false);
+  const [beenRatedThree, setBeenRatedThree] = useState(false);
+  const [beenRatedFour, setBeenRatedFour] = useState(false);
+  const [beenRatedFive, setBeenRatedFive] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -56,6 +59,10 @@ export default function Reviews({ users, setUsers }) {
     };
     getReviews();
   }, []);
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
 
   const usersCopy = [...users];
 
@@ -89,8 +96,6 @@ export default function Reviews({ users, setUsers }) {
     sitter?.pawRating[3] +
     sitter?.pawRating[4];
 
-  //  console.log(countOfPaws)
-
   const handleOnePaw = async (e) => {
     e.preventDefault();
     const updatedOnePaws = sitter?.pawRating[0] + 1;
@@ -104,6 +109,7 @@ export default function Reviews({ users, setUsers }) {
         sitter?.pawRating[4],
       ],
     });
+    setBeenRatedOne(true);
   };
 
   const handleTwoPaws = async (e) => {
@@ -119,6 +125,7 @@ export default function Reviews({ users, setUsers }) {
         sitter?.pawRating[4],
       ],
     });
+    setBeenRatedTwo(true);
   };
 
   const handleThreePaws = async (e) => {
@@ -134,6 +141,7 @@ export default function Reviews({ users, setUsers }) {
         sitter?.pawRating[4],
       ],
     });
+    setBeenRatedThree(true);
   };
 
   const handleFourPaws = async (e) => {
@@ -149,6 +157,7 @@ export default function Reviews({ users, setUsers }) {
         sitter?.pawRating[4],
       ],
     });
+    setBeenRatedFour(true);
   };
 
   const handleFivePaws = async (e) => {
@@ -164,6 +173,7 @@ export default function Reviews({ users, setUsers }) {
         updatedFivePaws,
       ],
     });
+    setBeenRatedFive(true);
   };
 
   const docRef = doc(db, "users", sitter_id);
@@ -176,12 +186,7 @@ export default function Reviews({ users, setUsers }) {
       body: comment,
       timestamp: serverTimestamp(),
     });
-  };
-  console.log(reviews);
-
-  const handleOneClick = () => {
-    setRating(1);
-    handleOnePaw();
+    refreshPage();
   };
 
   return (
@@ -214,19 +219,39 @@ export default function Reviews({ users, setUsers }) {
             {addReview ? (
               <>
                 <br />
-                <Button onClick={handleOnePaw}>
-                  Rate 1 <i class="fa-solid fa-paw"></i>
+                <Button onClick={handleOnePaw}  style={
+                  beenRatedOne
+                    ? { color: "gold" }
+                    : null
+                }> 
+                   Rate 1 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleTwoPaws}>
+                <Button onClick={handleTwoPaws} style={
+                  beenRatedTwo
+                    ? { color: "gold" }
+                    : null
+                }>
                   Rate 2 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleThreePaws}>
+                <Button onClick={handleThreePaws} style={
+                  beenRatedThree
+                    ? { color: "gold" }
+                    : null
+                }>
                   Rate 3 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleFourPaws}>
+                <Button onClick={handleFourPaws} style={
+                  beenRatedFour
+                    ? { color: "gold" }
+                    : null
+                }>
                   Rate 4 <i class="fa-solid fa-paw"></i>
                 </Button>
-                <Button onClick={handleFivePaws}>
+                <Button onClick={handleFivePaws} style={
+                  beenRatedFive
+                    ? { color: "gold" }
+                    : null
+                }>
                   Rate 5 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <br />
@@ -393,7 +418,7 @@ export default function Reviews({ users, setUsers }) {
           </Card.Body>
         </Card>
       </Container>
-
+      
       <h2 className="p-2">Reviews</h2>
       {reviews
         ? reviews.map((review) => {
