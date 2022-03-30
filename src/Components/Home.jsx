@@ -44,6 +44,7 @@ export default function Home({
   const navigate = useNavigate();
   const ownerLocation = location;
 
+  console.log(">>>>> ", location);
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -228,9 +229,7 @@ export default function Home({
                                     10
                                 ) / 10
                               : " no reviews yet"}
-
                           </Card.Text>
-
                         </Col>
                         {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}
                         <Col xs="3" sm="3" md="3" className="py-3">
