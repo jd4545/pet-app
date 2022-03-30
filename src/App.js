@@ -26,7 +26,7 @@ function App() {
   const [postcode, setPostcode] = useState(null);
   const [neighbourhood, setNeighbourhood] = useState(null);
   const [chat, setChat] = useState("");
-
+  const [messages, setMessages] = useState([]);
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -62,7 +62,14 @@ function App() {
 
             <Route
               path="/messages"
-              element={<Inbox chat={chat} setChat={setChat} />}
+              element={
+                <Inbox
+                  chat={chat}
+                  setChat={setChat}
+                  messages={messages}
+                  setMessages={setMessages}
+                />
+              }
             />
             <Route path="/signin" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -96,6 +103,8 @@ function App() {
                   setUsers={setUsers}
                   chat={chat}
                   setChat={setChat}
+                  messages={messages}
+                  setMessages={setMessages}
                 />
               }
             />

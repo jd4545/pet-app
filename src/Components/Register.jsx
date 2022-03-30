@@ -4,7 +4,7 @@ import { auth } from "../firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -41,39 +41,43 @@ export default function Register() {
           <div className="text-center m-5 p-5">
             <h1>Register</h1>
             <Form onSubmit={handleRegister} className="sign-group">
-              <Form.Control
-                placeholder="email"
-                className="my-1 mt-4"
-                value={registerEmail}
-                onChange={(event) => {
-                  setRegisterEmail(event.target.value);
-                }}
-              />
-              <br />
-              <Form.Control
-                type="password"
-                className="my-1"
-                value={registerPassword}
-                placeholder="password"
-                onChange={(event) => {
-                  setRegisterPassword(event.target.value);
-                }}
-              />
-              {error ? (
-                <p className="text-center p-1">
-                  Please check your email/password and try again
-                </p>
-              ) : (
-                ""
-              )}
-              <Button
-                style={{ color: "white" }}
-                variant="light"
-                className="p-2 px-4 mt-3 btn-search align-items-center"
-                type="submit"
-              >
-                Register
-              </Button>
+              <Row className="justify-content-center ms-auto p-2">
+                <Col lg="5">
+                  <Form.Control
+                    placeholder="email"
+                    className="my-1 mt-4"
+                    value={registerEmail}
+                    onChange={(event) => {
+                      setRegisterEmail(event.target.value);
+                    }}
+                  />
+                  <br />
+                  <Form.Control
+                    type="password"
+                    className="my-1"
+                    value={registerPassword}
+                    placeholder="password"
+                    onChange={(event) => {
+                      setRegisterPassword(event.target.value);
+                    }}
+                  />
+                  {error ? (
+                    <p className="text-center p-1">
+                      Please check your email/password and try again
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  <Button
+                    style={{ color: "white" }}
+                    variant="light"
+                    className="p-2 px-4 mt-3 btn-search align-items-center"
+                    type="submit"
+                  >
+                    Register
+                  </Button>
+                </Col>
+              </Row>
             </Form>
             <p className="py-3">
               Have an account?{" "}
