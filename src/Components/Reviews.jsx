@@ -1,4 +1,4 @@
-import { Container, Card, Row, Col, Button, Image, Form } from 'react-bootstrap'
+import { Container, Card, Row, Col, Button, Image, Form, ProgressBar } from 'react-bootstrap'
 import {
   addDoc,
   doc,
@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom'
 import dogIcon from '../assets/dogIcon.png'
 import catIcon from '../assets/catIcon.png'
 import React from 'react'
+// import {FaStar} from react-icons/fa;
 
 export default function Reviews({ users, setUsers }) {
   const { user, setUser } = useContext(UserContext)
@@ -28,6 +29,8 @@ export default function Reviews({ users, setUsers }) {
   const [comment, setComment] = useState('')
   const [reviews, setReviews] = useState('')
   const [addReview, setAddReview] = useState(false)
+  const [rating, setRating] = useState(null)
+  const [hover, setHover] = useState(null)
 
   useEffect(() => {
     const getUsers = async () => {
@@ -166,6 +169,13 @@ export default function Reviews({ users, setUsers }) {
     })
   }
   console.log(reviews)
+
+  const handleOneClick = ()=> {
+    setRating(1);
+    handleOnePaw();
+  }
+
+
   return (
     <>
       <Container>
@@ -188,20 +198,23 @@ export default function Reviews({ users, setUsers }) {
                   setAddReview(false);
                 }
           }
-            >Add a Review </ Button>
+            > { addReview ? "Do this another time" : "Add a Review" } </ Button>
             <br/>  <br/>
             
             { addReview ? <>
-              <Button onClick={handleOnePaw}>Award 1</Button>{' '}
-              <Button onClick={handleTwoPaws}>Award 2</Button>{' '}
-              <Button onClick={handleThreePaws}>Award 3</Button>{' '}
-              <Button onClick={handleFourPaws}>Award 4</Button>{' '}
-              <Button onClick={handleFivePaws}>Award 5</Button>
+              
+              
+              <br/>
+              <Button onClick={handleOnePaw}>Rate 1 <i class="fa-solid fa-paw"  ></i></Button>
+              <Button onClick={handleTwoPaws}>Rate 2 <i class="fa-solid fa-paw"  ></i></Button>
+              <Button onClick={handleThreePaws}>Rate 3 <i class="fa-solid fa-paw"  ></i></Button>
+              <Button onClick={handleFourPaws}>Rate 4 <i class="fa-solid fa-paw"  ></i></Button>
+              <Button onClick={handleFivePaws}>Rate 5 <i class="fa-solid fa-paw"  ></i></Button>
                 <br /><br />
             <Form>
-              {' '}
+              
               <Form.Control
-                placeholder="Leave a comment..."
+                placeholder="Leave a review..."
                 onChange={(e) => {
                   setComment(e.target.value)
                 }}
@@ -222,27 +235,48 @@ export default function Reviews({ users, setUsers }) {
         <Card>
           <Card.Body>
           <h4>Rating:</h4>
-            <br /> 
-            <h5>🐾 Average rating: {meanPaw} out of 5</h5>
+            <label>
+              <input type="radio" style={{display:"none"}} name="rating" value={1} onClick={() => setRating(1)} />
+              <h1 class="fa-solid fa-paw" style={ 1<= meanPaw ? {color:"gold", margin:"3px"}:{color:"grey", margin:"3px"} }  ></h1>
+              </label>
+              <label>
+              <input type="radio" style={{display:"none"}} name="rating" value={2} onClick={() => setRating(2)}  />
+              <h1 class="fa-solid fa-paw" style={ 2 <= meanPaw ? {color:"gold", margin:"3px"}: {color:"grey", margin:"3px"}}  ></h1>
+              </label>
+              <label>
+              <input type="radio" style={{display:"none"}} name="rating" value={3} onClick={() => setRating(3)} />
+              <h1 class="fa-solid fa-paw" style={ 3 <= meanPaw ? {color:"gold", margin:"3px"}: {color:"grey", margin:"3px"}}  ></h1>
+              </label>
+              <label>
+              <input type="radio" style={{display:"none"}} name="rating" value={4} onClick={() => setRating(4)} />
+              <h1 class="fa-solid fa-paw" style={ 4 <= meanPaw ? {color:"gold", margin:"3px"}: {color:"grey", margin:"3px"}}  ></h1>
+              </label>
+              <label>
+              <input type="radio" style={{display:"none"}} name="rating" value={5} onClick={() => setRating(5)} />
+              <h1 class="fa-solid fa-paw" style={ 5 <= meanPaw ? {color:"gold", margin:"3px"}: {color:"grey", margin:"3px"}}  ></h1>
+              </label>
+              <h5><i class="fa-solid fa-paw"  ></i> Average rating: {meanPaw} out of 5</h5>
             <Card.Text>
-              🐾 : {sitter?.pawRating[0]} votes (
-              {Math.round((sitter?.pawRating[0] / countOfPaws) * 100)} %)
+            <i class="fa-solid fa-paw"  ></i> : {sitter?.pawRating[0]} votes (
+              {Math.round((sitter?.pawRating[0] / countOfPaws) * 100)} %) <ProgressBar width="200" now={Math.round((sitter?.pawRating[0] / countOfPaws) * 100)}/>
+            </Card.Text> 
+            
+            
+            <Card.Text>
+            <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> : {sitter?.pawRating[1]} votes (
+              {Math.round((sitter?.pawRating[1] / countOfPaws) * 100)} %) <ProgressBar now={Math.round((sitter?.pawRating[1] / countOfPaws) * 100)}/>
+            </Card.Text> 
+            <Card.Text>
+            <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> : {sitter?.pawRating[2]} votes (
+              {Math.round((sitter?.pawRating[2] / countOfPaws) * 100)} %) <ProgressBar now={Math.round((sitter?.pawRating[2] / countOfPaws) * 100)}/>
             </Card.Text>
             <Card.Text>
-              🐾🐾 : {sitter?.pawRating[1]} votes (
-              {Math.round((sitter?.pawRating[1] / countOfPaws) * 100)} %)
+            <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> : {sitter?.pawRating[3]} votes (
+              {Math.round((sitter?.pawRating[3] / countOfPaws) * 100)} %) <ProgressBar now={Math.round((sitter?.pawRating[3] / countOfPaws) * 100)}/>
             </Card.Text>
             <Card.Text>
-              🐾🐾🐾 : {sitter?.pawRating[2]} votes (
-              {Math.round((sitter?.pawRating[2] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾🐾🐾 : {sitter?.pawRating[3]} votes (
-              {Math.round((sitter?.pawRating[3] / countOfPaws) * 100)} %)
-            </Card.Text>
-            <Card.Text>
-              🐾🐾🐾🐾🐾 : {sitter?.pawRating[4]} votes (
-              {Math.round((sitter?.pawRating[4] / countOfPaws) * 100)} %)
+            <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> <i class="fa-solid fa-paw"  ></i> : {sitter?.pawRating[4]} votes (
+              {Math.round((sitter?.pawRating[4] / countOfPaws) * 100)} %) <ProgressBar now={Math.round((sitter?.pawRating[4] / countOfPaws) * 100)}/>
             </Card.Text>
             </Card.Body>
         </Card>
@@ -257,7 +291,7 @@ export default function Reviews({ users, setUsers }) {
               <>
               <Container>
                   <Card>
-                <Card.Text>{review.username}</Card.Text>
+                <h6>{review.username}</h6>
                 <Card.Text>{review.body}</Card.Text>
                 </Card>
                 </Container>

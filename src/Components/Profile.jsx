@@ -32,9 +32,8 @@ export default function Profile({ users, setUsers, chat, setChat }) {
   return (
     <>
       <Container>
-        <ProfileCard />
+      <ProfileCard chat={chat} setChat={setChat} />
         <Reviews users={users} setUsers={setUsers} />
-        <ProfileCard chat={chat} setChat={setChat} />
       </Container>
     </>
   )
