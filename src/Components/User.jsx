@@ -32,18 +32,18 @@ export default function User({ user, selectUser, user1, chat }) {
         <div className="user_info p-2">
           <div className="">
             <h6>{user.name}</h6>
-            {data?.from !== user1 && data?.unread && (
-              <small className="unread">New</small>
-            )}
-          </div>
-          {/* <div
+            {/* <div
             className={`user_status ${user.isOnline ? "online" : "offline"}`}
           ></div> */}
+          </div>
+          {/* Line below shows most recent sent message truncated under the selected user. */}
+          {data?.from !== user1 && data?.unread && (
+            <small className="unread">New</small>
+          )}
         </div>
-        {/* Line below shows most recent sent message truncated under the selected user. */}
         {data && (
-          <p className="truncate px-4">
-            <strong>{data.from === user1 ? "me:" : null}</strong>
+          <p className="truncate px-5">
+            <strong>{data.from === user1 ? "sent:" : "received:"}</strong>
             {data.text}
           </p>
         )}

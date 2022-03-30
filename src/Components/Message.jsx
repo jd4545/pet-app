@@ -12,7 +12,7 @@ export default function Message({ msg, user1 }) {
 
   return (
     //rendering text boxes conditionally
-    <Container
+    <div
       className={`message_wrapper ${msg.from === user1 ? "own" : ""}`}
       ref={scrollRef}
     >
@@ -24,6 +24,6 @@ export default function Message({ msg, user1 }) {
           <Moment fromNow>{msg.created_at.toDate()}</Moment>
         </small>
       </p>
-    </Container>
+    </div>
   );
 }
