@@ -2,16 +2,16 @@ import { useState, useEffect, useContext } from "react";
 import { db } from "../firebase-config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import fetchLocation from "../api";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
 import { auth } from "../firebase-config";
 import { UserContext } from "../contexts/UserContext";
 
-export default function UserDetailsInput() {
+export default function UserDetailsInput({ postcode, setPostcode }) {
   const { user, setUser } = useContext(UserContext);
   const [newName, setNewName] = useState("");
   const [newPet, setNewPet] = useState("");
-  const [postcode, setPostcode] = useState([]);
+
   // const [location, setLocation] = useState([null, null]);
   const [users, setUsers] = useState([]);
   const [isSitter, setIsSitter] = useState(false);
@@ -22,11 +22,11 @@ export default function UserDetailsInput() {
   const [isCatSitter, setIsCatSitter] = useState(false);
   const [price, setPrice] = useState(0);
   const usersCollectionRef = collection(db, "users");
+  const navigate = useNavigate();
 
   const createUser = async (e) => {
     e.preventDefault();
     const locationInfo = await fetchLocation(postcode);
-    // setLocation([locationInfo.result.latitude, locationInfo.result.longitude])
     await addDoc(usersCollectionRef, {
       name: newName,
       postcode: postcode,
@@ -38,18 +38,16 @@ export default function UserDetailsInput() {
       price: price,
       location: [locationInfo.result.latitude, locationInfo.result.longitude],
       uid: user?.uid,
-      pawRating: [0,0,0,0,0]
+      pawRating: [0, 0, 0, 0, 0],
     });
     setNewName("");
     setNewPet("");
     setIsSitter(false);
     setBio("");
-    // setServices('')
     setIsDogSitter(false);
     setIsCatSitter(false);
     setPrice(0);
-    // setLocation([null, null])
-    // <Navigate to="/page" />
+    navigate("/home");
   };
 
   console.log(user, "state");
@@ -68,11 +66,12 @@ export default function UserDetailsInput() {
       <br />
       <br />
       <h1>Profile Details</h1>
-      <Form>
+      <Form className="p-3 sign-group">
         <br />
         <br />
         <Form.Control
           placeholder="Name..."
+          className="sign-form"
           onChange={(e) => {
             setNewName(e.target.value);
           }}
