@@ -125,6 +125,7 @@ export default function Home({
     />
   );
 
+
   return (
     <>
       <>
@@ -192,6 +193,18 @@ export default function Home({
           <Col lg="7">
             {sittersSortedByProximity.map((sitter, index) => {
               const sitterLocation = sitter.location;
+              const meanPaw = Math.round(
+                ((sitter?.pawRating[0] * 1 +
+                  sitter?.pawRating[1] * 2 +
+                  sitter?.pawRating[2] * 3 +
+                  sitter?.pawRating[3] * 4 +
+                  sitter?.pawRating[4] * 5) /
+                  sitter?.pawRating.reduce(
+                    (part, a) => part + a,
+                    0
+                  )) *
+                  10
+              ) / 10;
               console.log(sitterLocation, "<<< sitter location const");
               console.log("sitter >>", sitter);
               return (
@@ -214,7 +227,8 @@ export default function Home({
 
                           <Card.Text>
                             {voteImage} {"Average rating: "}
-                            {sitter?.pawRating
+                            {
+                            meanPaw 
                               ? Math.round(
                                   ((sitter?.pawRating[0] * 1 +
                                     sitter?.pawRating[1] * 2 +
@@ -247,6 +261,7 @@ export default function Home({
                               <p></p>
                             )}
                           </div>
+
                         </Col>
                       </Row>
                     </Card.Body>

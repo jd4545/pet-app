@@ -125,6 +125,9 @@ export default function ProfileCard({
                   <Card.Text className="p-2">
                     {prof ? prof.bio : "This is the users bio within profile"}
                   </Card.Text>
+                  <Card.Text className="p-2">
+                    {prof ? `£ ${prof.price} per day` : "The user has not set a price for their service yet"}
+                  </Card.Text>
                 </Col>
                 <Col lg="2" className="p-3">
                   <Button className="ms-auto btn-sign" onClick={handleMessage}>
