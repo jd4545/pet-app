@@ -42,7 +42,8 @@
   border: 0 none !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
-  background-color: #1e40af !important;
+  /* background-color: #1e40af !important; */
+  background-color: white !important;
 }
 
 .btn-sign {
@@ -81,7 +82,9 @@
   padding: 9px 9px;
   border: 0 none !important;
   font-weight: 600 !important;
-  background-color: #34d399 !important;
+  /* background-color: #34d399 !important; */
+  background-color: #1e40af;
+  /* background-color: #9333ea; */
 }
 /* 
 STOP HERE */
@@ -182,15 +185,6 @@ section .form {
   color: var(--color-5);
 }
 
-/* .home_container {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  overflow: hidden;
-  height: calc(100vh - 70px);
-  width: 100vw;
-} */
-
 .users_container {
   margin-top: 10px;
   overflow-y: auto;
@@ -219,13 +213,6 @@ section .form {
   height: 10px;
   border-radius: 50%;
 }
-
-/* .online {
-  background: #34eb52;
-}
-.offline {
-  background: var(--color-5);
-} */
 
 .messages_container {
   position: relative;
@@ -358,6 +345,6 @@ section .form {
 }
 
 .leaflet-container {
-  width: 40vw;
+  width: 100%;
   height: 70vh;
 }
