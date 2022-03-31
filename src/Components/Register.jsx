@@ -38,7 +38,7 @@ export default function Register() {
         {user ? (
           navigate("/")
         ) : (
-          <div className="text-center m-5 p-5">
+          <div className="text-center p-5">
             <h1>Register</h1>
             <Form onSubmit={handleRegister} className="sign-group">
               <Row className="justify-content-center ms-auto p-2">

@@ -63,12 +63,9 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
     fetchData();
   }, [user1]);
 
-  console.log("CHATTERS==>>>", chatters);
-  console.log(">>>>>> chat state", chat);
   //selecting user from sidebar - when select a user it provides that user to chat State.
   const selectUser = async (user) => {
     setChat(user);
-    console.log("USER==>>", user);
 
     const user2 = user.uid;
     console.log(user2);
@@ -142,7 +139,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
                     height="25"
-                    fill="#9333ea"
+                    fill="#fdba74"
                     class="bi bi-chat-fill"
                     viewBox="0 0 16 16"
                   >
@@ -196,33 +193,38 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
             />
           ))}
         </Col> */}
-        <div className="messages_container">
-          {chat ? (
-            <>
-              {/* <div className="messages_user">
+          <div className="messages_container">
+            {chat ? (
+              <>
+                {/* <div className="messages_user">
             <h3>{chat.name}</h3>
           </div> */}
-              <Container className="messages">
-                {messages.length
-                  ? messages.map((msg, i) => (
-                      <Message key={i} msg={msg} user1={user1} />
-                    ))
-                  : null}
-              </Container>
-              <MessageForm
-                handleSubmit={handleSubmit}
-                text={text}
-                setText={setText}
-              />
-            </>
-          ) : (
-            <>
-              <div className="text-center">
-                <Image src={chatIcon} alt="chat" width="150" className="my-5" />
-                <h5 className="">select a user to start chatting</h5>
-              </div>
-            </>
-          )}
+                <Container className="messages">
+                  {messages.length
+                    ? messages.map((msg, i) => (
+                        <Message key={i} msg={msg} user1={user1} />
+                      ))
+                    : null}
+                </Container>
+                <MessageForm
+                  handleSubmit={handleSubmit}
+                  text={text}
+                  setText={setText}
+                />
+              </>
+            ) : (
+              <>
+                <div className="text-center">
+                  <Image
+                    src={chatIcon}
+                    alt="chat"
+                    width="150"
+                    className="my-5"
+                  />
+                  <h5 className="">select a user to start chatting</h5>
+                </div>
+              </>
+            )}
           </div>
         </Container>
       )}

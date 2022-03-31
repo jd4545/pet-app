@@ -144,12 +144,12 @@ export default function EditProfile({ img, users, setUsers }) {
 
             <Col md="8" lg="8">
               <Row>
-                <Col>
+                <Col xs="10">
                   <Card.Title className="p-1 mt-3">
                     {currentUser ? currentUser.name : "Name Here"}
                   </Card.Title>
                 </Col>
-                <Col>
+                <Col xs="2">
                   <Button
                     onClick={() => setNameEdit(!nameEdit)}
                     className="ms-auto btn-light mt-3"
@@ -158,7 +158,7 @@ export default function EditProfile({ img, users, setUsers }) {
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
-                      fill="#9333ea"
+                      fill="#fdba74"
                       class="bi bi-pencil-fill"
                       viewBox="0 0 16 16"
                     >
@@ -187,14 +187,14 @@ export default function EditProfile({ img, users, setUsers }) {
                 ""
               )}
               <Row>
-                <Col>
+                <Col xs="10">
                   <Card.Text className="p-2">
                     {currentUser
                       ? currentUser.bio
                       : "User has not completed bio yet"}
                   </Card.Text>
                 </Col>
-                <Col>
+                <Col xs="2">
                   <Button
                     onClick={() => setBioEdit(!bioEdit)}
                     className="ms-auto btn-light"
@@ -203,7 +203,7 @@ export default function EditProfile({ img, users, setUsers }) {
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
-                      fill="#9333ea"
+                      fill="#fdba74"
                       class="bi bi-pencil-fill"
                       viewBox="0 0 16 16"
                     >
@@ -236,14 +236,14 @@ export default function EditProfile({ img, users, setUsers }) {
               {currentUser && currentUser.isSitter ? (
                 <>
                   <Row>
-                    <Col>
+                    <Col xs="10">
                       <Card.Text className="p-2">
                         {currentUser.isSitter
                           ? "£ " + currentUser.price + " per day"
                           : null}{" "}
                       </Card.Text>
                     </Col>
-                    <Col>
+                    <Col xs="2">
                       <Button
                         onClick={() => setPriceEdit(!priceEdit)}
                         className="ms-auto btn-light"
@@ -252,7 +252,7 @@ export default function EditProfile({ img, users, setUsers }) {
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
-                          fill="#9333ea"
+                          fill="#fdba74"
                           class="bi bi-pencil-fill"
                           viewBox="0 0 16 16"
                         >
@@ -291,12 +291,12 @@ export default function EditProfile({ img, users, setUsers }) {
                     {currentUser.isCatSitter ? " yes" : "no"}
                   </Card.Text>
                   <Row>
-                    <Col>
+                    <Col xs="10">
                       <Card.Text className="p-2">
                         Postcode: {currentUser ? currentUser.postcode : null}
                       </Card.Text>
                     </Col>
-                    <Col>
+                    <Col xs="2">
                       <Button
                         onClick={() => setPostcodeEdit(!postcodeEdit)}
                         className="ms-auto btn-light"
@@ -305,7 +305,7 @@ export default function EditProfile({ img, users, setUsers }) {
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
-                          fill="#9333ea"
+                          fill="#fdba74"
                           class="bi bi-pencil-fill"
                           viewBox="0 0 16 16"
                         >
