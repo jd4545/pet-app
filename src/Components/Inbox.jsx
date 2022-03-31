@@ -116,16 +116,7 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
 
   return (
     <>
-      {!user ? (
-        <Container className="text-center">
-          <h4 className="text-center">
-            You must be signed in to send a message
-          </h4>
-          <Button href="/signin" className="btn-sign m-3">
-            Sign in/Sign up
-          </Button>
-        </Container>
-      ) : (
+      {user ? (
         <Container className="border-top">
           <Navbar expand={false} className="fixed">
             <Row>
@@ -226,6 +217,15 @@ export default function Inbox({ chat, setChat, messages, setMessages }) {
               </>
             )}
           </div>
+        </Container>
+      ) : (
+        <Container className="text-center">
+          <h4 className="text-center">
+            You must be signed in to send a message
+          </h4>
+          <Button href="/signin" className="btn-sign m-3">
+            Sign in/Sign up
+          </Button>
         </Container>
       )}
     </>

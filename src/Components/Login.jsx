@@ -1,10 +1,15 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { auth } from "../firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { Form, Button, Container, Alert, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Image, Row, Col } from "react-bootstrap";
+import google from "../assets/google.png";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -24,6 +29,17 @@ export default function Login() {
       console.log(error.message);
       setError(error);
     }
+  };
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   console.log(user);
@@ -64,6 +80,15 @@ export default function Login() {
                   type="submit"
                 >
                   Sign In
+                </Button>
+                <h4 className="mt-3">or sign in with</h4>
+                <Button
+                  style={{ color: "white" }}
+                  variant=""
+                  className="p-2 px-4 mt-3 align-items-center"
+                  onClick={signInWithGoogle}
+                >
+                  <Image src={google} width="50" height="50" />
                 </Button>
               </Col>
             </Row>
