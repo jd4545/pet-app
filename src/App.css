@@ -40,8 +40,19 @@
   border: 0 none !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
+  color: white !important;
   /* background-color: #9333ea !important; */
   background-color: #fdba74 !important;
+}
+
+.btn-next {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  color: #fdba74 !important;
+  /* background-color: #9333ea !important; */
+  background-color: white !important;
 }
 
 .btn-home {

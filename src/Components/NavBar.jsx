@@ -1,14 +1,22 @@
 import paw from "../assets/paw.png";
-import { Navbar, Container, Nav, Offcanvas, Button } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  Offcanvas,
+  Button,
+  Image,
+} from "react-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import Logout from "./Logout";
+import logo from "../assets/tap-logo.png";
 
 export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
   return (
     <Navbar expand={false}>
-      <Container fluid>
+      <Container>
         <Navbar.Brand>
           <Nav.Link href="/">
             <img
@@ -20,9 +28,10 @@ export default function NavBar() {
             />
           </Nav.Link>
         </Navbar.Brand>
-        <Button href="/signin" className="ms-auto mx-3 btn-sign">
+        <Image src={logo} height="35" className="" />
+        {/* <Button href="/signin" className="ms-auto mx-3 btn-sign">
           Add a listing
-        </Button>
+        </Button> */}
         <Navbar.Toggle aria-controls="offcanvasNavbar" id="offcanvasNavbar" />
         <Navbar.Offcanvas
           id="offcanvasNavbar"
