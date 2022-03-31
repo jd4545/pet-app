@@ -125,7 +125,6 @@ export default function Home({
     />
   );
 
-
   return (
     <>
       <>
@@ -137,7 +136,7 @@ export default function Home({
           ) : (
             ""
           )}
-          <Nav className=" justify-content-center" style={{ color: "gray" }}>
+          <Nav className="justify-content-center" style={{ color: "gray" }}>
             <Nav.Item>
               <Form validated={validated} onSubmit={handleSubmit}>
                 <Row className="justify-content-center">
@@ -170,7 +169,7 @@ export default function Home({
                   <Col xs="auto" lg="3" className="my-1 text-center">
                     <Button
                       type="submit"
-                      style={{ color: "#9333ea" }}
+                      style={{ color: "#fdba74" }}
                       variant="light"
                       className="p-2 px-4 btn-home"
                     >
@@ -186,25 +185,23 @@ export default function Home({
         </div>
       </>
       <Container className="justify-content-center">
-        <h4 className="text-center p-2">
+        <h4 className="text-center p-2 mt-2">
           Pet care near {neighbourhood ? neighbourhood : "you"}
         </h4>
         <Row>
           <Col lg="7">
             {sittersSortedByProximity.map((sitter, index) => {
               const sitterLocation = sitter.location;
-              const meanPaw = Math.round(
-                ((sitter?.pawRating[0] * 1 +
-                  sitter?.pawRating[1] * 2 +
-                  sitter?.pawRating[2] * 3 +
-                  sitter?.pawRating[3] * 4 +
-                  sitter?.pawRating[4] * 5) /
-                  sitter?.pawRating.reduce(
-                    (part, a) => part + a,
-                    0
-                  )) *
-                  10
-              ) / 10;
+              const meanPaw =
+                Math.round(
+                  ((sitter?.pawRating[0] * 1 +
+                    sitter?.pawRating[1] * 2 +
+                    sitter?.pawRating[2] * 3 +
+                    sitter?.pawRating[3] * 4 +
+                    sitter?.pawRating[4] * 5) /
+                    sitter?.pawRating.reduce((part, a) => part + a, 0)) *
+                    10
+                ) / 10;
               console.log(sitterLocation, "<<< sitter location const");
               console.log("sitter >>", sitter);
               return (
@@ -227,8 +224,7 @@ export default function Home({
 
                           <Card.Text>
                             {voteImage} {"Average rating: "}
-                            {
-                            meanPaw 
+                            {meanPaw
                               ? Math.round(
                                   ((sitter?.pawRating[0] * 1 +
                                     sitter?.pawRating[1] * 2 +
@@ -261,7 +257,6 @@ export default function Home({
                               <p></p>
                             )}
                           </div>
-
                         </Col>
                       </Row>
                     </Card.Body>
@@ -271,7 +266,7 @@ export default function Home({
             })}
           </Col>
           <Col md="5" lg="5">
-            <Card>
+            <Card className="shadow-sm border-0">
               <Map
                 services={services}
                 setServices={setServices}

@@ -6,7 +6,8 @@
 }
 
 .link {
-  color: #9333ea !important;
+  color: #fdba74 !important;
+  /* color: #9333ea !important; */
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -23,6 +24,11 @@
   color: black;
 }
 
+.destyle:hover {
+  /* color: #9333ea; */
+  color: #fdba74;
+}
+
 .btn {
   padding: 3px 9px;
   border: 0 none !important;
@@ -34,7 +40,8 @@
   border: 0 none !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
-  background-color: #9333ea !important;
+  /* background-color: #9333ea !important; */
+  background-color: #fdba74 !important;
 }
 
 .btn-home {
@@ -51,7 +58,8 @@
   border: 0 none !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
-  background-color: #9333ea !important;
+  background-color: #fdba74 !important;
+  /* background-color: #9333ea !important; */
 }
 
 .btn:focus {
@@ -83,8 +91,10 @@
   border: 0 none !important;
   font-weight: 600 !important;
   /* background-color: #34d399 !important; */
-  background-color: #1e40af;
+  /* background-color: #1e40af; */
+  background-color: #ddd6fe;
   /* background-color: #9333ea; */
+  background-color: #fdba74;
 }
 /* 
 STOP HERE */

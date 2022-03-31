@@ -31,7 +31,7 @@ export default function Login() {
   return (
     <>
       <Container className="align-items-center">
-        <div className="text-center m-5 p-5">
+        <div className="text-center p-5">
           <h1>Sign In</h1>
           <Form onSubmit={handleLogin}>
             <Row className="justify-content-center ms-auto p-2">
