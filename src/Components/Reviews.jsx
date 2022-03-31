@@ -224,35 +224,45 @@ export default function Reviews({ users, setUsers }) {
               <>
                 <br />
                 <Button
-                  className="mx-1 btn-search"
+                  className={`mx-1 ${
+                    beenRatedOne ? "btn-paw-down" : "btn-paw"
+                  }`}
                   onClick={handleOnePaw}
                   style={beenRatedOne ? { color: "gold" } : null}
                 >
                   1 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <Button
-                  className="mx-1 btn-search"
+                  className={`mx-1 ${
+                    beenRatedOne ? "btn-paw-down" : "btn-paw"
+                  }`}
                   onClick={handleTwoPaws}
                   style={beenRatedTwo ? { color: "gold" } : null}
                 >
                   2 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <Button
-                  className="mx-1 btn-search"
+                  className={`mx-1 ${
+                    beenRatedOne ? "btn-paw-down" : "btn-paw"
+                  }`}
                   onClick={handleThreePaws}
                   style={beenRatedThree ? { color: "gold" } : null}
                 >
                   3 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <Button
-                  className="mx-1 btn-search"
+                  className={`mx-1 ${
+                    beenRatedOne ? "btn-paw-down" : "btn-paw"
+                  }`}
                   onClick={handleFourPaws}
                   style={beenRatedFour ? { color: "gold" } : null}
                 >
                   4 <i class="fa-solid fa-paw"></i>
                 </Button>
                 <Button
-                  className="mx-1 btn-search"
+                  className={`mx-1 ${
+                    beenRatedOne ? "btn-paw-down" : "btn-paw"
+                  }`}
                   onClick={handleFivePaws}
                   style={beenRatedFive ? { color: "gold" } : null}
                 >
