@@ -308,7 +308,7 @@ export default function Reviews({ users, setUsers }) {
               <h1
                 class="fa-solid fa-paw"
                 style={
-                  2 <= meanPaw
+                  1.5 <= meanPaw
                     ? { color: "gold", margin: "3px" }
                     : { color: "grey", margin: "3px" }
                 }
@@ -325,7 +325,7 @@ export default function Reviews({ users, setUsers }) {
               <h1
                 class="fa-solid fa-paw"
                 style={
-                  3 <= meanPaw
+                  2.5 <= meanPaw
                     ? { color: "gold", margin: "3px" }
                     : { color: "grey", margin: "3px" }
                 }
@@ -342,7 +342,7 @@ export default function Reviews({ users, setUsers }) {
               <h1
                 class="fa-solid fa-paw"
                 style={
-                  4 <= meanPaw
+                  3.5 <= meanPaw
                     ? { color: "gold", margin: "3px" }
                     : { color: "grey", margin: "3px" }
                 }
@@ -359,7 +359,7 @@ export default function Reviews({ users, setUsers }) {
               <h1
                 class="fa-solid fa-paw"
                 style={
-                  5 <= meanPaw
+                  4.5 <= meanPaw
                     ? { color: "gold", margin: "3px" }
                     : { color: "grey", margin: "3px" }
                 }
