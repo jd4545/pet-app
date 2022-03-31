@@ -366,8 +366,9 @@ export default function Reviews({ users, setUsers }) {
               ></h1>
             </label>
             <h5>
-              <i class="fa-solid fa-paw"></i> Average rating: {meanPaw} out of 5
+              <i class="fa-solid fa-paw"></i> Average rating: { meanPaw ? `${meanPaw} out of 5` : "no ratings yet"}
             </h5>
+            { meanPaw ? <div>
             <Card.Text>
               <i class="fa-solid fa-paw"></i> : {sitter?.pawRating[0]} votes (
               {Math.round((sitter?.pawRating[0] / countOfPaws) * 100)} %){" "}
@@ -411,6 +412,8 @@ export default function Reviews({ users, setUsers }) {
                 now={Math.round((sitter?.pawRating[4] / countOfPaws) * 100)}
               />
             </Card.Text>
+            </div> : null}
+            
           </Card.Body>
         </Card>
       </Container>
@@ -420,6 +423,7 @@ export default function Reviews({ users, setUsers }) {
         ? reviews.map((review) => {
             return (
               <>
+              {review.body === "" ? null : <div>
                 <Container>
                   <Card className="justify-content-center mx-2 shadow-sm mb-3 p-3"
             border="light">
@@ -427,6 +431,7 @@ export default function Reviews({ users, setUsers }) {
                     <Card.Text>{review.body}</Card.Text>
                   </Card>
                 </Container>
+                </div>}
               </>
             );
           })
