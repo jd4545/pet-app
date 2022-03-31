@@ -21,10 +21,10 @@ import Reviews from "./Components/Reviews";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [services, setServices] = useState("Cat Sitting");
-  const [location, setLocation] = useState([51.574959, -0.088178]);
+  const [services, setServices] = useState("Dog Sitting");
+  const [location, setLocation] = useState([53.4721, -2.2382]);
   const [users, setUsers] = useState([]);
-  const [postcode, setPostcode] = useState("N4 1DN");
+  const [postcode, setPostcode] = useState("");
   const [neighbourhood, setNeighbourhood] = useState(null);
   const [chat, setChat] = useState("");
   const [messages, setMessages] = useState([]);

@@ -18,7 +18,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
-      navigate("/");
+      navigate("/home");
       //add functionality to redirect user to "/" when logged in
     } catch (error) {
       console.log(error.message);

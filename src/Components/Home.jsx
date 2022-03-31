@@ -143,6 +143,7 @@ export default function Home({
                 <Row className="justify-content-center">
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Control
+                      defaultValue={"N4 1DN"}
                       className="border-0"
                       type="text"
                       value={postcode}
@@ -152,6 +153,7 @@ export default function Home({
                   </Col>
                   <Col s="auto" md="auto" lg={4} className="my-1">
                     <Form.Select
+                      defaultValue={"Dog Sitting"}
                       className="border-0"
                       value={services}
                       onChange={(e) => {
@@ -168,7 +170,7 @@ export default function Home({
                   <Col xs="auto" lg="3" className="my-1 text-center">
                     <Button
                       type="submit"
-                      style={{ color: "white" }}
+                      style={{ color: "#9333ea" }}
                       variant="light"
                       className="p-2 px-4 btn-home"
                     >
@@ -214,15 +216,12 @@ export default function Home({
                   <Card className="sittercard  my-3 shadow-sm border-0">
                     <Card.Body>
                       <Row>
-                        <Col xs="3" sm="3" md="3">
+                        <Col xs="3" sm="3" md="3" lg="3">
                           <Image src={avatar} width="90" height="90" />
-                          <Badge pill bg="light" text="dark" className=" my-2">
-                            £{sitter.price} per day
-                          </Badge>
                         </Col>
-                        <Col xs="6" sm="6" md="6" className="px-5">
+                        <Col xs="9" sm="5" md="5" lg="5" className="px-5">
                           <Card.Text>
-                            <h4>{sitter.name}</h4>
+                            <h5>{sitter.name}</h5>
                             {sitter.proximity} miles away
                           </Card.Text>
 
@@ -245,30 +244,33 @@ export default function Home({
                               : " no reviews yet"}
                           </Card.Text>
                         </Col>
-                        {/* <li>Dogsitter: {sitter.isDogSitter.toString()}</li> */}
-                        <Col xs="3" sm="3" md="3" className="py-3">
-                          {sitter.isDogSitter ? (
-                            <Image src={dog} alt="dog" width="25" />
-                          ) : (
-                            <p></p>
-                          )}
-                          {/* <li>Catsitter: {sitter.isCatSitter.toString()}</li> */}
-                          {sitter.isCatSitter ? (
-                            <Image src={cat} alt="cat" width="25" />
-                          ) : (
-                            <p></p>
-                          )}
-                          {/* <Card.Text>Rating here</Card.Text> */}
+                        <Col xs="auto" sm="4" md="4" lg="4">
+                          <Badge pill bg="light" text="dark" className=" my-2">
+                            £{sitter.price} per day
+                          </Badge>
+                          <div className="py-2">
+                            {sitter.isDogSitter ? (
+                              <Image src={dog} alt="dog" width="25" />
+                            ) : (
+                              <p></p>
+                            )}
+
+                            {sitter.isCatSitter ? (
+                              <Image src={cat} alt="cat" width="25" />
+                            ) : (
+                              <p></p>
+                            )}
+                          </div>
+
                         </Col>
                       </Row>
                     </Card.Body>
-                    {/* <h1>Location: {user.location}</h1> */}
                   </Card>
                 </Link>
               );
             })}
           </Col>
-          <Col lg="5">
+          <Col md="5" lg="5">
             <Card>
               <Map
                 services={services}
