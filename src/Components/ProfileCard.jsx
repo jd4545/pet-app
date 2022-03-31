@@ -105,9 +105,13 @@ const selectUser = async () => {
                   <Card.Title className="p-1">
                     {prof ? prof.name : "Name Here"}
                   </Card.Title>
-                  <Image src={dogIcon} width="30" className="p-1" />
+                  {prof.isDogSitter ? <Image src={dogIcon} width="30" className="p-1" /> : null}
+                  {prof.isCatSitter ? <Image src={catIcon} width="30" className="p-1" /> : null}
                   <Card.Text className="p-2">
                     {prof ? prof.bio : "This is the users bio within profile"}
+                  </Card.Text>
+                  <Card.Text className="p-2">
+                    {prof ? `£ ${prof.price} per day` : "The user has not set a price for their service yet"}
                   </Card.Text>
                 </Col>
                 <Col lg="2" className="p-3">
