@@ -55,6 +55,26 @@
   background-color: white !important;
 }
 
+.btn-paw {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  color: white;
+  /* background-color: #9333ea !important; */
+  background-color: #fdba74 !important;
+}
+
+.btn-paw-down {
+  padding: 3px 9px;
+  border: 0 none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  color: gold;
+  /* background-color: #9333ea !important; */
+  background-color: white !important;
+}
+
 .btn-home {
   padding: 3px 9px;
   border: 0 none !important;
@@ -196,9 +216,6 @@ section .form {
 
 .btn:hover {
   transform: scale(1.05);
-}
-
-.navbar-toggler-icon {
 }
 
 .error {
