@@ -278,16 +278,16 @@ export default function Reviews({ users, setUsers }) {
                     }}
                     required="required"
                   />
+                  <button
+                    style={{ color: "white" }}
+                    variant="light"
+                    className="p-2 px-4 mt-3 btn-search align-items-center"
+                    type="submit"
+                  >
+                    Submit review
+                  </button>
                 </Form>
                 <br />
-                <button
-                  style={{ color: "white" }}
-                  variant="light"
-                  className="p-2 px-4 btn-search align-items-center"
-                  type="submit"
-                >
-                  Submit review
-                </button>
               </>
             ) : null}
           </Card.Body>
