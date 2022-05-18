@@ -8,18 +8,22 @@ This app was conceived, planned and developed as the final project for the North
 I was part of a team of six to complete this project within two weeks from start to finish.
 We settled on a pet-sitter finder app with the remit of being user-friendly, well-designed, informative and fun.
 
-## Project summary
+## Team working
 - We spiked various new technologies and ideas for apps
 - Settled on the pet-finder app idea and worked on a wireframe plan
-- Agile working with daily stand ups
+- Agile working with daily stand ups and a kanban board
 - co-ordinated commits on Github to minimise conflicts
 - split into teams to work as pairs, with regular updates to/from rest of the team
+- team spirits were high despite the pressure and we supported each other when needed
+- we are proud of our final product!
 
 ## Techs used
-- built on a React JS platform
+- built on a React JS front-end
 - authentication using Firebase
-- pet-sitter data stored on Firestore noSQL database for flexibility
-- implemented our own version of a distance calculator
+- back-end data stored on Firestore noSQL database for flexibility
+- data manipulation using Firestrore and node.js
+- implemented our own version of a distance calculator using postcodes.io API and node.js
+- leaflet for map showing user locations and services
 - instant messaging feature using Firebase
 - styling with Bootstrap
 
